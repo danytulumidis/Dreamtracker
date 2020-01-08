@@ -13,6 +13,7 @@ import { DreamsListEditComponent } from './dreams/dreams-list-edit/dreams-list-e
 import { GoalsComponent } from './goals/goals.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
 import { GoalsListEditComponent } from './goals/goals-list-edit/goals-list-edit.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GoalsListEditComponent } from './goals/goals-list-edit/goals-list-edit.
     DreamsListEditComponent,
     GoalsComponent,
     GoalsListComponent,
-    GoalsListEditComponent
+    GoalsListEditComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
