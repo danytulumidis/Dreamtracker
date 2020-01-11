@@ -3,7 +3,8 @@ main.landing_page {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: contain;
+    background-size: cover;
+    height: 100vh;
 }
 
 h1.landing_page {
