@@ -14,6 +14,7 @@ import { GoalsComponent } from './goals/goals.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
 import { GoalsListEditComponent } from './goals/goals-list-edit/goals-list-edit.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
