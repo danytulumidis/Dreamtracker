@@ -34,7 +34,7 @@ import { AboutComponent } from './about/about.component';
     GoalsListComponent,
     GoalsListEditComponent,
     LandingPageComponent,
-    ProfileComponent
+    ProfileComponent,
     AboutComponent
 
   ],
