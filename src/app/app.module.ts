@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule } from '@angular/material';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { ProfileComponent } from './profile/profile.component';
     GoalsListEditComponent,
     LandingPageComponent,
     ProfileComponent
+    AboutComponent
+
   ],
   imports: [
     BrowserModule,

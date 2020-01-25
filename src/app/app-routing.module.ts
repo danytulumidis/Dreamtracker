@@ -6,13 +6,15 @@ import { DreamsListComponent } from './dreams/dreams-list/dreams-list.component'
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'mydreams', component: DreamsListComponent},
   { path: 'goals', component: GoalsListComponent},
-  { path: 'signin', component: LoginComponent}
+  { path: 'signin', component: LoginComponent},
+  { path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
