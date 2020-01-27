@@ -7,6 +7,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
 import { AboutComponent } from './about/about.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'mydreams', component: DreamsListComponent},
   { path: 'goals', component: GoalsListComponent},
   { path: 'signin', component: LoginComponent},
-  { path: 'about', component: AboutComponent}
+  { path: 'about', component: AboutComponent},
+  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({
