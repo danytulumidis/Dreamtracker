@@ -12,4 +12,11 @@ export class DreamsComponent implements OnInit {
   ngOnInit() {
   }
 
+  addGoals() {
+
+  }
+
+  saveDream() {
+
+  }
 }
