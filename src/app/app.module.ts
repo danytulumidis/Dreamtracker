@@ -16,10 +16,11 @@ import { GoalsListComponent } from './goals/goals-list/goals-list.component';
 import { GoalsListEditComponent } from './goals/goals-list-edit/goals-list-edit.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule } from '@angular/material';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
+import { DreamsService } from './shared/services/dream.service';
+import { GoalsService } from './shared/services/goal.service';
 
 @NgModule({
   declarations: [
@@ -37,22 +38,18 @@ import { AboutComponent } from './about/about.component';
     LandingPageComponent,
     ProfileComponent,
     AboutComponent
-
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatMenuModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    DreamsService,
+    GoalsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DreamsService } from '../shared/services/dream.service';
+import { Dream } from '../shared/models/dream.model';
 
 @Component({
   selector: 'app-dreams',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dreams.component.scss']
 })
 export class DreamsComponent implements OnInit {
+  dreams: Dream[] = [];
 
-  constructor() { }
+  constructor(private dreamsService:DreamsService) { }
 
   ngOnInit() {
+    this.dreams = this.dreamsService.dreams;
   }
 
   addGoals() {
