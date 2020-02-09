@@ -3,9 +3,9 @@ export class Goal {
     public description: string;
     public finished: boolean;
 
-    constructor(name: string, desc: string) {
+    constructor(name: string, desc: string, finished: boolean) {
         this.name = name;
         this.description = desc;
-        this.finished = false;
+        this.finished = finished;
     }
 }

@@ -4,11 +4,17 @@
     </div>
 </div>
 
-<app-dreams-list></app-dreams-list>
+<app-dreams-list *ngFor="let dream of dreams" [dreamsList]="dream"></app-dreams-list>
 
 <div class="main">
     <div class="section text-center">
         <div class="container">
+            <div class="row">
+                <div class="col-md-8 mr-auto ml-auto">
+                    <h2>Add your next Dream</h2>
+                    <hr>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-6 mr-auto ml-auto">
                     <h2>Name</h2>
