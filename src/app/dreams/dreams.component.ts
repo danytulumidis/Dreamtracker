@@ -20,7 +20,7 @@ export class DreamsComponent implements OnInit {
 
   }
 
-  saveDream() {
-
+  saveDream(dreamName: HTMLInputElement, dreamDescr: HTMLTextAreaElement) {
+    this.dreamsService.saveNewDream(dreamName.value, dreamDescr.value);
   }
 }
