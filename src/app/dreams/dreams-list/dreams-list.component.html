@@ -2,11 +2,6 @@
     <div class="section text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 mr-auto ml-auto">
-                    <h2>Your Dreams List</h2>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-4">
                     <h3>Name</h3>
                     <hr>
@@ -20,7 +15,7 @@
                 <div class="col-md-4">
                     <h3>Goals</h3>
                     <hr>
-                    <p>{{ dreamsList.goals }}</p>
+                    <p *ngFor="let goal of dreamsList.goals">{{ goal }}</p>
                 </div>
             </div>
         </div>
