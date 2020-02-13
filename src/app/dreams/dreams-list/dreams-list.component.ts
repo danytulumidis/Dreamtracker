@@ -14,4 +14,8 @@ export class DreamsListComponent implements OnInit {
     
   }
 
+  deleteDream() {
+    
+  }
+
 }

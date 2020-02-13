@@ -2,20 +2,23 @@
     <div class="section text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h3>Name</h3>
                     <hr>
                     <p>{{ dreamsList.name }}</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h3>Description</h3>
                     <hr>
                     <p>{{ dreamsList.description }}</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h3>Goals</h3>
                     <hr>
                     <p *ngFor="let goal of dreamsList.goals">{{ goal }}</p>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-outline-danger btn-round" (click)="deleteDream()">Delete</button>
                 </div>
             </div>
         </div>
