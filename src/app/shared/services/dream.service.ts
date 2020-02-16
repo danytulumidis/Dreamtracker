@@ -20,4 +20,11 @@ export class DreamsService {
             goals: ['just a dummy goal']
         })
     }
+
+    // TODO[A] Dream needs another unique indicator than the name
+    deleteDream(dreamName: string) {
+        const selectedDream = this.dreams.find(dream => dream.name === dreamName);
+        
+        this.dreams.splice(this.dreams.findIndex(dream => dream.name === selectedDream.name),1)
+    }
 }

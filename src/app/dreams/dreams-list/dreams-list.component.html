@@ -18,7 +18,8 @@
                     <p *ngFor="let goal of dreamsList.goals">{{ goal }}</p>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-outline-danger btn-round" (click)="deleteDream()">Delete</button>
+                    <!-- TODO[A] Dream needs another unique indicator than the name -->
+                    <button type="button" class="btn btn-outline-danger btn-round" (click)="deleteDream(dreamsList.name)">Delete</button>
                 </div>
             </div>
         </div>
