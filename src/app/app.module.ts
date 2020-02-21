@@ -22,6 +22,10 @@ import { AboutComponent } from './about/about.component';
 import { DreamsService } from './shared/services/dream.service';
 import { GoalsService } from './shared/services/goal.service';
 
+// Amplify Backend
+import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
+import Auth from '@aws-amplify/auth';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +52,15 @@ import { GoalsService } from './shared/services/goal.service';
   ],
   providers: [
     DreamsService,
-    GoalsService
+    GoalsService,
+    {
+      provide: AmplifyService,
+      useFactory:  () => {
+        return AmplifyModules({
+          Auth
+        });
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
