@@ -165,9 +165,9 @@
                             "QueryString": "false"
                         },
                         "ViewerProtocolPolicy": "redirect-to-https",
-                        "DefaultTTL": 86400,
-                        "MaxTTL": 31536000,
-                        "MinTTL": 60,
+                        "DefaultTTL": "30",
+                        "MaxTTL": "40",
+                        "MinTTL": "30",
                         "Compress": true
                     },
                     "DefaultRootObject": "index.html",

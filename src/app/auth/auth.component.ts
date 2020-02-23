@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-auth',
@@ -14,10 +15,11 @@ export class AuthComponent implements OnInit {
   }
 
   loginFB() {
-    this.amplifyService.auth().federatedSignIn();
+    Auth.federatedSignIn();
   }
 
   logout() {
-    this.amplifyService.auth().signOut();
+    Auth.currentAuthenticatedUser().then(user => console.log(user));
+    Auth.signOut();
   }
 }
