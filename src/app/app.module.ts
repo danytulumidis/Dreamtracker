@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DreamsComponent } from './dreams/dreams.component';
 import { DreamsListComponent } from './dreams/dreams-list/dreams-list.component';
@@ -30,8 +29,6 @@ import Auth from '@aws-amplify/auth';
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent,
-    RegistrationComponent,
     PaymentComponent,
     DreamsComponent,
     DreamsListComponent,
@@ -41,14 +38,16 @@ import Auth from '@aws-amplify/auth';
     GoalsListEditComponent,
     LandingPageComponent,
     ProfileComponent,
-    AboutComponent
+    AboutComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AmplifyAngularModule
   ],
   providers: [
     DreamsService,
