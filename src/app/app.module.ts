@@ -50,8 +50,6 @@ import Auth from '@aws-amplify/auth';
     AmplifyAngularModule
   ],
   providers: [
-    DreamsService,
-    GoalsService,
     {
       provide: AmplifyService,
       useFactory:  () => {

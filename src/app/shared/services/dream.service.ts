@@ -1,5 +1,9 @@
 import { Dream } from '../models/dream.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+  })
 export class DreamsService {
     dreams: Dream[] = [{
         name: 'Web Application',
