@@ -1,10 +1,26 @@
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<button (click)="loginFB()">Login FB</button>
-<button (click)="logout()">Logout</button>
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');">
+        <div class="filter"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                    <div class="card card-register">
+                        <h3 class="title">Welcome</h3>
+                        <div class="social-line text-center">
+                            <a class="fb-button">
+                                <i class="fa fa-facebook-square fb-icon"></i>
+                            </a>
+                            <br><br>
+                            <a class="google-button">
+                                <i class="fa fa-google google-icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer register-footer text-center">
+                <h6>&copy;{{currentDate | date: 'yyyy'}}, Dreamtracker <i class="fa fa-heart heart"></i> by Dany Tulumidis</h6>
+            </div>
+        </div>
+    </div>
+</div>
