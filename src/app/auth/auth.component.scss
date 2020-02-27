@@ -1,5 +1,6 @@
 .card-register {
     max-width: none;
+    background-color: #ff8f5e9e;
 }
 
 .fb-button {
@@ -8,7 +9,7 @@
 
 .fb-icon {
     font-size: 80px;
-    width: 50px !important;
+    width: 70px !important;
 }
 
 .google-button {
@@ -17,5 +18,9 @@
 
 .google-icon {
     font-size: 80px;
-    width: 50px !important;
+    width: 70px !important;
+}
+
+.login-title {
+    font-weight: bold;
 }
