@@ -13,7 +13,7 @@ export class DreamsComponent implements OnInit {
   constructor(private dreamsService:DreamsService) { }
 
   ngOnInit() {
-    this.dreams = this.dreamsService.dreams;
+    this.dreams = this.dreamsService.getDreams();
   }
 
   addGoals() {

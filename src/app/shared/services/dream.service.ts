@@ -16,6 +16,10 @@ export class DreamsService {
         goals: ['save dreams and goals in a database','Implement OAuth2 for User sign up/in']
     }];
 
+    getDreams() {
+        return this.dreams.slice();
+    }
+
     // TODO Use real goals and not dummy values
     saveNewDream(dreamName: string, dreamDescr: string) {
         this.dreams.push({
