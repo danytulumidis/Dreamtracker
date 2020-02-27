@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
   })
 export class DreamsService {
-    dreams: Dream[] = [{
+    private dreams: Dream[] = [{
         name: 'Web Application',
         description: 'develop and deploy a Web Application!',
         goals: ['Idea for Application','Develop the Application']

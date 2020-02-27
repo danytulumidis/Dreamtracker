@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
   })
 export class GoalsService {
-    goals: Goal[] = [{
+    private goals: Goal[] = [{
         name: 'first goal',
         description: 'be fooking awesome!',
         finished: false
