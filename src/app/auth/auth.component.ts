@@ -9,6 +9,10 @@ import { Auth } from 'aws-amplify';
 })
 export class AuthComponent implements OnInit {
 
+  currentDate : Date = new Date();
+  focus;
+  focus1;
+
   constructor(private amplifyService:AmplifyService) { }
 
   ngOnInit() {
