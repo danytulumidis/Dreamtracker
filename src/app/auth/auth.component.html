@@ -7,11 +7,11 @@
                     <div class="card card-register">
                         <h3 class="title login-title">Login</h3>
                         <div class="social-line text-center">
-                            <a class="fb-button">
+                            <a class="fb-button" (click)="federatedSignIn('facebook')">
                                 <i class="fa fa-facebook-square fb-icon"></i>
                             </a>
                             <br><br>
-                            <a class="google-button">
+                            <a class="google-button" (click)="federatedSignIn('google')">
                                 <i class="fa fa-google google-icon"></i>
                             </a>
                         </div>
