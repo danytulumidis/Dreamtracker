@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmplifyService } from 'aws-amplify-angular';
-import { Auth } from 'aws-amplify';
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,24 +9,13 @@ import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 export class AuthComponent implements OnInit {
 
   currentDate : Date = new Date();
-  focus;
-  focus1;
 
-  constructor(private amplifyService:AmplifyService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  federatedSignIn(provider: string) {
-    if (provider === 'facebook') {
-      Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Facebook});
-    } else {
-      Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google});
-    }
-  }
-
-  logout() {
-    // Auth.currentAuthenticatedUser().then(user => console.log(user));
-    Auth.signOut();
+  federatedSignIn(provider:string) {
+    this.authService.federatedSignIn(provider);
   }
 }
