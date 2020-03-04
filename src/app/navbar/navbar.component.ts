@@ -69,4 +69,10 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+
+    logout() {
+        if(this.signedIn) {
+            this.authServive.logout();
+        }
+    }
 }

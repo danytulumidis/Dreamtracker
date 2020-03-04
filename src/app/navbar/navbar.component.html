@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a [routerLink]="['about']" class="nav-link"><i class="nc-icon nc-alert-circle-i"></i>About</a>
                 </li>
+                <li *ngIf="signedIn" class="nav-item">
+                    <a (click)="logout()" class="nav-link"><i class="nc-icon nc-user-run"></i>Logout</a>
+                </li>
             </ul>
         </div>
     </div>
