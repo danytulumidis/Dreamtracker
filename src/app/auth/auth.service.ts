@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   logout() {
-    // Auth.currentAuthenticatedUser().then(user => console.log(user));
     Auth.signOut();
   }
 }
