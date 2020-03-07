@@ -17,7 +17,7 @@ export class DreamsService {
     }];
 
     getDreams() {
-        return this.dreams.slice();
+        return this.dreams;
     }
 
     // TODO Use real goals and not dummy values

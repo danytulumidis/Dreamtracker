@@ -11,10 +11,12 @@ export class AuthService {
   user: any;
 
   constructor(private amplifyService: AmplifyService) {
-    this.amplifyService.authStateChange$.subscribe(authState => {
-      this.user = authState.user;
-      this.signedIn = authState.state === 'signedIn' && this.user;            
-    })
+    // this.amplifyService.authStateChange$.subscribe(authState => {
+    //   this.user = authState.user;
+    //   this.signedIn = authState.state === 'signedIn' && this.user;            
+    // })
+    // Just for DEV
+    this.signedIn = true;
   }
 
   federatedSignIn(provider: string) {
