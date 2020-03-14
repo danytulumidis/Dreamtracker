@@ -1,0 +1,30 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateDreams {
+  onCreateDreams {
+    id
+    name
+    description
+    goals
+  }
+}
+subscription OnCreateTodo {
+  onCreateTodo {
+    id
+    name
+    description
+  }
+}
+subscription OnUpdateTodo {
+  onUpdateTodo {
+    id
+    name
+    description
+  }
+}
+subscription OnDeleteTodo {
+  onDeleteTodo {
+    id
+    name
+    description
+  }
+}

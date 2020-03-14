@@ -1,0 +1,55 @@
+# this is an auto generated file. This will be overwritten
+mutation DeleteDreams($id: Int!) {
+  deleteDreams(id: $id) {
+    id
+    name
+    description
+    goals
+  }
+}
+mutation CreateDreams($createDreamsInput: CreateDreamsInput!) {
+  createDreams(createDreamsInput: $createDreamsInput) {
+    id
+    name
+    description
+    goals
+  }
+}
+mutation UpdateDreams($updateDreamsInput: UpdateDreamsInput!) {
+  updateDreams(updateDreamsInput: $updateDreamsInput) {
+    id
+    name
+    description
+    goals
+  }
+}
+mutation CreateTodo(
+  $input: CreateTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  createTodo(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}
+mutation UpdateTodo(
+  $input: UpdateTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  updateTodo(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}
+mutation DeleteTodo(
+  $input: DeleteTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  deleteTodo(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}

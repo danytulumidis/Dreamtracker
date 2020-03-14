@@ -1,0 +1,47 @@
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+input CreateDreamsInput {
+  id: Int!
+  name: String!
+  description: String!
+  goals: String!
+}
+
+type Dreams {
+  id: Int!
+  name: String!
+  description: String!
+  goals: String!
+}
+
+input UpdateDreamsInput {
+  id: Int!
+  name: String
+  description: String
+  goals: String
+}
+
+type Mutation {
+  deleteDreams(id: Int!): Dreams
+  createDreams(createDreamsInput: CreateDreamsInput!): Dreams
+  updateDreams(updateDreamsInput: UpdateDreamsInput!): Dreams
+}
+
+type Query {
+  getDreams(id: Int!): Dreams
+  listDreamss: [Dreams]
+}
+
+type Subscription {
+  onCreateDreams: Dreams @aws_subscribe(mutations: ["createDreams"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

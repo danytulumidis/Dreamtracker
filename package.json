@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@aws-amplify/cli": "^4.16.0",
     "@ng-bootstrap/ng-bootstrap": "^5.2.1",
     "aws-amplify": "^2.2.5",
     "aws-amplify-angular": "^4.1.6",
