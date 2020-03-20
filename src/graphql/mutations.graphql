@@ -23,33 +23,3 @@ mutation UpdateDreams($updateDreamsInput: UpdateDreamsInput!) {
     goals
   }
 }
-mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  createTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-  }
-}
-mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  updateTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-  }
-}
-mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  deleteTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-  }
-}
