@@ -1,3 +1,20 @@
 .about-header {
     background-image: url('https://images.unsplash.com/photo-1494249465471-5655b7878482?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
 }
+
+.line-break {
+    border: 1px solid rgb(0, 174, 255);
+}
+
+.title-about {
+    font-weight: bold;
+}
+
+.colored-text {
+    text-transform: uppercase;
+    background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3vw;
+}
