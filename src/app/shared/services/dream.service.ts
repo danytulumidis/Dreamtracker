@@ -16,6 +16,8 @@ export class DreamsService {
         goals: ['save dreams and goals in a database','Implement OAuth2 for User sign up/in']
     }];
 
+    constructor() {}
+
     getDreams() {
         return this.dreams;
     }
@@ -34,5 +36,10 @@ export class DreamsService {
         const selectedDream = this.dreams.find(dream => dream.name === dreamName);
         
         this.dreams.splice(this.dreams.findIndex(dream => dream.name === selectedDream.name),1)
+    }
+
+    saveEditedDream(editedDream) {
+        const selectedDream = this.dreams.findIndex(dream => dream.name === editedDream.name);
+        this.dreams[selectedDream] = editedDream;
     }
 }

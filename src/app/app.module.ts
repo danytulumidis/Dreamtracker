@@ -18,12 +18,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
-import { DreamsService } from './shared/services/dream.service';
-import { GoalsService } from './shared/services/goal.service';
 
 // Amplify Backend
 import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
 import Auth from '@aws-amplify/auth';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +42,7 @@ import Auth from '@aws-amplify/auth';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     NgbModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,6 +59,9 @@ import Auth from '@aws-amplify/auth';
       }
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DreamsListEditComponent
+  ]
 })
 export class AppModule { }
