@@ -31,6 +31,14 @@ export class DreamsService {
         })
     }
 
+    checkDreamCount() {
+        // TODO Check if Dream is active or done
+        if (this.dreams.length === 5) {
+            return false;
+        }
+        return true;
+    }
+
     // TODO[A] Dream needs another unique indicator than the name
     deleteDream(dreamName: string) {
         const selectedDream = this.dreams.find(dream => dream.name === dreamName);
