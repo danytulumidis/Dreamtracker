@@ -9,6 +9,7 @@ import { Dream } from '../shared/models/dream.model';
 })
 export class DreamsComponent implements OnInit {
   dreams: Dream[] = [];
+  tooManyDreams: String;
 
   constructor(private dreamsService:DreamsService) { }
 
@@ -21,6 +22,10 @@ export class DreamsComponent implements OnInit {
   }
 
   saveDream(dreamName: HTMLInputElement, dreamDescr: HTMLTextAreaElement) {
-    this.dreamsService.saveNewDream(dreamName.value, dreamDescr.value);
+    if (!this.dreamsService.checkDreamCount()) {
+      this.tooManyDreams = 'You cant have more than 5 active dreams at once!';
+    } else {
+      this.dreamsService.saveNewDream(dreamName.value, dreamDescr.value);
+    }
   }
 }
