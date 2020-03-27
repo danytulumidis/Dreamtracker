@@ -1,11 +1,14 @@
+import { Goal } from './goal.model';
+
+// TODO: Expand Dream Model with ID etc.
 export class Dream {
     public name: string;
     public description: string;
-    public goals: string[];
+    public goals: Goal[];
 
-    constructor(name: string, desc: string, goals: string[]) {
+    constructor(name: string, desc: string, goals: Goal) {
         this.name = name;
         this.description = desc;
-        this.goals = goals;
+        this.goals.push(goals);
     }
 }

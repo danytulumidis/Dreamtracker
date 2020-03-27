@@ -1,5 +1,6 @@
 import { Dream } from '../models/dream.model';
 import { Injectable } from '@angular/core';
+import { GoalsService } from './goal.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,15 +9,15 @@ export class DreamsService {
     private dreams: Dream[] = [{
         name: 'Web Application',
         description: 'develop and deploy a Web Application!',
-        goals: ['Idea for Application','Develop the Application']
+        goals: this.goalService.getGoals(1)
     },
     {
         name: 'Finish Dreamtracker',
         description: 'Finish this application!',
-        goals: ['save dreams and goals in a database','Implement OAuth2 for User sign up/in']
+        goals: this.goalService.getGoals(2)
     }];
 
-    constructor() {}
+    constructor(private goalService: GoalsService) {}
 
     getDreams() {
         return this.dreams;
@@ -27,7 +28,8 @@ export class DreamsService {
         this.dreams.push({
             name: dreamName,
             description: dreamDescr,
-            goals: ['just a dummy goal']
+            // TODO push goals
+            goals: []
         })
     }
 
