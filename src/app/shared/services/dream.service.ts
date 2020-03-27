@@ -7,14 +7,28 @@ import { GoalsService } from './goal.service';
   })
 export class DreamsService {
     private dreams: Dream[] = [{
+        ID: 1,
         name: 'Web Application',
         description: 'develop and deploy a Web Application!',
-        goals: this.goalService.getGoals(1)
+        goals: this.goalService.getGoals(1),
+        isPrivate: false,
+        upvote: 150,
+        progress: 0,
+        finished: false,
+        userID: 123,
+        createdAt: new Date() 
     },
     {
+        ID: 2,
         name: 'Finish Dreamtracker',
         description: 'Finish this application!',
-        goals: this.goalService.getGoals(2)
+        goals: this.goalService.getGoals(2),
+        isPrivate: false,
+        upvote: 150,
+        progress: 0,
+        finished: false,
+        userID: 123,
+        createdAt: new Date() 
     }];
 
     constructor(private goalService: GoalsService) {}
@@ -24,12 +38,18 @@ export class DreamsService {
     }
 
     // TODO Use real goals and not dummy values
-    saveNewDream(dreamName: string, dreamDescr: string) {
+    saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
         this.dreams.push({
+            ID: 3,
             name: dreamName,
             description: dreamDescr,
-            // TODO push goals
-            goals: []
+            goals: [],
+            isPrivate: dreamPrivate,
+            upvote: 0,
+            progress: 0,
+            finished: false,
+            userID: 123,
+            createdAt: new Date() 
         })
     }
 

@@ -17,11 +17,12 @@ export class DreamsComponent implements OnInit {
     this.dreams = this.dreamsService.getDreams();
   }
 
-  saveDream(dreamName: HTMLInputElement, dreamDescr: HTMLTextAreaElement) {
+  saveDream(dreamName: HTMLInputElement, dreamDescr: HTMLTextAreaElement, dreamPrivate: HTMLInputElement) {
     if (!this.dreamsService.checkDreamCount()) {
       this.tooManyDreams = 'You cant have more than 5 active dreams at once!';
     } else {
-      this.dreamsService.saveNewDream(dreamName.value, dreamDescr.value);
+      console.log(dreamPrivate.value)
+      this.dreamsService.saveNewDream(dreamName.value, dreamDescr.value, dreamPrivate.checked);
     }
   }
 }

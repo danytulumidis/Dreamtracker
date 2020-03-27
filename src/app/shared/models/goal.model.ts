@@ -6,7 +6,8 @@ export class Goal {
     public dreamsID: number;
     public createdAt: Date;
 
-    constructor(name: string, desc: string, finished: boolean, dreamsID: number, createdAt: Date) {
+    constructor(id: number, name: string, desc: string, finished: boolean, dreamsID: number, createdAt: Date) {
+        this.id = id;
         this.name = name;
         this.description = desc;
         this.finished = finished;
