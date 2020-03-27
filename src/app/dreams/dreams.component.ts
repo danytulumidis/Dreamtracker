@@ -17,10 +17,6 @@ export class DreamsComponent implements OnInit {
     this.dreams = this.dreamsService.getDreams();
   }
 
-  addGoals() {
-
-  }
-
   saveDream(dreamName: HTMLInputElement, dreamDescr: HTMLTextAreaElement) {
     if (!this.dreamsService.checkDreamCount()) {
       this.tooManyDreams = 'You cant have more than 5 active dreams at once!';
