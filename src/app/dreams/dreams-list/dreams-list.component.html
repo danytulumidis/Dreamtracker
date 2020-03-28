@@ -2,16 +2,18 @@
     <div class="section text-center">
         <div class="container dream-border">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <h3>Name</h3>
                     <hr>
                     <p>{{ dreamsList.name }}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <h3>Description</h3>
                     <hr>
                     <p>{{ dreamsList.description }}</p>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
                     <h3>Private</h3>
                     <hr>
@@ -21,6 +23,23 @@
                     <h3>Goals</h3>
                     <hr>
                     <p *ngFor="let goal of dreamsList.goals">{{ goal.name }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Upvotes</h3>
+                    <hr>
+                    <p>{{ dreamsList.upvote }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Finished</h3>
+                    <hr>
+                    <p>{{ dreamsList.finished }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Progress</h3>
+                    <hr>
+                    <ngb-progressbar type="success" [value]="dreamsList.progress" [animated]="true"><i class="progress-text">{{dreamsList.progress + '%'}}</i></ngb-progressbar>
                 </div>
             </div>
             <div class="row">
