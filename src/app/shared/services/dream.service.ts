@@ -13,7 +13,7 @@ export class DreamsService {
         goals: this.goalService.getGoals(1),
         isPrivate: false,
         upvote: 150,
-        progress: 0,
+        progress: 30,
         finished: false,
         userID: 123,
         createdAt: new Date() 
@@ -25,7 +25,7 @@ export class DreamsService {
         goals: this.goalService.getGoals(2),
         isPrivate: false,
         upvote: 150,
-        progress: 0,
+        progress: 50,
         finished: false,
         userID: 123,
         createdAt: new Date() 
