@@ -39,6 +39,9 @@
               </li> -->
                 <!-- TODO Maybe put "this is how you can act" when not signed in -->
                 <li *ngIf="signedIn" class="nav-item">
+                    <a [routerLink]="['alldreams']" class="nav-link"><i class="nc-icon nc-spaceship"></i>All Dreams</a>
+                </li>
+                <li *ngIf="signedIn" class="nav-item">
                     <a [routerLink]="['mydreams']" class="nav-link"><i class="nc-icon nc-spaceship"></i>My Dreams</a>
                 </li>
                 <li *ngIf="signedIn" class="nav-item">

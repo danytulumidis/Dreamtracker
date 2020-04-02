@@ -15,7 +15,7 @@ export class DreamsService {
         upvote: 150,
         progress: 30,
         finished: false,
-        userID: 123,
+        user: 'Dany',
         createdAt: new Date() 
     },
     {
@@ -27,7 +27,7 @@ export class DreamsService {
         upvote: 150,
         progress: 50,
         finished: false,
-        userID: 123,
+        user: 'Dany',
         createdAt: new Date() 
     }];
 
@@ -35,6 +35,10 @@ export class DreamsService {
 
     getDreams() {
         return this.dreams;
+    }
+
+    getPublicDreams() {
+        return this.dreams.filter(element => element.isPrivate === false);
     }
 
     // TODO Use real goals and not dummy values
@@ -48,7 +52,7 @@ export class DreamsService {
             upvote: 0,
             progress: 0,
             finished: false,
-            userID: 123,
+            user: 'Dany',
             createdAt: new Date() 
         })
     }

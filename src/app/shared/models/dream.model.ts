@@ -10,11 +10,11 @@ export class Dream {
     public upvote: number;
     public progress: number;
     public finished: boolean;
-    public userID: number;
+    public user: string;
     public createdAt: Date;
 
     constructor(name: string, desc: string, goals: Goal, isPrivate: boolean, upvote: number, progress: number,
-        finished: boolean, userID: number, createdAt: Date) {
+        finished: boolean, user: string, createdAt: Date) {
         this.name = name;
         this.description = desc;
         this.goals.push(goals);
@@ -22,7 +22,7 @@ export class Dream {
         this.upvote = upvote;
         this.progress = progress;
         this.finished = finished;
-        this.userID = userID;
+        this.user = user;
         this.createdAt = createdAt;
     }
 }

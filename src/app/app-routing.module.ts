@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // components
 import { DreamsComponent } from './dreams/dreams.component';
+import { PeopleDreamsComponent } from './dreams/people-dreams/people-dreams.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthComponent } from './auth/auth.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
@@ -14,6 +15,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'mydreams', canActivate: [AuthGuard], component: DreamsComponent},
+  { path: 'alldreams', canActivate: [AuthGuard], component: PeopleDreamsComponent},
   { path: 'goals', canActivate: [AuthGuard], component: GoalsListComponent},
   { path: 'auth', component: AuthComponent},
   { path: 'about', component: AboutComponent},

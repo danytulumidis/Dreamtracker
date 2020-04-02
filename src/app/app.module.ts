@@ -23,6 +23,7 @@ import { AboutComponent } from './about/about.component';
 import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
 import Auth from '@aws-amplify/auth';
 import { FormsModule } from '@angular/forms';
+import { PeopleDreamsComponent } from './dreams/people-dreams/people-dreams.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     LandingPageComponent,
     ProfileComponent,
     AboutComponent,
-    AuthComponent
+    AuthComponent,
+    PeopleDreamsComponent
   ],
   imports: [
     BrowserModule,
