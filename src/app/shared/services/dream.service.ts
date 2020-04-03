@@ -13,7 +13,7 @@ export class DreamsService {
         goals: this.goalService.getGoals(1),
         isPrivate: false,
         upvote: 150,
-        progress: 30,
+        progress: 0,
         finished: false,
         user: 'Dany',
         createdAt: new Date() 
@@ -25,7 +25,7 @@ export class DreamsService {
         goals: this.goalService.getGoals(2),
         isPrivate: false,
         upvote: 150,
-        progress: 50,
+        progress: 0,
         finished: false,
         user: 'Dany',
         createdAt: new Date() 
@@ -41,7 +41,6 @@ export class DreamsService {
         return this.dreams.filter(element => element.isPrivate === false);
     }
 
-    // TODO Use real goals and not dummy values
     saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
         this.dreams.push({
             ID: 3,
@@ -75,5 +74,16 @@ export class DreamsService {
     saveEditedDream(editedDream) {
         const selectedDream = this.dreams.findIndex(dream => dream.name === editedDream.name);
         this.dreams[selectedDream] = editedDream;
+    }
+
+    updateProgressBar(dreamID: number) {
+        const allGoals = this.goalService.getGoals(dreamID);
+        const goalQuantity = allGoals.length;
+        const finishedGoals = allGoals.filter(element => element.finished === true).length;
+        const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+
+        const dreamDone = this.dreams[dreamIndex].progress = (100 / goalQuantity) * finishedGoals;
+        // When all goals are done set Dream to done
+        this.dreams[dreamIndex].finished = dreamDone === 100;
     }
 }
