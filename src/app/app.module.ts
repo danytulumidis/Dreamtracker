@@ -63,7 +63,8 @@ import { PeopleDreamsComponent } from './dreams/people-dreams/people-dreams.comp
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    DreamsListEditComponent
+    DreamsListEditComponent,
+    GoalsListEditComponent
   ]
 })
 export class AppModule { }

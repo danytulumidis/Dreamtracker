@@ -14,27 +14,24 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3>Private</h3>
                     <hr>
                     <p>{{ dreamsList.isPrivate }}</p>
                 </div>
-                <div class="col-md-3">
-                    <h3>Goals</h3>
-                    <hr>
-                    <p *ngFor="let goal of dreamsList.goals">{{ goal.name }}</p>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3>Upvotes</h3>
                     <hr>
                     <p>{{ dreamsList.upvote }}</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h3>Finished</h3>
                     <hr>
                     <p>{{ dreamsList.finished }}</p>
                 </div>
             </div>
+            <!-- Show Goals -->
+            <app-goals [goals]="dreamsList.goals"></app-goals>
             <div class="row">
                 <div class="col-md-12">
                     <h3>Progress</h3>
@@ -46,7 +43,8 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <!-- TODO[A] Dream needs another unique indicator than the name -->
-                    <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editDream(dreamsList)">Edit</button>
+                    <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editDream(dreamsList)">Edit Dream</button>
+                    <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editGoals()">Edit Goals</button>
                     <button type="button" class="btn btn-outline-danger btn-round alter-button" (click)="deleteDream(dreamsList.name)">Delete</button>
                 </div>
                 <div class="col-md-4"></div>

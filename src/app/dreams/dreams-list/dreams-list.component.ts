@@ -3,6 +3,7 @@ import { Dream } from 'src/app/shared/models/dream.model';
 import { DreamsService } from 'src/app/shared/services/dream.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DreamsListEditComponent } from '../dreams-list-edit/dreams-list-edit.component'
+import { GoalsService } from 'src/app/shared/services/goal.service';
 
 @Component({
   selector: 'app-dreams-list',
@@ -12,7 +13,7 @@ import { DreamsListEditComponent } from '../dreams-list-edit/dreams-list-edit.co
 export class DreamsListComponent implements OnInit {
   @Input() dreamsList: Dream;
 
-  constructor(private dreamService:DreamsService, public modalService: NgbModal) { }
+  constructor(private dreamService:DreamsService, private goalsService:GoalsService , public modalService: NgbModal) { }
 
   ngOnInit() {
     
@@ -31,6 +32,9 @@ export class DreamsListComponent implements OnInit {
         console.log(result);
       }
     });
+  }
+
+  editGoals() {
   }
 
 }

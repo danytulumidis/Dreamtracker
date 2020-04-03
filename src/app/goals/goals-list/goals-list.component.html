@@ -1,0 +1,31 @@
+<div class="main">
+    <div class="section text-center reduce-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Name</h3>
+                    <hr>
+                    <p>{{ goals.name }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Description</h3>
+                    <hr>
+                    <p>{{ goals.description }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Finished</h3>
+                    <hr>
+                    <p>{{ goals.finished }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Done</h3>
+                    <hr>
+                    <div class="form-group">
+                        <input type="checkbox" class="form-control" placeholder="Tell us your Dream"
+                        [checked]="goals.finished" (change)="editGoalFinish(checkboxValue.checked, goals.id, goals.dreamsID)" #checkboxValue>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

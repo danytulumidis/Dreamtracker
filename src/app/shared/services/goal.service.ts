@@ -9,7 +9,7 @@ export class GoalsService {
         id: 1,
         name: 'Find an idea',
         description: 'Find an idea to make a web application',
-        finished: true,
+        finished: false,
         dreamsID: 1,
         createdAt: new Date()
     },
@@ -35,5 +35,11 @@ export class GoalsService {
     // Return all goals for the requested Dream by the dreamID
     getGoals(dreamID) {
         return this.goals.filter(goals => goals.dreamsID === dreamID);
+    }
+
+    // Set Goal to done or not done
+    editFinishStatus(isFinished: boolean, goalsID: number) {
+        const goalIndex = this.goals.findIndex(element => element.id === goalsID);
+        this.goals[goalIndex].finished = isFinished;
     }
 }
