@@ -1,4 +1,8 @@
+// Imports
 @import '~animate.css/animate.min';
+
+// Variables
+$main-color: #11d44b7e;
 
 html, body {
     height: 100%;
@@ -37,4 +41,8 @@ p {
 
 .reduce-padding {
     padding: 20px 0px 20px 0px;
+}
+
+.icon-danger {
+    color: $main-color;
 }

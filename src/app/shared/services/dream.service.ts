@@ -82,7 +82,7 @@ export class DreamsService {
         const finishedGoals = allGoals.filter(element => element.finished === true).length;
         const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
 
-        const dreamDone = this.dreams[dreamIndex].progress = (100 / goalQuantity) * finishedGoals;
+        const dreamDone = this.dreams[dreamIndex].progress = Math.round((100 / goalQuantity) * finishedGoals);
         // When all goals are done set Dream to done
         this.dreams[dreamIndex].finished = dreamDone === 100;
     }
