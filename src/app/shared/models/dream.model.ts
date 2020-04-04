@@ -9,19 +9,19 @@ export class Dream {
     public isPrivate: boolean;
     public upvote: number;
     public progress: number;
-    public finished: boolean;
+    public status: string;
     public user: string;
     public createdAt: Date;
 
     constructor(name: string, desc: string, goals: Goal, isPrivate: boolean, upvote: number, progress: number,
-        finished: boolean, user: string, createdAt: Date) {
+        status: string, user: string, createdAt: Date) {
         this.name = name;
         this.description = desc;
         this.goals.push(goals);
         this.isPrivate = isPrivate;
         this.upvote = upvote;
         this.progress = progress;
-        this.finished = finished;
+        this.status = status;
         this.user = user;
         this.createdAt = createdAt;
     }

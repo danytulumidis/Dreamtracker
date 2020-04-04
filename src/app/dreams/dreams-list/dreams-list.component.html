@@ -17,7 +17,10 @@
                 <div class="col-md-4">
                     <h3>Private</h3>
                     <hr>
-                    <p>{{ dreamsList.isPrivate }}</p>
+                    <i *ngIf="dreamsList.isPrivate; else notFinished" class="nc-icon nc-check-2"></i>
+                    <ng-template #notFinished>
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </ng-template>
                 </div>
                 <div class="col-md-4">
                     <h3>Upvotes</h3>
@@ -25,9 +28,9 @@
                     <p>{{ dreamsList.upvote }}</p>
                 </div>
                 <div class="col-md-4">
-                    <h3>Finished</h3>
+                    <h3>Status</h3>
                     <hr>
-                    <p>{{ dreamsList.finished }}</p>
+                    <p [ngClass]="dreamsList.progress <= 49 ? 'status-down' : 'status-up'"> {{ dreamsList.status }} </p>
                 </div>
             </div>
             <!-- Show Goals -->
