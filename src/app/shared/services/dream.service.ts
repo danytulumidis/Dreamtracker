@@ -14,7 +14,7 @@ export class DreamsService {
         isPrivate: false,
         upvote: 150,
         progress: 0,
-        finished: false,
+        status: 'To Do',
         user: 'Dany',
         createdAt: new Date() 
     },
@@ -26,7 +26,7 @@ export class DreamsService {
         isPrivate: false,
         upvote: 150,
         progress: 0,
-        finished: false,
+        status: 'To Do',
         user: 'Dany',
         createdAt: new Date() 
     }];
@@ -50,7 +50,7 @@ export class DreamsService {
             isPrivate: dreamPrivate,
             upvote: 0,
             progress: 0,
-            finished: false,
+            status: 'To Do',
             user: 'Dany',
             createdAt: new Date() 
         })
@@ -83,7 +83,17 @@ export class DreamsService {
         const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
 
         const dreamDone = this.dreams[dreamIndex].progress = Math.round((100 / goalQuantity) * finishedGoals);
-        // When all goals are done set Dream to done
-        this.dreams[dreamIndex].finished = dreamDone === 100;
+        // Set Dream Status Based on the current progress
+        if (dreamDone === 0) {
+            this.dreams[dreamIndex].status = 'To Do';
+        } else if (dreamDone <= 20) {
+            this.dreams[dreamIndex].status = 'In Progress';
+        } else if (dreamDone <= 60) {
+            this.dreams[dreamIndex].status = 'Keep it up!';
+        } else if (dreamDone <= 90) {
+            this.dreams[dreamIndex].status = 'Almost Done, keep going!';
+        } else if (dreamDone === 100) {
+            this.dreams[dreamIndex].status = 'Done';
+        }
     }
 }
