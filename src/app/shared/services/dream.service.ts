@@ -37,6 +37,11 @@ export class DreamsService {
         return this.dreams;
     }
 
+    updateGoal(dreamID:Number) {
+        const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+        this.dreams[dreamIndex].goals = this.goalService.getGoals(dreamID);
+    }
+
     getPublicDreams() {
         return this.dreams.filter(element => element.isPrivate === false);
     }
