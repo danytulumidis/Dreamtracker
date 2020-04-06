@@ -47,7 +47,7 @@
                 <div class="col-md-4">
                     <!-- TODO[A] Dream needs another unique indicator than the name -->
                     <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editDream(dreamsList)">Edit Dream</button>
-                    <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editGoals()">Edit Goals</button>
+                    <button type="button" class="btn btn-outline-primary btn-round alter-button" (click)="editGoals(dreamsList.goals)">Edit Goals</button>
                     <button type="button" class="btn btn-outline-danger btn-round alter-button" (click)="deleteDream(dreamsList.name)">Delete</button>
                 </div>
                 <div class="col-md-4"></div>
