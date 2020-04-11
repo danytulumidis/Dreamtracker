@@ -1,17 +1,198 @@
 # this is an auto generated file. This will be overwritten
-query GetDreams($id: Int!) {
-  getDreams(id: $id) {
-    id
+query GetDream($dreamID: Int!) {
+  getDream(dreamID: $dreamID) {
+    dreamID
     name
     description
-    goals
+    private
+    userID
+    upvotes
+    created
   }
 }
-query ListDreamss {
-  listDreamss {
-    id
+query ListDreams {
+  listDreams {
+    dreamID
     name
     description
-    goals
+    private
+    userID
+    upvotes
+    created
+  }
+}
+query GetFriendship($userB: Int!) {
+  getFriendship(userB: $userB) {
+    userA
+    userB
+    created
+    status
+  }
+}
+query ListFriendships {
+  listFriendships {
+    userA
+    userB
+    created
+    status
+  }
+}
+query GetGoal($goalID: Int!) {
+  getGoal(goalID: $goalID) {
+    goalID
+    name
+    description
+    dreamID
+    finished
+    created
+  }
+}
+query ListGoals {
+  listGoals {
+    goalID
+    name
+    description
+    dreamID
+    finished
+    created
+  }
+}
+query GetUser($userID: Int!) {
+  getUser(userID: $userID) {
+    userID
+    name
+    description
+    jobTitle
+    profilePictureURL
+    created
+  }
+}
+query ListUsers {
+  listUsers {
+    userID
+    name
+    description
+    jobTitle
+    profilePictureURL
+    created
+  }
+}
+query GetUserSetting($settingID: Int!) {
+  getUserSetting(settingID: $settingID) {
+    settingID
+    settingName
+    settingValue
+    userID
+  }
+}
+query ListUserSettings {
+  listUserSettings {
+    settingID
+    settingName
+    settingValue
+    userID
+  }
+}
+query GetBlog($id: ID!) {
+  getBlog(id: $id) {
+    id
+    name
+    posts {
+      items {
+        id
+        title
+      }
+      nextToken
+    }
+  }
+}
+query ListBlogs(
+  $filter: ModelBlogFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetPost($id: ID!) {
+  getPost(id: $id) {
+    id
+    title
+    blog {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    comments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+  }
+}
+query ListPosts(
+  $filter: ModelPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    content
+    post {
+      id
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
+  }
+}
+query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      post {
+        id
+        title
+      }
+    }
+    nextToken
   }
 }

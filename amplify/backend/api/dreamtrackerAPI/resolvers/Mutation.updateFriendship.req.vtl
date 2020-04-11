@@ -1,0 +1,9 @@
+#set( $updateList = {} )
+#foreach( $entry in $ctx.args.updateFriendshipInput.keySet() )
+  #set( $discard = $updateList.put($entry, "'$ctx.args.updateFriendshipInput[$entry]'") )
+#end
+#set( $update = $updateList.toString().replace("{","").replace("}","") )
+{
+  "version": "2018-05-29",
+  "statements":   ["UPDATE Friendship SET $update WHERE userB=$ctx.args.updateFriendshipInput.userB", "SELECT * FROM Friendship WHERE userB=$ctx.args.updateFriendshipInput.userB"]
+}
