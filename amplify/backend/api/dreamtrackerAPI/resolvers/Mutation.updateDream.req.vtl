@@ -1,0 +1,9 @@
+#set( $updateList = {} )
+#foreach( $entry in $ctx.args.updateDreamInput.keySet() )
+  #set( $discard = $updateList.put($entry, "'$ctx.args.updateDreamInput[$entry]'") )
+#end
+#set( $update = $updateList.toString().replace("{","").replace("}","") )
+{
+  "version": "2018-05-29",
+  "statements":   ["UPDATE Dream SET $update WHERE dreamID=$ctx.args.updateDreamInput.dreamID", "SELECT * FROM Dream WHERE dreamID=$ctx.args.updateDreamInput.dreamID"]
+}

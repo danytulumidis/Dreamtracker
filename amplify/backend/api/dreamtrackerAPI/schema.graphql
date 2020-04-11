@@ -1,37 +1,185 @@
-input CreateDreamsInput {
-  id: Int!
+type Blog @model {
+  id: ID!
   name: String!
-  description: String!
-  goals: String!
+  posts: [Post] @connection(name: "BlogPosts")
 }
 
-type Dreams {
-  id: Int!
-  name: String!
-  description: String!
-  goals: String!
+type Post @model {
+  id: ID!
+  title: String!
+  blog: Blog @connection(name: "BlogPosts")
+  comments: [Comment] @connection(name: "PostComments")
 }
 
-input UpdateDreamsInput {
-  id: Int!
+type Comment @model {
+  id: ID!
+  content: String
+  post: Post @connection(name: "PostComments")
+}
+
+input CreateDreamInput {
+  dreamID: Int!
+  name: String!
+  description: String!
+  private: Int!
+  userID: Int!
+  upvotes: Int
+  created: AWSTimestamp!
+}
+
+type Dream {
+  dreamID: Int!
+  name: String!
+  description: String!
+  private: Int!
+  userID: Int!
+  upvotes: Int
+  created: AWSTimestamp!
+}
+
+input UpdateDreamInput {
+  dreamID: Int!
   name: String
   description: String
-  goals: String
+  private: Int
+  userID: Int
+  upvotes: Int
+  created: AWSTimestamp
+}
+
+input CreateFriendshipInput {
+  userA: Int!
+  userB: Int!
+  created: AWSTimestamp!
+  status: String!
+}
+
+type Friendship {
+  userA: Int!
+  userB: Int!
+  created: AWSTimestamp!
+  status: String!
+}
+
+input UpdateFriendshipInput {
+  userA: Int!
+  userB: Int!
+  created: AWSTimestamp
+  status: String
+}
+
+input CreateGoalInput {
+  goalID: Int!
+  name: String!
+  description: String!
+  dreamID: Int!
+  finished: Int!
+  created: AWSTimestamp!
+}
+
+type Goal {
+  goalID: Int!
+  name: String!
+  description: String!
+  dreamID: Int!
+  finished: Int!
+  created: AWSTimestamp!
+}
+
+input UpdateGoalInput {
+  goalID: Int!
+  name: String
+  description: String
+  dreamID: Int
+  finished: Int
+  created: AWSTimestamp
+}
+
+input CreateUserInput {
+  userID: Int!
+  name: String!
+  description: String!
+  jobTitle: String
+  profilePictureURL: String
+  created: AWSTimestamp!
+}
+
+type User {
+  userID: Int!
+  name: String!
+  description: String!
+  jobTitle: String
+  profilePictureURL: String
+  created: AWSTimestamp!
+}
+
+input UpdateUserInput {
+  userID: Int!
+  name: String
+  description: String
+  jobTitle: String
+  profilePictureURL: String
+  created: AWSTimestamp
+}
+
+input CreateUserSettingInput {
+  settingID: Int!
+  settingName: String!
+  settingValue: String!
+  userID: Int!
+}
+
+type UserSetting {
+  settingID: Int!
+  settingName: String!
+  settingValue: String!
+  userID: Int!
+}
+
+input UpdateUserSettingInput {
+  settingID: Int!
+  settingName: String
+  settingValue: String
+  userID: Int
 }
 
 type Mutation {
-  deleteDreams(id: Int!): Dreams
-  createDreams(createDreamsInput: CreateDreamsInput!): Dreams
-  updateDreams(updateDreamsInput: UpdateDreamsInput!): Dreams
+  deleteDream(dreamID: Int!): Dream
+  createDream(createDreamInput: CreateDreamInput!): Dream
+  updateDream(updateDreamInput: UpdateDreamInput!): Dream
+  deleteFriendship(userB: Int!): Friendship
+  createFriendship(createFriendshipInput: CreateFriendshipInput!): Friendship
+  updateFriendship(updateFriendshipInput: UpdateFriendshipInput!): Friendship
+  deleteGoal(goalID: Int!): Goal
+  createGoal(createGoalInput: CreateGoalInput!): Goal
+  updateGoal(updateGoalInput: UpdateGoalInput!): Goal
+  deleteUser(userID: Int!): User
+  createUser(createUserInput: CreateUserInput!): User
+  updateUser(updateUserInput: UpdateUserInput!): User
+  deleteUserSetting(settingID: Int!): UserSetting
+  createUserSetting(createUserSettingInput: CreateUserSettingInput!): UserSetting
+  updateUserSetting(updateUserSettingInput: UpdateUserSettingInput!): UserSetting
 }
 
 type Query {
-  getDreams(id: Int!): Dreams
-  listDreamss: [Dreams]
+  getDream(dreamID: Int!): Dream
+  listDreams: [Dream]
+  getFriendship(userB: Int!): Friendship
+  listFriendships: [Friendship]
+  getGoal(goalID: Int!): Goal
+  listGoals: [Goal]
+  getUser(userID: Int!): User
+  listUsers: [User]
+  getUserSetting(settingID: Int!): UserSetting
+  listUserSettings: [UserSetting]
 }
 
 type Subscription {
-  onCreateDreams: Dreams @aws_subscribe(mutations: ["createDreams"])
+  onCreateDream: Dream @aws_subscribe(mutations: ["createDream"])
+  onCreateFriendship: Friendship @aws_subscribe(mutations: ["createFriendship"])
+  onCreateGoal: Goal @aws_subscribe(mutations: ["createGoal"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onCreateUserSetting: UserSetting @aws_subscribe(mutations: ["createUserSetting"])
 }
 
 schema {

@@ -1,25 +1,319 @@
 # this is an auto generated file. This will be overwritten
-mutation DeleteDreams($id: Int!) {
-  deleteDreams(id: $id) {
-    id
+mutation DeleteDream($dreamID: Int!) {
+  deleteDream(dreamID: $dreamID) {
+    dreamID
     name
     description
-    goals
+    private
+    userID
+    upvotes
+    created
   }
 }
-mutation CreateDreams($createDreamsInput: CreateDreamsInput!) {
-  createDreams(createDreamsInput: $createDreamsInput) {
-    id
+mutation CreateDream($createDreamInput: CreateDreamInput!) {
+  createDream(createDreamInput: $createDreamInput) {
+    dreamID
     name
     description
-    goals
+    private
+    userID
+    upvotes
+    created
   }
 }
-mutation UpdateDreams($updateDreamsInput: UpdateDreamsInput!) {
-  updateDreams(updateDreamsInput: $updateDreamsInput) {
-    id
+mutation UpdateDream($updateDreamInput: UpdateDreamInput!) {
+  updateDream(updateDreamInput: $updateDreamInput) {
+    dreamID
     name
     description
-    goals
+    private
+    userID
+    upvotes
+    created
+  }
+}
+mutation DeleteFriendship($userB: Int!) {
+  deleteFriendship(userB: $userB) {
+    userA
+    userB
+    created
+    status
+  }
+}
+mutation CreateFriendship($createFriendshipInput: CreateFriendshipInput!) {
+  createFriendship(createFriendshipInput: $createFriendshipInput) {
+    userA
+    userB
+    created
+    status
+  }
+}
+mutation UpdateFriendship($updateFriendshipInput: UpdateFriendshipInput!) {
+  updateFriendship(updateFriendshipInput: $updateFriendshipInput) {
+    userA
+    userB
+    created
+    status
+  }
+}
+mutation DeleteGoal($goalID: Int!) {
+  deleteGoal(goalID: $goalID) {
+    goalID
+    name
+    description
+    dreamID
+    finished
+    created
+  }
+}
+mutation CreateGoal($createGoalInput: CreateGoalInput!) {
+  createGoal(createGoalInput: $createGoalInput) {
+    goalID
+    name
+    description
+    dreamID
+    finished
+    created
+  }
+}
+mutation UpdateGoal($updateGoalInput: UpdateGoalInput!) {
+  updateGoal(updateGoalInput: $updateGoalInput) {
+    goalID
+    name
+    description
+    dreamID
+    finished
+    created
+  }
+}
+mutation DeleteUser($userID: Int!) {
+  deleteUser(userID: $userID) {
+    userID
+    name
+    description
+    jobTitle
+    profilePictureURL
+    created
+  }
+}
+mutation CreateUser($createUserInput: CreateUserInput!) {
+  createUser(createUserInput: $createUserInput) {
+    userID
+    name
+    description
+    jobTitle
+    profilePictureURL
+    created
+  }
+}
+mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+  updateUser(updateUserInput: $updateUserInput) {
+    userID
+    name
+    description
+    jobTitle
+    profilePictureURL
+    created
+  }
+}
+mutation DeleteUserSetting($settingID: Int!) {
+  deleteUserSetting(settingID: $settingID) {
+    settingID
+    settingName
+    settingValue
+    userID
+  }
+}
+mutation CreateUserSetting($createUserSettingInput: CreateUserSettingInput!) {
+  createUserSetting(createUserSettingInput: $createUserSettingInput) {
+    settingID
+    settingName
+    settingValue
+    userID
+  }
+}
+mutation UpdateUserSetting($updateUserSettingInput: UpdateUserSettingInput!) {
+  updateUserSetting(updateUserSettingInput: $updateUserSettingInput) {
+    settingID
+    settingName
+    settingValue
+    userID
+  }
+}
+mutation CreateBlog(
+  $input: CreateBlogInput!
+  $condition: ModelBlogConditionInput
+) {
+  createBlog(input: $input, condition: $condition) {
+    id
+    name
+    posts {
+      items {
+        id
+        title
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateBlog(
+  $input: UpdateBlogInput!
+  $condition: ModelBlogConditionInput
+) {
+  updateBlog(input: $input, condition: $condition) {
+    id
+    name
+    posts {
+      items {
+        id
+        title
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteBlog(
+  $input: DeleteBlogInput!
+  $condition: ModelBlogConditionInput
+) {
+  deleteBlog(input: $input, condition: $condition) {
+    id
+    name
+    posts {
+      items {
+        id
+        title
+      }
+      nextToken
+    }
+  }
+}
+mutation CreatePost(
+  $input: CreatePostInput!
+  $condition: ModelPostConditionInput
+) {
+  createPost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    comments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdatePost(
+  $input: UpdatePostInput!
+  $condition: ModelPostConditionInput
+) {
+  updatePost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    comments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+  }
+}
+mutation DeletePost(
+  $input: DeletePostInput!
+  $condition: ModelPostConditionInput
+) {
+  deletePost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      posts {
+        nextToken
+      }
+    }
+    comments {
+      items {
+        id
+        content
+      }
+      nextToken
+    }
+  }
+}
+mutation CreateComment(
+  $input: CreateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  createComment(input: $input, condition: $condition) {
+    id
+    content
+    post {
+      id
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateComment(
+  $input: UpdateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  updateComment(input: $input, condition: $condition) {
+    id
+    content
+    post {
+      id
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteComment(
+  $input: DeleteCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  deleteComment(input: $input, condition: $condition) {
+    id
+    content
+    post {
+      id
+      title
+      blog {
+        id
+        name
+      }
+      comments {
+        nextToken
+      }
+    }
   }
 }
