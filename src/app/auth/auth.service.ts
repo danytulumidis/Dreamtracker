@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
 import { AmplifyService } from "aws-amplify-angular";
 
 @Injectable({
@@ -11,12 +11,31 @@ export class AuthService {
   user: any;
 
   constructor(private amplifyService: AmplifyService) {
-    this.amplifyService.authStateChange$.subscribe(authState => {
-      this.user = authState.user;
-      this.signedIn = authState.state === "signedIn" && this.user;
+    // this.amplifyService.authStateChange$.subscribe(authState => {
+    //   this.user = authState.user;
+    //   this.signedIn = authState.state === "signedIn" && this.user;
+    // });
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      switch (event) {
+        case "signIn":
+          this.user = data;
+          this.signedIn = true;
+          break;
+        case "signOut":
+          this.user = null;
+          break;
+      }
     });
     // Just for DEV
     // this.signedIn = true;
+  }
+
+  isLoggedIn() {
+    if (this.signedIn) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   federatedSignIn(provider: string) {
