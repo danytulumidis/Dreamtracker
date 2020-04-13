@@ -6,8 +6,8 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
-import { AmplifyService } from "aws-amplify-angular";
 import { AuthService } from "./auth.service";
+import { Auth } from "aws-amplify";
 
 @Injectable({
   providedIn: "root"
@@ -20,11 +20,13 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // return true if authenticated
-    if (this.authService.isLoggedIn()) {
-      return true;
-    } else {
-      this.router.navigate(["/"]);
-      return false;
-    }
+    return Auth.currentAuthenticatedUser()
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        this.router.navigate(["/"]);
+        return false;
+      });
   }
 }

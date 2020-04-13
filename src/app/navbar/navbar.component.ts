@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import { Component, OnInit, ElementRef, NgZone } from "@angular/core";
 import {
   Location,
   LocationStrategy,
@@ -19,10 +19,19 @@ export class NavbarComponent implements OnInit {
   constructor(
     public location: Location,
     private element: ElementRef,
-    private authServive: AuthService
+    private authService: AuthService,
+    private ngZone: NgZone
   ) {
     this.sidebarVisible = false;
-    this.signedIn = this.authServive.isLoggedIn();
+    this.authService.authState.subscribe(user =>
+      this.ngZone.run(() => {
+        if (user !== null) {
+          this.signedIn = true;
+        } else {
+          this.signedIn = false;
+        }
+      })
+    );
   }
 
   ngOnInit() {
@@ -78,7 +87,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     if (this.signedIn) {
-      this.authServive.logout();
+      this.authService.logout();
     }
   }
 }
