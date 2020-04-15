@@ -72,11 +72,15 @@ export class DreamsService {
   }
 
   deleteDream(dreamName: string) {
-    const selectedDream = this.dreams.find(dream => dream.name === dreamName);
-    this.dreams.splice(
-      this.dreams.findIndex(dream => dream.name === selectedDream.name),
-      1
+    const selectedDreamIndex = this.dreams.findIndex(
+      dream => dream.name === dreamName
     );
+    // Delete all goals related to this dream
+    if (this.dreams[selectedDreamIndex].goals.length > 0) {
+      this.goalService.deleteGoals(this.dreams[selectedDreamIndex].ID);
+    }
+    // Delete the dream
+    this.dreams.splice(selectedDreamIndex, 1);
   }
 
   saveEditedDream(editedDream) {
