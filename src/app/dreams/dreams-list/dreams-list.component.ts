@@ -1,34 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Dream } from 'src/app/shared/models/dream.model';
-import { DreamsService } from 'src/app/shared/services/dream.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DreamsListEditComponent } from '../dreams-list-edit/dreams-list-edit.component'
-import { Goal } from 'src/app/shared/models/goal.model';
-import { GoalsListEditComponent } from 'src/app/goals/goals-list-edit/goals-list-edit.component';
+import { Component, OnInit, Input } from "@angular/core";
+import { Dream } from "src/app/shared/models/dream.model";
+import { DreamsService } from "src/app/shared/services/dream.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DreamsListEditComponent } from "../dreams-list-edit/dreams-list-edit.component";
+import { Goal } from "src/app/shared/models/goal.model";
+import { GoalsListEditComponent } from "src/app/goals/goals-list-edit/goals-list-edit.component";
 
 @Component({
-  selector: 'app-dreams-list',
-  templateUrl: './dreams-list.component.html',
-  styleUrls: ['./dreams-list.component.scss']
+  selector: "app-dreams-list",
+  templateUrl: "./dreams-list.component.html",
+  styleUrls: ["./dreams-list.component.scss"]
 })
 export class DreamsListComponent implements OnInit {
   @Input() dreamsList: Dream;
+  showDelete: boolean;
+  confirmDeletion: boolean = false;
 
-  constructor(private dreamService:DreamsService, public modalService: NgbModal) { }
+  constructor(
+    private dreamService: DreamsService,
+    public modalService: NgbModal
+  ) {}
 
-  ngOnInit() {
-    
+  ngOnInit() {}
+
+  tryDeleteDream() {
+    this.showDelete = true;
   }
 
-  // TODO[A] Dream needs another unique indicator than the name
-  deleteDream(dreamName: string) {
-    this.dreamService.deleteDream(dreamName);
+  deleteDream(dreamName: string, confirmation: boolean) {
+    if (confirmation) {
+      this.dreamService.deleteDream(dreamName);
+    }
+    this.showDelete = false;
   }
 
   editDream(dream: Dream) {
     const modalRef = this.modalService.open(DreamsListEditComponent);
     modalRef.componentInstance.dream = dream;
-    modalRef.result.then((result) => {
+    modalRef.result.then(result => {
       if (result) {
         console.log(result);
       }
@@ -39,11 +48,10 @@ export class DreamsListComponent implements OnInit {
     const modalRef = this.modalService.open(GoalsListEditComponent);
     modalRef.componentInstance.goals = goals;
     modalRef.componentInstance.dreamID = this.dreamsList.ID;
-    modalRef.result.then((result) => {
+    modalRef.result.then(result => {
       if (result) {
         console.log(result);
       }
     });
   }
-
 }

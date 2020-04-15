@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
     private ngZone: NgZone
   ) {
     this.sidebarVisible = false;
+    // Defines if user is signed in and can see and access the whole application
     this.authService.authState.subscribe(user =>
       this.ngZone.run(() => {
         if (user !== null) {
