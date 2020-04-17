@@ -6,7 +6,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppComponent } from "./app.component";
 import { AuthComponent } from "./auth/auth.component";
 import { NavbarComponent } from "./navbar/navbar.component";
-import { PaymentComponent } from "./payment/payment.component";
 import { DreamsComponent } from "./dreams/dreams.component";
 import { DreamsListComponent } from "./dreams/dreams-list/dreams-list.component";
 import { DreamsListEditComponent } from "./dreams/dreams-list-edit/dreams-list-edit.component";
@@ -33,7 +32,6 @@ import { PeopleDreamsComponent } from "./dreams/people-dreams/people-dreams.comp
   declarations: [
     AppComponent,
     NavbarComponent,
-    PaymentComponent,
     DreamsComponent,
     DreamsListComponent,
     DreamsListEditComponent,

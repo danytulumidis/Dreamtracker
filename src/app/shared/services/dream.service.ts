@@ -39,13 +39,17 @@ export class DreamsService {
     return this.dreams;
   }
 
-  updateGoal(dreamID: Number) {
-    const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
-    this.dreams[dreamIndex].goals = this.goalService.getGoals(dreamID);
+  getUserDreams(user: any) {
+    return this.dreams.filter(element => element.user === user);
   }
 
   getPublicDreams() {
     return this.dreams.filter(element => element.isPrivate === false);
+  }
+
+  updateGoal(dreamID: Number) {
+    const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+    this.dreams[dreamIndex].goals = this.goalService.getGoals(dreamID);
   }
 
   saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {

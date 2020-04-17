@@ -22,7 +22,13 @@ const routes: Routes = [
   { path: "goals", canActivate: [AuthGuard], component: GoalsComponent },
   { path: "auth", component: AuthComponent },
   { path: "about", component: AboutComponent },
-  { path: "profile", canActivate: [AuthGuard], component: ProfileComponent }
+  //! TODO Parameter for user id
+  { path: "profile", canActivate: [AuthGuard], component: ProfileComponent },
+  {
+    path: "profile/settings",
+    loadChildren: () =>
+      import("./settings/settings.module").then(m => m.SettingsModule)
+  }
 ];
 
 @NgModule({
