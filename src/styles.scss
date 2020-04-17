@@ -1,58 +1,59 @@
 // Imports
-@import '~animate.css/animate.min';
+@import "~animate.css/animate.min";
 
 // Variables
 $main-color: #11d44b7e;
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 body {
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 h3 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 h4 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .description {
-    color: black;
+  color: black;
 }
 
 .modal-dialog {
-    // changed default from 500 to 1000px
-    max-width: 1000px;
+  // changed default from 500 to 1000px
+  max-width: 1000px;
 }
 
 .progress {
-    height: 40px;
+  height: 40px;
 }
 
 .reduce-padding {
-    padding: 20px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
 }
 
 .icon-danger {
-    color: $main-color;
+  color: $main-color;
 }
 
 .nc-simple-remove {
-    font-size: 40px;
-    color: red;
+  font-size: 40px;
+  color: red;
 }
 
 .nc-check-2 {
-    font-size: 40px;
-    color: green;
+  font-size: 40px;
+  color: #11d44b7e;
 }
