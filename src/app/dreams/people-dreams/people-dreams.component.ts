@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { DreamsService } from 'src/app/shared/services/dream.service';
-import { Dream } from 'src/app/shared/models/dream.model';
+import { Component, OnInit } from "@angular/core";
+import { DreamsService } from "src/app/shared/services/dream.service";
+import { Dream } from "src/app/shared/models/dream.model";
 
 @Component({
-  selector: 'app-people-dreams',
-  templateUrl: './people-dreams.component.html',
-  styleUrls: ['./people-dreams.component.scss']
+  selector: "app-people-dreams",
+  templateUrl: "./people-dreams.component.html",
+  styleUrls: ["./people-dreams.component.scss"]
 })
 export class PeopleDreamsComponent implements OnInit {
   publicDreams: Dream[] = [];
-  
-  constructor(private dreamsService: DreamsService) { }
+
+  liked: boolean = false;
+
+  constructor(private dreamsService: DreamsService) {}
 
   ngOnInit() {
     this.publicDreams = this.dreamsService.getPublicDreams();
   }
 
+  onLikeDream(dreamID: number) {
+    this.dreamsService.likeDream(dreamID, this.liked);
+    this.liked = !this.liked;
+  }
 }

@@ -1,39 +1,53 @@
 <div class="page-header page-header all-dreams-header" data-parallax="true">
-    <div class="filter"></div>
-    <div class="container">
-        <div class="motto text-center">
-            <h1>Dreams around the world!</h1>
-            <h3>See dreams from other people all around the world</h3>
-            <br />
-        </div>
+  <div class="filter"></div>
+  <div class="container">
+    <div class="motto text-center">
+      <h1>Dreams around the world!</h1>
+      <h3>See dreams from other people all around the world</h3>
+      <br />
     </div>
+  </div>
 </div>
 
 <div *ngFor="let dream of publicDreams" class="main">
-    <div class="section text-center reduce-padding">
-        <div class="container dream-border">
-            <div class="row">
-                <div class="col-md-3">
-                    <h3>Name</h3>
-                    <hr>
-                    <p>{{ dream.name }}</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>Description</h3>
-                    <hr>
-                    <p>{{ dream.description }}</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>Upvotes</h3>
-                    <hr>
-                    <p>{{ dream.upvote }}</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>From User</h3>
-                    <hr>
-                    <p>{{ dream.user }}</p>
-                </div>
-            </div>
+  <div class="section text-center reduce-padding">
+    <div class="container dream-border">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Name</h3>
+          <hr />
+          <p>{{ dream.name }}</p>
         </div>
+        <div class="col-md-6">
+          <h3>Description</h3>
+          <hr />
+          <p>{{ dream.description }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>From User</h3>
+          <hr />
+          <p>{{ dream.user }}</p>
+        </div>
+        <div class="col-md-6">
+          <h3>Upvotes</h3>
+          <hr />
+          <p>{{ dream.upvote }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button
+            type="button"
+            class="btn btn-danger btn-round"
+            [ngClass]="{ unlike: !liked }"
+            (click)="onLikeDream(dream.ID)"
+          >
+            <i class="fa fa-heart"></i>Like
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

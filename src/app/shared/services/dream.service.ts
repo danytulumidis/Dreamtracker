@@ -30,6 +30,18 @@ export class DreamsService {
       status: "To Do",
       user: "Dany",
       createdAt: new Date()
+    },
+    {
+      ID: 3,
+      name: "Work at Google",
+      description: "Work as a Full Stack Web Developer at Google",
+      goals: [],
+      isPrivate: false,
+      upvote: 450,
+      progress: 0,
+      status: "To Do",
+      user: "Dany",
+      createdAt: new Date()
     }
   ];
 
@@ -50,6 +62,19 @@ export class DreamsService {
   updateGoal(dreamID: Number) {
     const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
     this.dreams[dreamIndex].goals = this.goalService.getGoals(dreamID);
+  }
+
+  // Updates Upvotes from Dream
+  likeDream(dreamID: number, liked: boolean) {
+    if (!liked) {
+      this.dreams[
+        this.dreams.findIndex(element => element.ID === dreamID)
+      ].upvote += 1;
+    } else {
+      this.dreams[
+        this.dreams.findIndex(element => element.ID === dreamID)
+      ].upvote -= 1;
+    }
   }
 
   saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
