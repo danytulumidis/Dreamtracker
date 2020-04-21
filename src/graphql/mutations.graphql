@@ -86,6 +86,24 @@ mutation UpdateGoal($updateGoalInput: UpdateGoalInput!) {
     created
   }
 }
+mutation DeleteUpvote($dreamID: Int!) {
+  deleteUpvote(dreamID: $dreamID) {
+    userID
+    dreamID
+  }
+}
+mutation CreateUpvote($createUpvoteInput: CreateUpvoteInput!) {
+  createUpvote(createUpvoteInput: $createUpvoteInput) {
+    userID
+    dreamID
+  }
+}
+mutation UpdateUpvote($updateUpvoteInput: UpdateUpvoteInput!) {
+  updateUpvote(updateUpvoteInput: $updateUpvoteInput) {
+    userID
+    dreamID
+  }
+}
 mutation DeleteUser($userID: Int!) {
   deleteUser(userID: $userID) {
     userID

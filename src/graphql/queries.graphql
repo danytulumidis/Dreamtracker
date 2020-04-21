@@ -57,6 +57,18 @@ query ListGoals {
     created
   }
 }
+query GetUpvote($dreamID: Int!) {
+  getUpvote(dreamID: $dreamID) {
+    userID
+    dreamID
+  }
+}
+query ListUpvotes {
+  listUpvotes {
+    userID
+    dreamID
+  }
+}
 query GetUser($userID: Int!) {
   getUser(userID: $userID) {
     userID

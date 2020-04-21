@@ -28,6 +28,12 @@ subscription OnCreateGoal {
     created
   }
 }
+subscription OnCreateUpvote {
+  onCreateUpvote {
+    userID
+    dreamID
+  }
+}
 subscription OnCreateUser {
   onCreateUser {
     userID
