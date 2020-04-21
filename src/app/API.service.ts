@@ -58,6 +58,16 @@ export type UpdateGoalInput = {
   created?: number | null;
 };
 
+export type CreateUpvoteInput = {
+  userID: number;
+  dreamID: number;
+};
+
+export type UpdateUpvoteInput = {
+  userID: number;
+  dreamID: number;
+};
+
 export type CreateUserInput = {
   userID: number;
   name: string;
@@ -321,6 +331,24 @@ export type UpdateGoalMutation = {
   dreamID: number;
   finished: number;
   created: number;
+};
+
+export type DeleteUpvoteMutation = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
+};
+
+export type CreateUpvoteMutation = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
+};
+
+export type UpdateUpvoteMutation = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
 };
 
 export type DeleteUserMutation = {
@@ -612,6 +640,18 @@ export type ListGoalsQuery = {
   created: number;
 };
 
+export type GetUpvoteQuery = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
+};
+
+export type ListUpvotesQuery = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
+};
+
 export type GetUserQuery = {
   __typename: "User";
   userID: number;
@@ -782,6 +822,12 @@ export type OnCreateGoalSubscription = {
   dreamID: number;
   finished: number;
   created: number;
+};
+
+export type OnCreateUpvoteSubscription = {
+  __typename: "Upvote";
+  userID: number;
+  dreamID: number;
 };
 
 export type OnCreateUserSubscription = {
@@ -1171,6 +1217,58 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateGoalMutation>response.data.updateGoal;
+  }
+  async DeleteUpvote(dreamID: number): Promise<DeleteUpvoteMutation> {
+    const statement = `mutation DeleteUpvote($dreamID: Int!) {
+        deleteUpvote(dreamID: $dreamID) {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      dreamID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteUpvoteMutation>response.data.deleteUpvote;
+  }
+  async CreateUpvote(
+    createUpvoteInput: CreateUpvoteInput
+  ): Promise<CreateUpvoteMutation> {
+    const statement = `mutation CreateUpvote($createUpvoteInput: CreateUpvoteInput!) {
+        createUpvote(createUpvoteInput: $createUpvoteInput) {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      createUpvoteInput
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateUpvoteMutation>response.data.createUpvote;
+  }
+  async UpdateUpvote(
+    updateUpvoteInput: UpdateUpvoteInput
+  ): Promise<UpdateUpvoteMutation> {
+    const statement = `mutation UpdateUpvote($updateUpvoteInput: UpdateUpvoteInput!) {
+        updateUpvote(updateUpvoteInput: $updateUpvoteInput) {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      updateUpvoteInput
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateUpvoteMutation>response.data.updateUpvote;
   }
   async DeleteUser(userID: number): Promise<DeleteUserMutation> {
     const statement = `mutation DeleteUser($userID: Int!) {
@@ -1720,6 +1818,33 @@ export class APIService {
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <Array<ListGoalsQuery>>response.data.listGoals;
   }
+  async GetUpvote(dreamID: number): Promise<GetUpvoteQuery> {
+    const statement = `query GetUpvote($dreamID: Int!) {
+        getUpvote(dreamID: $dreamID) {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      dreamID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetUpvoteQuery>response.data.getUpvote;
+  }
+  async ListUpvotes(): Promise<Array<ListUpvotesQuery>> {
+    const statement = `query ListUpvotes {
+        listUpvotes {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    return <Array<ListUpvotesQuery>>response.data.listUpvotes;
+  }
   async GetUser(userID: number): Promise<GetUserQuery> {
     const statement = `query GetUser($userID: Int!) {
         getUser(userID: $userID) {
@@ -2034,6 +2159,18 @@ export class APIService {
       }`
     )
   ) as Observable<OnCreateGoalSubscription>;
+
+  OnCreateUpvoteListener: Observable<OnCreateUpvoteSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateUpvote {
+        onCreateUpvote {
+          __typename
+          userID
+          dreamID
+        }
+      }`
+    )
+  ) as Observable<OnCreateUpvoteSubscription>;
 
   OnCreateUserListener: Observable<OnCreateUserSubscription> = API.graphql(
     graphqlOperation(

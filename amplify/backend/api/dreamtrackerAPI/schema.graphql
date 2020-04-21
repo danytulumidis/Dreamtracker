@@ -95,6 +95,21 @@ input UpdateGoalInput {
   created: AWSTimestamp
 }
 
+input CreateUpvoteInput {
+  userID: Int!
+  dreamID: Int!
+}
+
+type Upvote {
+  userID: Int!
+  dreamID: Int!
+}
+
+input UpdateUpvoteInput {
+  userID: Int!
+  dreamID: Int!
+}
+
 input CreateUserInput {
   userID: Int!
   name: String!
@@ -153,6 +168,9 @@ type Mutation {
   deleteGoal(goalID: Int!): Goal
   createGoal(createGoalInput: CreateGoalInput!): Goal
   updateGoal(updateGoalInput: UpdateGoalInput!): Goal
+  deleteUpvote(dreamID: Int!): Upvote
+  createUpvote(createUpvoteInput: CreateUpvoteInput!): Upvote
+  updateUpvote(updateUpvoteInput: UpdateUpvoteInput!): Upvote
   deleteUser(userID: Int!): User
   createUser(createUserInput: CreateUserInput!): User
   updateUser(updateUserInput: UpdateUserInput!): User
@@ -168,6 +186,8 @@ type Query {
   listFriendships: [Friendship]
   getGoal(goalID: Int!): Goal
   listGoals: [Goal]
+  getUpvote(dreamID: Int!): Upvote
+  listUpvotes: [Upvote]
   getUser(userID: Int!): User
   listUsers: [User]
   getUserSetting(settingID: Int!): UserSetting
@@ -178,6 +198,7 @@ type Subscription {
   onCreateDream: Dream @aws_subscribe(mutations: ["createDream"])
   onCreateFriendship: Friendship @aws_subscribe(mutations: ["createFriendship"])
   onCreateGoal: Goal @aws_subscribe(mutations: ["createGoal"])
+  onCreateUpvote: Upvote @aws_subscribe(mutations: ["createUpvote"])
   onCreateUser: User @aws_subscribe(mutations: ["createUser"])
   onCreateUserSetting: UserSetting @aws_subscribe(mutations: ["createUserSetting"])
 }
