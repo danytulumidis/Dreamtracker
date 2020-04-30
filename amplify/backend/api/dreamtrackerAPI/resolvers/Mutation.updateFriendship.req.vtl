@@ -5,5 +5,5 @@
 #set( $update = $updateList.toString().replace("{","").replace("}","") )
 {
   "version": "2018-05-29",
-  "statements":   ["UPDATE Friendship SET $update WHERE userB=$ctx.args.updateFriendshipInput.userB", "SELECT * FROM Friendship WHERE userB=$ctx.args.updateFriendshipInput.userB"]
+  "statements":   ["UPDATE Friendship SET $update WHERE userB=$ctx.args.updateFriendshipInput.userB", "SELECT * FROM Friendship WHERE userB='$ctx.args.updateFriendshipInput.userB'"]
 }
