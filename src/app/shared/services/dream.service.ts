@@ -56,15 +56,18 @@ export class DreamsService {
 
   // Updates Upvotes from Dream
   likeDream(dreamID: number, liked: boolean) {
+    const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+
     if (!liked) {
-      this.dreams[
-        this.dreams.findIndex(element => element.ID === dreamID)
-      ].upvote += 1;
+      this.dreams[dreamIndex].upvote += 1;
     } else {
-      this.dreams[
-        this.dreams.findIndex(element => element.ID === dreamID)
-      ].upvote -= 1;
+      this.dreams[dreamIndex].upvote -= 1;
     }
+
+    this.apiService.UpdateDream({
+      dreamID: this.dreams[dreamIndex].ID,
+      upvotes: this.dreams[dreamIndex].upvote
+    });
   }
 
   saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
@@ -105,13 +108,23 @@ export class DreamsService {
     }
     // Delete the dream
     this.dreams.splice(selectedDreamIndex, 1);
+    this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID);
   }
 
-  saveEditedDream(editedDream) {
+  saveEditedDream(editedDream: Dream) {
+    let privateNumber = editedDream.isPrivate ? 1 : 0;
+
     const selectedDream = this.dreams.findIndex(
       dream => dream.name === editedDream.name
     );
     this.dreams[selectedDream] = editedDream;
+    this.apiService.UpdateDream({
+      dreamID: editedDream.ID,
+      name: editedDream.name,
+      description: editedDream.description,
+      private: privateNumber,
+      upvotes: editedDream.upvote
+    });
   }
 
   updateProgressBar(dreamID: number) {
