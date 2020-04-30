@@ -1,40 +1,21 @@
-type Blog @model {
-  id: ID!
-  name: String!
-  posts: [Post] @connection(name: "BlogPosts")
-}
-
-type Post @model {
-  id: ID!
-  title: String!
-  blog: Blog @connection(name: "BlogPosts")
-  comments: [Comment] @connection(name: "PostComments")
-}
-
-type Comment @model {
-  id: ID!
-  content: String
-  post: Post @connection(name: "PostComments")
-}
-
 input CreateDreamInput {
   dreamID: Int!
   name: String!
   description: String!
-  private: Int!
-  userID: Int!
+  private: Int
+  userID: String!
   upvotes: Int
-  created: AWSTimestamp!
+  created: String
 }
 
 type Dream {
   dreamID: Int!
   name: String!
   description: String!
-  private: Int!
-  userID: Int!
+  private: Int
+  userID: String!
   upvotes: Int
-  created: AWSTimestamp!
+  created: String
 }
 
 input UpdateDreamInput {
@@ -42,29 +23,29 @@ input UpdateDreamInput {
   name: String
   description: String
   private: Int
-  userID: Int
+  userID: String
   upvotes: Int
-  created: AWSTimestamp
+  created: String
 }
 
 input CreateFriendshipInput {
-  userA: Int!
-  userB: Int!
-  created: AWSTimestamp!
-  status: String!
+  userA: String!
+  userB: String!
+  created: String
+  status: String
 }
 
 type Friendship {
-  userA: Int!
-  userB: Int!
-  created: AWSTimestamp!
-  status: String!
+  userA: String!
+  userB: String!
+  created: String
+  status: String
 }
 
 input UpdateFriendshipInput {
-  userA: Int!
-  userB: Int!
-  created: AWSTimestamp
+  userA: String!
+  userB: String!
+  created: String
   status: String
 }
 
@@ -73,8 +54,8 @@ input CreateGoalInput {
   name: String!
   description: String!
   dreamID: Int!
-  finished: Int!
-  created: AWSTimestamp!
+  finished: Int
+  created: String
 }
 
 type Goal {
@@ -82,8 +63,8 @@ type Goal {
   name: String!
   description: String!
   dreamID: Int!
-  finished: Int!
-  created: AWSTimestamp!
+  finished: Int
+  created: String
 }
 
 input UpdateGoalInput {
@@ -92,77 +73,77 @@ input UpdateGoalInput {
   description: String
   dreamID: Int
   finished: Int
-  created: AWSTimestamp
+  created: String
 }
 
 input CreateUpvoteInput {
-  userID: Int!
+  userID: String!
   dreamID: Int!
 }
 
 type Upvote {
-  userID: Int!
+  userID: String!
   dreamID: Int!
 }
 
 input UpdateUpvoteInput {
-  userID: Int!
+  userID: String!
   dreamID: Int!
 }
 
 input CreateUserInput {
-  userID: Int!
+  userID: String!
   name: String!
   description: String!
   jobTitle: String
   profilePictureURL: String
-  created: AWSTimestamp!
+  created: String
 }
 
 type User {
-  userID: Int!
+  userID: String!
   name: String!
   description: String!
   jobTitle: String
   profilePictureURL: String
-  created: AWSTimestamp!
+  created: String
 }
 
 input UpdateUserInput {
-  userID: Int!
+  userID: String!
   name: String
   description: String
   jobTitle: String
   profilePictureURL: String
-  created: AWSTimestamp
+  created: String
 }
 
 input CreateUserSettingInput {
   settingID: Int!
   settingName: String!
   settingValue: String!
-  userID: Int!
+  userID: String!
 }
 
 type UserSetting {
   settingID: Int!
   settingName: String!
   settingValue: String!
-  userID: Int!
+  userID: String!
 }
 
 input UpdateUserSettingInput {
   settingID: Int!
   settingName: String
   settingValue: String
-  userID: Int
+  userID: String
 }
 
 type Mutation {
   deleteDream(dreamID: Int!): Dream
   createDream(createDreamInput: CreateDreamInput!): Dream
   updateDream(updateDreamInput: UpdateDreamInput!): Dream
-  deleteFriendship(userB: Int!): Friendship
+  deleteFriendship(userB: String!): Friendship
   createFriendship(createFriendshipInput: CreateFriendshipInput!): Friendship
   updateFriendship(updateFriendshipInput: UpdateFriendshipInput!): Friendship
   deleteGoal(goalID: Int!): Goal
@@ -171,24 +152,28 @@ type Mutation {
   deleteUpvote(dreamID: Int!): Upvote
   createUpvote(createUpvoteInput: CreateUpvoteInput!): Upvote
   updateUpvote(updateUpvoteInput: UpdateUpvoteInput!): Upvote
-  deleteUser(userID: Int!): User
+  deleteUser(userID: String!): User
   createUser(createUserInput: CreateUserInput!): User
   updateUser(updateUserInput: UpdateUserInput!): User
   deleteUserSetting(settingID: Int!): UserSetting
-  createUserSetting(createUserSettingInput: CreateUserSettingInput!): UserSetting
-  updateUserSetting(updateUserSettingInput: UpdateUserSettingInput!): UserSetting
+  createUserSetting(
+    createUserSettingInput: CreateUserSettingInput!
+  ): UserSetting
+  updateUserSetting(
+    updateUserSettingInput: UpdateUserSettingInput!
+  ): UserSetting
 }
 
 type Query {
   getDream(dreamID: Int!): Dream
-  listDreams: [Dream]
-  getFriendship(userB: Int!): Friendship
+  listDreams(userID: String!): [Dream]
+  getFriendship(userB: String!): Friendship
   listFriendships: [Friendship]
   getGoal(goalID: Int!): Goal
   listGoals: [Goal]
   getUpvote(dreamID: Int!): Upvote
   listUpvotes: [Upvote]
-  getUser(userID: Int!): User
+  getUser(userID: String!): User
   listUsers: [User]
   getUserSetting(settingID: Int!): UserSetting
   listUserSettings: [UserSetting]
@@ -200,7 +185,8 @@ type Subscription {
   onCreateGoal: Goal @aws_subscribe(mutations: ["createGoal"])
   onCreateUpvote: Upvote @aws_subscribe(mutations: ["createUpvote"])
   onCreateUser: User @aws_subscribe(mutations: ["createUser"])
-  onCreateUserSetting: UserSetting @aws_subscribe(mutations: ["createUserSetting"])
+  onCreateUserSetting: UserSetting
+    @aws_subscribe(mutations: ["createUserSetting"])
 }
 
 schema {

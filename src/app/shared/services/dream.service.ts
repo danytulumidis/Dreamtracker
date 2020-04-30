@@ -1,53 +1,43 @@
 import { Dream } from "../models/dream.model";
 import { Injectable } from "@angular/core";
 import { GoalsService } from "./goal.service";
+import { APIService } from "src/app/API.service";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class DreamsService {
-  private dreams: Dream[] = [
-    {
-      ID: 1,
-      name: "Web Application",
-      description: "develop and deploy a Web Application!",
-      goals: this.goalService.getGoals(1),
-      isPrivate: false,
-      upvote: 150,
-      progress: 0,
-      status: "To Do",
-      user: "Dany",
-      createdAt: new Date()
-    },
-    {
-      ID: 2,
-      name: "Finish Dreamtracker",
-      description: "Finish this application!",
-      goals: this.goalService.getGoals(2),
-      isPrivate: false,
-      upvote: 150,
-      progress: 0,
-      status: "To Do",
-      user: "Dany",
-      createdAt: new Date()
-    },
-    {
-      ID: 3,
-      name: "Work at Google",
-      description: "Work as a Full Stack Web Developer at Google",
-      goals: [],
-      isPrivate: false,
-      upvote: 450,
-      progress: 0,
-      status: "To Do",
-      user: "Dany",
-      createdAt: new Date()
-    }
-  ];
+  private dreams: Dream[] = [];
 
-  constructor(private goalService: GoalsService) {}
+  constructor(
+    private goalService: GoalsService,
+    private apiService: APIService,
+    private userService: UserService
+  ) {}
 
-  getDreams() {
+  // Fetch dreams from the database when user logged in
+  fetchDreams() {
+    this.userService.getCurrentUser().then(user => {
+      if (this.dreams.length === 0) {
+        this.apiService.ListDreams(user.attributes.email).then(dreams => {
+          dreams.forEach(dream =>
+            this.dreams.push({
+              ID: dream.dreamID,
+              name: dream.name,
+              description: dream.description,
+              goals: [],
+              isPrivate: dream.private === 1 ? true : false,
+              upvote: dream.upvotes,
+              progress: 0,
+              status: "To Do",
+              user: dream.userID,
+              createdAt: this.userService.getCurrentDate()
+            })
+          );
+        });
+      }
+    });
     return this.dreams;
   }
 
@@ -78,22 +68,27 @@ export class DreamsService {
   }
 
   saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
-    this.dreams.push({
-      ID: 3,
-      name: dreamName,
-      description: dreamDescr,
-      goals: [],
-      isPrivate: dreamPrivate,
-      upvote: 0,
-      progress: 0,
-      status: "To Do",
-      user: "Dany",
-      createdAt: new Date()
-    });
+    let privateNumber = dreamPrivate ? 1 : 0;
+
+    this.userService
+      .getCurrentUser()
+      .then(user => {
+        this.apiService.CreateDream({
+          dreamID: 1,
+          name: dreamName,
+          description: dreamDescr,
+          private: privateNumber,
+          userID: user.attributes.email,
+          upvotes: 0,
+          created: this.userService.getCurrentDate()
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   checkDreamCount() {
     // TODO Check if Dream is active or done
+    return true;
     if (this.dreams.length === 5) {
       return false;
     }

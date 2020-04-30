@@ -10,6 +10,7 @@ import { Subscription } from "rxjs/Subscription";
 import "rxjs/add/operator/filter";
 import { Location, DOCUMENT } from "@angular/common";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { UserService } from "./shared/services/user.service";
 
 @Component({
   selector: "app-root",
@@ -27,9 +28,21 @@ export class AppComponent {
     private router: Router,
     @Inject(DOCUMENT) private document: any,
     private element: ElementRef,
-    public location: Location
+    public location: Location,
+    private userService: UserService
   ) {}
   ngOnInit() {
+    // Create current User in DB if not exist yet
+    setTimeout(() => {
+      this.userService
+        .getCurrentUser()
+        .then(user => {
+          console.log("Current User:", user);
+          this.userService.insertNewUser(user);
+        })
+        .catch(err => console.log(err));
+    }, 500);
+
     var navbar: HTMLElement = this.element.nativeElement.children[0]
       .children[0];
     this._router = this.router.events
