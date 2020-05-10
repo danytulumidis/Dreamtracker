@@ -17,7 +17,7 @@ export class DreamsService {
   ) {}
 
   // Fetch dreams from the database when user logged in
-  fetchDreams() {
+  fetchDreams(): Dream[] {
     this.userService.getCurrentUser().then(user => {
       if (this.dreams.length === 0) {
         this.apiService.ListDreams(user.attributes.email).then(dreams => {
@@ -26,13 +26,13 @@ export class DreamsService {
               ID: dream.dreamID,
               name: dream.name,
               description: dream.description,
-              goals: [],
+              goals: this.goalService.fetchGoals(dream.dreamID),
               isPrivate: dream.private === 1 ? true : false,
               upvote: dream.upvotes,
               progress: 0,
               status: "To Do",
               user: dream.userID,
-              createdAt: this.userService.getCurrentDate()
+              createdAt: dream.created
             })
           );
         });
@@ -49,20 +49,9 @@ export class DreamsService {
     return this.dreams.filter(element => element.isPrivate === false);
   }
 
-  updateGoal(dreamID: Number) {
-    const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
-    this.dreams[dreamIndex].goals = this.goalService.getGoals(dreamID);
-  }
-
   // Updates Upvotes from Dream
   likeDream(dreamID: number, liked: boolean) {
     const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
-
-    if (!liked) {
-      this.dreams[dreamIndex].upvote += 1;
-    } else {
-      this.dreams[dreamIndex].upvote -= 1;
-    }
 
     this.apiService.UpdateDream({
       dreamID: this.dreams[dreamIndex].ID,
@@ -76,15 +65,30 @@ export class DreamsService {
     this.userService
       .getCurrentUser()
       .then(user => {
-        this.apiService.CreateDream({
-          dreamID: 1,
-          name: dreamName,
-          description: dreamDescr,
-          private: privateNumber,
-          userID: user.attributes.email,
-          upvotes: 0,
-          created: this.userService.getCurrentDate()
-        });
+        this.apiService
+          .CreateDream({
+            dreamID: 1,
+            name: dreamName,
+            description: dreamDescr,
+            private: privateNumber,
+            userID: user.attributes.email,
+            upvotes: 0,
+            created: this.userService.getCurrentDate()
+          })
+          .then(dream => {
+            this.dreams.push({
+              ID: dream.dreamID,
+              name: dream.name,
+              description: dream.description,
+              goals: [],
+              isPrivate: dreamPrivate,
+              upvote: 0,
+              progress: 0,
+              status: "To Do",
+              user: dream.userID,
+              createdAt: dream.created
+            });
+          });
       })
       .catch(err => console.log(err));
   }
@@ -107,17 +111,12 @@ export class DreamsService {
       this.goalService.deleteGoals(this.dreams[selectedDreamIndex].ID);
     }
     // Delete the dream
-    this.dreams.splice(selectedDreamIndex, 1);
     this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID);
   }
 
   saveEditedDream(editedDream: Dream) {
     let privateNumber = editedDream.isPrivate ? 1 : 0;
 
-    const selectedDream = this.dreams.findIndex(
-      dream => dream.name === editedDream.name
-    );
-    this.dreams[selectedDream] = editedDream;
     this.apiService.UpdateDream({
       dreamID: editedDream.ID,
       name: editedDream.name,
@@ -125,6 +124,16 @@ export class DreamsService {
       private: privateNumber,
       upvotes: editedDream.upvote
     });
+  }
+
+  deleteGoalFromDream(dreamID: number, goalID: number) {
+    const dreamIndex = this.dreams.findIndex(dream => dream.ID === dreamID);
+    if (dreamIndex !== -1) {
+      this.dreams[dreamIndex].goals.splice(
+        this.dreams[dreamIndex].goals.findIndex(goal => goal.id === goalID),
+        1
+      );
+    }
   }
 
   updateProgressBar(dreamID: number) {

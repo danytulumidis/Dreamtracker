@@ -1,28 +1,14 @@
-import { Goal } from './goal.model';
+import { Goal } from "./goal.model";
 
-// TODO: Expand Dream Model with ID etc.
-export class Dream {
-    public ID: number;
-    public name: string;
-    public description: string;
-    public goals: Goal[];
-    public isPrivate: boolean;
-    public upvote: number;
-    public progress: number;
-    public status: string;
-    public user: string;
-    public createdAt: Date;
-
-    constructor(name: string, desc: string, goals: Goal, isPrivate: boolean, upvote: number, progress: number,
-        status: string, user: string, createdAt: Date) {
-        this.name = name;
-        this.description = desc;
-        this.goals.push(goals);
-        this.isPrivate = isPrivate;
-        this.upvote = upvote;
-        this.progress = progress;
-        this.status = status;
-        this.user = user;
-        this.createdAt = createdAt;
-    }
+export interface Dream {
+  ID: number;
+  name: string;
+  description: string;
+  goals: Goal[];
+  isPrivate: boolean;
+  upvote: number;
+  progress: number;
+  status: string;
+  user: string;
+  createdAt: any;
 }

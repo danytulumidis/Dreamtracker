@@ -1,0 +1,8 @@
+{
+  "version": "2018-05-29",
+  "statements":   ["SELECT * FROM Goal WHERE goalID=$ctx.args.goalID", "DELETE FROM Goal WHERE dreamID=$ctx.args.dreamID"],
+
+  "variableMap": {
+    ":dreamID": $util.toJson($ctx.args.dreamID)
+  }
+}

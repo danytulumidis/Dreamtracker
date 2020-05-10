@@ -1,6 +1,7 @@
 import { Goal } from "../models/goal.model";
 import { Injectable } from "@angular/core";
-import { element } from "protractor";
+import { APIService } from "src/app/API.service";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +9,31 @@ import { element } from "protractor";
 export class GoalsService {
   private goals: Goal[] = [];
 
-  constructor() {}
+  constructor(
+    private apiService: APIService,
+    private userService: UserService
+  ) {}
+
+  // Fetch goals from the database for a dream
+  fetchGoals(dreamID: number): Goal[] {
+    this.userService.getCurrentUser().then(user => {
+      if (this.goals.length === 0) {
+        this.apiService.ListGoals(dreamID).then(goals => {
+          goals.forEach(goal =>
+            this.goals.push({
+              id: goal.goalID,
+              name: goal.name,
+              description: goal.description,
+              finished: goal.finished === 1 ? true : false,
+              dreamsID: dreamID,
+              createdAt: goal.created
+            })
+          );
+        });
+      }
+    });
+    return this.goals;
+  }
 
   // Return all goals for the requested Dream by the dreamID
   getGoals(dreamID) {
@@ -16,33 +41,65 @@ export class GoalsService {
   }
 
   // Add a goal to a dream
-  addGoal(dreamID: number) {
-    this.goals.push({
-      id: this.goals[this.goals.length - 1].id + 1,
-      name: "",
-      description: "",
-      finished: false,
-      dreamsID: dreamID,
-      createdAt: new Date()
+  addGoalInDatabase(dreamID: number) {
+    this.apiService
+      .CreateGoal({
+        goalID: 1,
+        name: "",
+        description: "",
+        dreamID: dreamID,
+        finished: 0,
+        created: this.userService.getCurrentDate()
+      })
+      .then(goal => {
+        this.goals.push({
+          id: goal.goalID,
+          name: goal.name,
+          description: goal.description,
+          finished: false,
+          dreamsID: dreamID,
+          createdAt: goal.created
+        });
+      });
+  }
+
+  saveGoals(goals: Goal[]) {
+    goals.map(goal => {
+      this.apiService.UpdateGoal({
+        goalID: goal.id,
+        name: goal.name,
+        description: goal.description
+      });
     });
   }
 
   // Delete a goal from a dream
-  deleteGoal(dreamID: number) {
-    this.goals.splice(
-      this.goals.findIndex(element => element.dreamsID === dreamID),
-      1
-    );
+  deleteGoal(goalID: number) {
+    this.apiService.DeleteGoal(goalID).then(() => {
+      this.goals.splice(
+        this.goals.findIndex(element => element.id === goalID),
+        1
+      );
+    });
   }
 
   // Delete ALL goals from a dream (when deleting a dream for example)
   deleteGoals(dreamID: number) {
-    this.goals = this.goals.filter(element => element.dreamsID !== dreamID);
+    this.apiService.DeleteGoals(dreamID);
   }
 
   // Set Goal to done or not done
   editFinishStatus(isFinished: boolean, goalsID: number) {
-    const goalIndex = this.goals.findIndex(element => element.id === goalsID);
-    this.goals[goalIndex].finished = isFinished;
+    let finishNumber = isFinished ? 1 : 0;
+    return this.apiService
+      .UpdateGoal({
+        goalID: goalsID,
+        finished: finishNumber
+      })
+      .then(data => {
+        this.goals[
+          this.goals.findIndex(element => element.id === data.goalID)
+        ].finished = isFinished;
+      });
   }
 }

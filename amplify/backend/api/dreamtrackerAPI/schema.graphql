@@ -146,6 +146,7 @@ type Mutation {
   deleteFriendship(userB: String!): Friendship
   createFriendship(createFriendshipInput: CreateFriendshipInput!): Friendship
   updateFriendship(updateFriendshipInput: UpdateFriendshipInput!): Friendship
+  deleteGoals(dreamID: Int!): Goal
   deleteGoal(goalID: Int!): Goal
   createGoal(createGoalInput: CreateGoalInput!): Goal
   updateGoal(updateGoalInput: UpdateGoalInput!): Goal
@@ -170,7 +171,7 @@ type Query {
   getFriendship(userB: String!): Friendship
   listFriendships: [Friendship]
   getGoal(goalID: Int!): Goal
-  listGoals: [Goal]
+  listGoals(dreamID: Int!): [Goal]
   getUpvote(dreamID: Int!): Upvote
   listUpvotes: [Upvote]
   getUser(userID: String!): User

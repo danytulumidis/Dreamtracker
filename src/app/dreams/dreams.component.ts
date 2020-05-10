@@ -25,7 +25,6 @@ export class DreamsComponent implements OnInit {
     if (!this.dreamsService.checkDreamCount()) {
       this.tooManyDreams = "You cant have more than 5 active dreams at once!";
     } else {
-      console.log(dreamPrivate.value);
       this.dreamsService.saveNewDream(
         dreamName.value,
         dreamDescr.value,

@@ -157,6 +157,16 @@ export type UpdateFriendshipMutation = {
   status: string | null;
 };
 
+export type DeleteGoalsMutation = {
+  __typename: "Goal";
+  goalID: number;
+  name: string;
+  description: string;
+  dreamID: number;
+  finished: number | null;
+  created: string | null;
+};
+
 export type DeleteGoalMutation = {
   __typename: "Goal";
   goalID: number;
@@ -547,6 +557,26 @@ export class APIService {
     )) as any;
     return <UpdateFriendshipMutation>response.data.updateFriendship;
   }
+  async DeleteGoals(dreamID: number): Promise<DeleteGoalsMutation> {
+    const statement = `mutation DeleteGoals($dreamID: Int!) {
+        deleteGoals(dreamID: $dreamID) {
+          __typename
+          goalID
+          name
+          description
+          dreamID
+          finished
+          created
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      dreamID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteGoalsMutation>response.data.deleteGoals;
+  }
   async DeleteGoal(goalID: number): Promise<DeleteGoalMutation> {
     const statement = `mutation DeleteGoal($goalID: Int!) {
         deleteGoal(goalID: $goalID) {
@@ -880,9 +910,9 @@ export class APIService {
     )) as any;
     return <GetGoalQuery>response.data.getGoal;
   }
-  async ListGoals(): Promise<Array<ListGoalsQuery>> {
-    const statement = `query ListGoals {
-        listGoals {
+  async ListGoals(dreamID: number): Promise<Array<ListGoalsQuery>> {
+    const statement = `query ListGoals($dreamID: Int!) {
+        listGoals(dreamID: $dreamID) {
           __typename
           goalID
           name
@@ -892,7 +922,12 @@ export class APIService {
           created
         }
       }`;
-    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    const gqlAPIServiceArguments: any = {
+      dreamID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
     return <Array<ListGoalsQuery>>response.data.listGoals;
   }
   async GetUpvote(dreamID: number): Promise<GetUpvoteQuery> {

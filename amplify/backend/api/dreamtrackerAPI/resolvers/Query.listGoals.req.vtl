@@ -1,4 +1,8 @@
 {
   "version": "2018-05-29",
-  "statements":   ["SELECT * FROM Goal"]
+  "statements":   ["SELECT * FROM Goal WHERE dreamID = :dreamID"],
+
+  "variableMap": {
+    ":dreamID": $util.toJson($ctx.args.dreamID)
+  }
 }

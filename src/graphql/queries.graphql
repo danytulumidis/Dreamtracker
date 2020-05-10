@@ -47,8 +47,8 @@ query GetGoal($goalID: Int!) {
     created
   }
 }
-query ListGoals {
-  listGoals {
+query ListGoals($dreamID: Int!) {
+  listGoals(dreamID: $dreamID) {
     goalID
     name
     description

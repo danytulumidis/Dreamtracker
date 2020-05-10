@@ -1,44 +1,75 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Edit your Goal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+  <h4 class="modal-title" id="modal-basic-title">Edit your Goal</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
-    <div class="section text-center">
-        <div class="container">
-            <div *ngFor="let goal of goals" class="row">
-                <div class="col-sm-5 mr-auto ml-auto">
-                    <h2>Name</h2>
-                    <div class="form-group">
-                        <textarea class="form-control" cols="20" [(ngModel)]="goal.name" type="text"></textarea>
-                    </div>
-                </div>
-                <div class="col-sm-5 mr-auto ml-auto">
-                    <h2>Description</h2>
-                    <div class="form-group">
-                        <textarea class="form-control" cols="50" rows="4" [(ngModel)]="goal.description"
-                        type="text">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="col-sm-2 mr-auto ml-auto adjust-padding">
-                    <button type="button" class="btn btn-outline-danger btn-round alter-button" (click)="deleteGoal()">Delete</button>
-                </div>
-            </div>
-            <hr>            
+  <div class="section text-center">
+    <div class="container">
+      <div *ngFor="let goal of goals" class="row">
+        <div class="col-sm-5 mr-auto ml-auto">
+          <h2>Name</h2>
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              cols="20"
+              [(ngModel)]="goal.name"
+              type="text"
+            ></textarea>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6 mr-auto ml-auto">
-                <button (click)="addGoals()" type="submit"
-                class="btn btn-outline-primary btn-round alter-button">Add</button>
-            </div>
+        <div class="col-sm-5 mr-auto ml-auto">
+          <h2>Description</h2>
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              cols="50"
+              rows="4"
+              [(ngModel)]="goal.description"
+              type="text"
+            >
+            </textarea>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6 mr-auto ml-auto">
-                <button (click)="saveGoal()" type="submit"
-                class="btn btn-outline-primary btn-round alter-button">Close & Save</button>
-            </div>
+        <div class="col-sm-2 mr-auto ml-auto adjust-padding">
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-round alter-button"
+            (click)="deleteGoal(goal.id)"
+          >
+            Delete
+          </button>
         </div>
+      </div>
+      <hr />
     </div>
+    <div class="row">
+      <div class="col-sm-6 mr-auto ml-auto">
+        <button
+          (click)="addGoals()"
+          type="submit"
+          class="btn btn-outline-primary btn-round alter-button"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 mr-auto ml-auto">
+        <button
+          (click)="saveGoal()"
+          type="submit"
+          class="btn btn-outline-primary btn-round alter-button"
+        >
+          Close & Save
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
