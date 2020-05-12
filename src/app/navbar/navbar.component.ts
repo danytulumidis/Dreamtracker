@@ -5,6 +5,7 @@ import {
   PathLocationStrategy
 } from "@angular/common";
 import { AuthService } from "../auth/auth.service";
+import { UserService } from "../shared/services/user.service";
 
 @Component({
   selector: "app-navbar",
@@ -14,25 +15,33 @@ import { AuthService } from "../auth/auth.service";
 export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
-  signedIn: boolean;
+  signedIn: boolean = false;
 
   constructor(
     public location: Location,
     private element: ElementRef,
     private authService: AuthService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private userService: UserService
   ) {
     this.sidebarVisible = false;
     // Defines if user is signed in and can see and access the whole application
-    this.authService.authState.subscribe(user =>
+    this.authService.authState.subscribe(user => {
       this.ngZone.run(() => {
         if (user !== null) {
           this.signedIn = true;
         } else {
           this.signedIn = false;
         }
+      });
+    });
+
+    this.userService
+      .getCurrentUser()
+      .then(user => {
+        user != null ? (this.signedIn = true) : (this.signedIn = false);
       })
-    );
+      .catch(err => console.log(err));
   }
 
   ngOnInit() {

@@ -24,8 +24,6 @@ export class AuthService {
           break;
       }
     });
-    // Just for DEV
-    // this.signedIn = true;
   }
 
   federatedSignIn(provider: string) {
