@@ -1,5 +1,5 @@
 input CreateDreamInput {
-  dreamID: Int!
+  dreamID: Int
   name: String!
   description: String!
   private: Int
@@ -50,7 +50,7 @@ input UpdateFriendshipInput {
 }
 
 input CreateGoalInput {
-  goalID: Int!
+  goalID: Int
   name: String!
   description: String!
   dreamID: Int!

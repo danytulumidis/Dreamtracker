@@ -14,7 +14,7 @@ export class DreamsComponent implements OnInit {
   constructor(private dreamsService: DreamsService) {}
 
   ngOnInit() {
-    this.dreams = this.dreamsService.fetchDreams();
+    this.dreams = this.dreamsService.getUserDreams();
   }
 
   saveDream(

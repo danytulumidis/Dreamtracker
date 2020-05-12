@@ -3,7 +3,6 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Goal } from "src/app/shared/models/goal.model";
 import { GoalsService } from "src/app/shared/services/goal.service";
 import { DreamsService } from "src/app/shared/services/dream.service";
-import { copyFileSync } from "fs";
 
 @Component({
   selector: "app-goals-list-edit",
@@ -28,14 +27,17 @@ export class GoalsListEditComponent implements OnInit {
   }
 
   addGoals() {
-    // Add the goal
-    this.goalsService.addGoalInDatabase(this.dreamID);
+    // Add the goal in the database and to the dream
+    const goalID = this.goalsService.addGoalInDatabase(this.dreamID);
+    goalID.then(goalID => {
+      this.dreamService.addGoalToADream(this.dreamID, goalID);
+    });
   }
 
   deleteGoal(goalID: number) {
+    // Detach the goal from the dream
+    this.dreamService.deleteGoalFromDream(this.dreamID, goalID);
     // Delete the goal
     this.goalsService.deleteGoal(goalID);
-    // Delete goal from a dream
-    this.dreamService.deleteGoalFromDream(this.dreamID, goalID);
   }
 }

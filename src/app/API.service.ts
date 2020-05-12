@@ -7,7 +7,7 @@ import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
 export type CreateDreamInput = {
-  dreamID: number;
+  dreamID?: number | null;
   name: string;
   description: string;
   private?: number | null;
@@ -41,7 +41,7 @@ export type UpdateFriendshipInput = {
 };
 
 export type CreateGoalInput = {
-  goalID: number;
+  goalID?: number | null;
   name: string;
   description: string;
   dreamID: number;

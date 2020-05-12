@@ -17,32 +17,28 @@ export class DreamsService {
   ) {}
 
   // Fetch dreams from the database when user logged in
-  fetchDreams(): Dream[] {
-    this.userService.getCurrentUser().then(user => {
-      if (this.dreams.length === 0) {
-        this.apiService.ListDreams(user.attributes.email).then(dreams => {
-          dreams.forEach(dream =>
-            this.dreams.push({
-              ID: dream.dreamID,
-              name: dream.name,
-              description: dream.description,
-              goals: this.goalService.fetchGoals(dream.dreamID),
-              isPrivate: dream.private === 1 ? true : false,
-              upvote: dream.upvotes,
-              progress: 0,
-              status: "To Do",
-              user: dream.userID,
-              createdAt: dream.created
-            })
-          );
-        });
-      }
+  async fetchDreams(user: any) {
+    const dreams = await this.apiService.ListDreams(user.attributes.email);
+
+    dreams.forEach(async dream => {
+      await this.goalService.fetchGoals(dream.dreamID);
+      this.dreams.push({
+        ID: dream.dreamID,
+        name: dream.name,
+        description: dream.description,
+        goals: this.goalService.getGoals(dream.dreamID),
+        isPrivate: dream.private === 1 ? true : false,
+        upvote: dream.upvotes,
+        progress: 0,
+        status: "To Do",
+        user: dream.userID,
+        createdAt: dream.created
+      });
     });
-    return this.dreams;
   }
 
-  getUserDreams(user: any) {
-    return this.dreams.filter(element => element.user === user);
+  getUserDreams() {
+    return this.dreams;
   }
 
   getPublicDreams() {
@@ -67,7 +63,6 @@ export class DreamsService {
       .then(user => {
         this.apiService
           .CreateDream({
-            dreamID: 1,
             name: dreamName,
             description: dreamDescr,
             private: privateNumber,
@@ -124,6 +119,11 @@ export class DreamsService {
       private: privateNumber,
       upvotes: editedDream.upvote
     });
+  }
+
+  addGoalToADream(dreamID: number, goalID: number) {
+    const dreamIndex = this.dreams.findIndex(dream => dream.ID === dreamID);
+    this.dreams[dreamIndex].goals.push(this.goalService.getGoalByID(goalID));
   }
 
   deleteGoalFromDream(dreamID: number, goalID: number) {

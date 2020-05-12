@@ -11,6 +11,7 @@ import "rxjs/add/operator/filter";
 import { Location, DOCUMENT } from "@angular/common";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { UserService } from "./shared/services/user.service";
+import { DreamsService } from "./shared/services/dream.service";
 
 @Component({
   selector: "app-root",
@@ -29,7 +30,8 @@ export class AppComponent {
     @Inject(DOCUMENT) private document: any,
     private element: ElementRef,
     public location: Location,
-    private userService: UserService
+    private userService: UserService,
+    private dreamService: DreamsService
   ) {}
   ngOnInit() {
     // Create current User in DB if not exist yet
@@ -39,6 +41,7 @@ export class AppComponent {
         .then(user => {
           console.log("Current User:", user);
           this.userService.insertNewUser(user);
+          this.dreamService.fetchDreams(user);
         })
         .catch(err => console.log(err));
     }, 500);

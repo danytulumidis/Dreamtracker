@@ -15,52 +15,51 @@ export class GoalsService {
   ) {}
 
   // Fetch goals from the database for a dream
-  fetchGoals(dreamID: number): Goal[] {
-    this.userService.getCurrentUser().then(user => {
-      if (this.goals.length === 0) {
-        this.apiService.ListGoals(dreamID).then(goals => {
-          goals.forEach(goal =>
-            this.goals.push({
-              id: goal.goalID,
-              name: goal.name,
-              description: goal.description,
-              finished: goal.finished === 1 ? true : false,
-              dreamsID: dreamID,
-              createdAt: goal.created
-            })
-          );
-        });
-      }
-    });
-    return this.goals;
+  async fetchGoals(dreamID: number) {
+    const goals = await this.apiService.ListGoals(dreamID);
+
+    goals.forEach(goal =>
+      this.goals.push({
+        id: goal.goalID,
+        name: goal.name,
+        description: goal.description,
+        finished: goal.finished === 1 ? true : false,
+        dreamsID: goal.dreamID,
+        createdAt: goal.created
+      })
+    );
   }
 
   // Return all goals for the requested Dream by the dreamID
-  getGoals(dreamID) {
+  getGoals(dreamID: number): Goal[] {
     return this.goals.filter(goals => goals.dreamsID === dreamID);
   }
 
+  getGoalByID(id: number) {
+    const goalIndex = this.goals.findIndex(goal => goal.id === id);
+    return this.goals[goalIndex];
+  }
+
   // Add a goal to a dream
-  addGoalInDatabase(dreamID: number) {
-    this.apiService
-      .CreateGoal({
-        goalID: 1,
-        name: "",
-        description: "",
-        dreamID: dreamID,
-        finished: 0,
-        created: this.userService.getCurrentDate()
-      })
-      .then(goal => {
-        this.goals.push({
-          id: goal.goalID,
-          name: goal.name,
-          description: goal.description,
-          finished: false,
-          dreamsID: dreamID,
-          createdAt: goal.created
-        });
-      });
+  async addGoalInDatabase(dreamID: number) {
+    const goal = await this.apiService.CreateGoal({
+      name: "",
+      description: "",
+      dreamID: dreamID,
+      finished: 0,
+      created: this.userService.getCurrentDate()
+    });
+
+    this.goals.push({
+      id: goal.goalID,
+      name: goal.name,
+      description: goal.description,
+      finished: false,
+      dreamsID: dreamID,
+      createdAt: goal.created
+    });
+
+    return goal.goalID;
   }
 
   saveGoals(goals: Goal[]) {

@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
   constructor(private dreamsService: DreamsService) {}
 
   ngOnInit() {
-    // TODO Get the right userid to fetch the user dreams
-    this.userDreams = this.dreamsService.getUserDreams("Dany");
+    this.userDreams = this.dreamsService.getUserDreams();
   }
 }
