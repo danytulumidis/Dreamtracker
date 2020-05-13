@@ -63,8 +63,8 @@ query GetUpvote($dreamID: Int!) {
     dreamID
   }
 }
-query ListUpvotes {
-  listUpvotes {
+query ListUpvotes($userID: String!) {
+  listUpvotes(userID: $userID) {
     userID
     dreamID
   }

@@ -41,13 +41,15 @@ export class DreamsService {
     return this.dreams;
   }
 
-  getPublicDreams() {
+  async getPublicDreams() {
     return this.dreams.filter(element => element.isPrivate === false);
   }
 
   // Updates Upvotes from Dream
   likeDream(dreamID: number, liked: boolean) {
     const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+
+    liked ? this.dreams[dreamIndex].upvote++ : this.dreams[dreamIndex].upvote--;
 
     this.apiService.UpdateDream({
       dreamID: this.dreams[dreamIndex].ID,

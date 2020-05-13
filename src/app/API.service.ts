@@ -946,15 +946,20 @@ export class APIService {
     )) as any;
     return <GetUpvoteQuery>response.data.getUpvote;
   }
-  async ListUpvotes(): Promise<Array<ListUpvotesQuery>> {
-    const statement = `query ListUpvotes {
-        listUpvotes {
+  async ListUpvotes(userID: string): Promise<Array<ListUpvotesQuery>> {
+    const statement = `query ListUpvotes($userID: String!) {
+        listUpvotes(userID: $userID) {
           __typename
           userID
           dreamID
         }
       }`;
-    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    const gqlAPIServiceArguments: any = {
+      userID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
     return <Array<ListUpvotesQuery>>response.data.listUpvotes;
   }
   async GetUser(userID: string): Promise<GetUserQuery> {

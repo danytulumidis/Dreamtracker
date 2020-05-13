@@ -173,7 +173,7 @@ type Query {
   getGoal(goalID: Int!): Goal
   listGoals(dreamID: Int!): [Goal]
   getUpvote(dreamID: Int!): Upvote
-  listUpvotes: [Upvote]
+  listUpvotes(userID: String!): [Upvote]
   getUser(userID: String!): User
   listUsers: [User]
   getUserSetting(settingID: Int!): UserSetting

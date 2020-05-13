@@ -41,7 +41,7 @@
           <button
             type="button"
             class="btn btn-danger btn-round"
-            [ngClass]="{ unlike: !liked }"
+            [ngClass]="{ unlike: !checkDreamIsLiked(dream.ID) }"
             (click)="onLikeDream(dream.ID)"
           >
             <i class="fa fa-heart"></i>Like
