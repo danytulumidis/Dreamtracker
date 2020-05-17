@@ -56,16 +56,6 @@ mutation UpdateFriendship($updateFriendshipInput: UpdateFriendshipInput!) {
     status
   }
 }
-mutation DeleteGoals($dreamID: Int!) {
-  deleteGoals(dreamID: $dreamID) {
-    goalID
-    name
-    description
-    dreamID
-    finished
-    created
-  }
-}
 mutation DeleteGoal($goalID: Int!) {
   deleteGoal(goalID: $goalID) {
     goalID

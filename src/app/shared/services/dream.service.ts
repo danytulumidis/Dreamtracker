@@ -99,16 +99,18 @@ export class DreamsService {
     return true;
   }
 
-  deleteDream(dreamName: string) {
+  deleteDream(dreamID: number) {
     const selectedDreamIndex = this.dreams.findIndex(
-      dream => dream.name === dreamName
+      dream => dream.ID === dreamID
     );
     // Delete all goals related to this dream
     if (this.dreams[selectedDreamIndex].goals.length > 0) {
-      this.goalService.deleteGoals(this.dreams[selectedDreamIndex].ID);
+      this.goalService.deleteGoals(this.dreams[selectedDreamIndex].goals);
     }
     // Delete the dream
-    this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID);
+    this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID).then(() => {
+      this.dreams.splice(selectedDreamIndex, 1);
+    });
   }
 
   saveEditedDream(editedDream: Dream) {

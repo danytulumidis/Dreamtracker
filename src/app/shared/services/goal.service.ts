@@ -83,8 +83,15 @@ export class GoalsService {
   }
 
   // Delete ALL goals from a dream (when deleting a dream for example)
-  deleteGoals(dreamID: number) {
-    this.apiService.DeleteGoals(dreamID);
+  deleteGoals(goals: Goal[]) {
+    goals.forEach(element =>
+      this.apiService.DeleteGoal(element.id).then(() => {
+        this.goals.splice(
+          this.goals.findIndex(goal => goal.id === element.id),
+          1
+        );
+      })
+    );
   }
 
   // Set Goal to done or not done

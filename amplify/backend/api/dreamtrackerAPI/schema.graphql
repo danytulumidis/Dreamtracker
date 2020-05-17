@@ -146,7 +146,6 @@ type Mutation {
   deleteFriendship(userB: String!): Friendship
   createFriendship(createFriendshipInput: CreateFriendshipInput!): Friendship
   updateFriendship(updateFriendshipInput: UpdateFriendshipInput!): Friendship
-  deleteGoals(dreamID: Int!): Goal
   deleteGoal(goalID: Int!): Goal
   createGoal(createGoalInput: CreateGoalInput!): Goal
   updateGoal(updateGoalInput: UpdateGoalInput!): Goal

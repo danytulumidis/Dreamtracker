@@ -27,9 +27,9 @@ export class DreamsListComponent implements OnInit {
     this.showDelete = true;
   }
 
-  deleteDream(dreamName: string, confirmation: boolean) {
+  deleteDream(dreamID: number, confirmation: boolean) {
     if (confirmation) {
-      this.dreamService.deleteDream(dreamName);
+      this.dreamService.deleteDream(dreamID);
     }
     this.showDelete = false;
   }
