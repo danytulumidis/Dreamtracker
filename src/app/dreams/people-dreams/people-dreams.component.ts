@@ -24,6 +24,8 @@ export class PeopleDreamsComponent implements OnInit {
     this.publicDreams = await this.dreamsService.getPublicDreams();
 
     this.user = await this.userServie.getCurrentUser();
+
+    // TODO: Make this more generic, DRY!
     // Get info if user liked dream already or not
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
@@ -44,11 +46,14 @@ export class PeopleDreamsComponent implements OnInit {
       });
       this.dreamsService.likeDream(dreamID, true);
     }
+
+    // TODO: Make this more generic, DRY!
+    this.userUpvotes = await this.apiService.ListUpvotes(
+      this.user.attributes.email
+    );
   }
 
   checkDreamIsLiked(dreamID: number): boolean {
-    if (this.userUpvotes) {
-      return this.userUpvotes.some(element => element.dreamID === dreamID);
-    }
+    return this.userUpvotes.some(element => element.dreamID === dreamID);
   }
 }

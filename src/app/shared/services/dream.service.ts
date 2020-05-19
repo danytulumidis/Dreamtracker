@@ -107,6 +107,10 @@ export class DreamsService {
     if (this.dreams[selectedDreamIndex].goals.length > 0) {
       this.goalService.deleteGoals(this.dreams[selectedDreamIndex].goals);
     }
+
+    // Delete the Upvotes for this dream
+    this.apiService.DeleteUpvote(dreamID);
+
     // Delete the dream
     this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID).then(() => {
       this.dreams.splice(selectedDreamIndex, 1);
