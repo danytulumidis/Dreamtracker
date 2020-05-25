@@ -34,6 +34,7 @@ export class DreamsService {
         user: dream.userID,
         createdAt: dream.created
       });
+      this.updateProgressBar(dream.dreamID);
     });
   }
 
@@ -146,6 +147,12 @@ export class DreamsService {
 
   updateProgressBar(dreamID: number) {
     const allGoals = this.goalService.getGoals(dreamID);
+
+    // If the dream doesnt have goals there is no need to update the progress bar
+    if (allGoals.length === 0) {
+      return;
+    }
+
     const goalQuantity = allGoals.length;
     const finishedGoals = allGoals.filter(element => element.finished === true)
       .length;
