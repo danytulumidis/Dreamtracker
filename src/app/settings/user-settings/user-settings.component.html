@@ -11,7 +11,7 @@
       <div class="owner">
         <div class="avatar">
           <img
-            src="./assets/img/landing_page/itsme.jpg"
+            src="https://images.unsplash.com/photo-1563902452959-f07de6bf4d7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
             alt="Circle Image"
             class="img-circle img-no-padding img-responsive"
           />
@@ -39,6 +39,7 @@
               type="text"
               class="form-control"
               placeholder="Your real name or a nickname"
+              [(ngModel)]="userSettings.name"
             />
           </div>
         </div>
@@ -47,7 +48,12 @@
         <div class="col-sm-6 mr-auto ml-auto">
           <h3>Job Title</h3>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Job Title" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Job Title"
+              [(ngModel)]="userSettings.jobTitle"
+            />
           </div>
         </div>
       </div>
@@ -59,6 +65,7 @@
               class="form-control"
               placeholder="Tell us about you and your dreams!"
               rows="5"
+              [(ngModel)]="userSettings.description"
             ></textarea>
           </div>
         </div>

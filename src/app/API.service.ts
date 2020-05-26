@@ -87,7 +87,7 @@ export type UpdateUserInput = {
 };
 
 export type CreateUserSettingInput = {
-  settingID: number;
+  settingID?: number | null;
   settingName: string;
   settingValue: string;
   userID: string;
@@ -985,9 +985,11 @@ export class APIService {
     )) as any;
     return <GetUserSettingQuery>response.data.getUserSetting;
   }
-  async ListUserSettings(): Promise<Array<ListUserSettingsQuery>> {
-    const statement = `query ListUserSettings {
-        listUserSettings {
+  async ListUserSettings(
+    userID: string
+  ): Promise<Array<ListUserSettingsQuery>> {
+    const statement = `query ListUserSettings($userID: String!) {
+        listUserSettings(userID: $userID) {
           __typename
           settingID
           settingName
@@ -995,7 +997,12 @@ export class APIService {
           userID
         }
       }`;
-    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    const gqlAPIServiceArguments: any = {
+      userID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
     return <Array<ListUserSettingsQuery>>response.data.listUserSettings;
   }
   OnCreateDreamListener: Observable<OnCreateDreamSubscription> = API.graphql(

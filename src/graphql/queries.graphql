@@ -97,8 +97,8 @@ query GetUserSetting($settingID: Int!) {
     userID
   }
 }
-query ListUserSettings {
-  listUserSettings {
+query ListUserSettings($userID: String!) {
+  listUserSettings(userID: $userID) {
     settingID
     settingName
     settingValue

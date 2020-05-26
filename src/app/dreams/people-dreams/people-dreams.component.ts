@@ -17,13 +17,13 @@ export class PeopleDreamsComponent implements OnInit {
   constructor(
     private dreamsService: DreamsService,
     private apiService: APIService,
-    private userServie: UserService
+    private userService: UserService
   ) {}
 
   async ngOnInit() {
     this.publicDreams = await this.dreamsService.getPublicDreams();
 
-    this.user = await this.userServie.getCurrentUser();
+    this.user = await this.userService.getCurrentUser();
 
     // TODO: Make this more generic, DRY!
     // Get info if user liked dream already or not

@@ -119,7 +119,7 @@ input UpdateUserInput {
 }
 
 input CreateUserSettingInput {
-  settingID: Int!
+  settingID: Int
   settingName: String!
   settingValue: String!
   userID: String!
@@ -176,7 +176,7 @@ type Query {
   getUser(userID: String!): User
   listUsers: [User]
   getUserSetting(settingID: Int!): UserSetting
-  listUserSettings: [UserSetting]
+  listUserSettings(userID: String!): [UserSetting]
 }
 
 type Subscription {

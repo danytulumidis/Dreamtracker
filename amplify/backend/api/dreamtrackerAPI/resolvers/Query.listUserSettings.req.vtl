@@ -1,4 +1,8 @@
 {
   "version": "2018-05-29",
-  "statements":   ["SELECT * FROM UserSetting"]
+  "statements":   ["SELECT * FROM UserSetting WHERE userID = :userID"],
+
+  "variableMap": {
+    ":userID": $util.toJson($ctx.args.userID)
+  }
 }
