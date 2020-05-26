@@ -56,4 +56,6 @@ export class PeopleDreamsComponent implements OnInit {
   checkDreamIsLiked(dreamID: number): boolean {
     return this.userUpvotes.some(element => element.dreamID === dreamID);
   }
+
+  goToUserProfile() {}
 }
