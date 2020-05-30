@@ -24,6 +24,7 @@ export class UserSettingsComponent implements OnInit {
 
   async ngOnInit() {
     this.user = await this.userService.getCurrentUser();
+    this.userSettings = this.userService.getUserSettings();
   }
 
   async saveSettings() {
@@ -31,7 +32,7 @@ export class UserSettingsComponent implements OnInit {
       this.user.attributes.email
     );
 
-    // ! If a user setting already exit for a specific setting update it and NOT generate another one!
+    // ! If a user setting already exist for a specific setting update it and NOT generate another one!
     if (currentUserSettings.length === 0) {
       this.apiService.CreateUserSetting({
         settingName: "Name",
