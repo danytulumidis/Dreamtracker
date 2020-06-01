@@ -9,6 +9,7 @@ import { UserService } from "./user.service";
 })
 export class DreamsService {
   private dreams: Dream[] = [];
+  private publicDreams: Dream[] = [];
 
   constructor(
     private goalService: GoalsService,
@@ -42,15 +43,39 @@ export class DreamsService {
     return this.dreams;
   }
 
+  async fetchPublicDreams() {
+    const publicDreams = await this.apiService.ListPublicDreams();
+
+    publicDreams.forEach(async dream => {
+      this.publicDreams.push({
+        ID: dream.dreamID,
+        name: dream.name,
+        description: dream.description,
+        goals: [],
+        isPrivate: false,
+        upvote: dream.upvotes,
+        progress: 0,
+        status: "",
+        user: dream.userID,
+        createdAt: dream.created
+      });
+    });
+  }
+
   async getPublicDreams() {
-    return this.dreams.filter(element => element.isPrivate === false);
+    await this.fetchPublicDreams();
+    return this.publicDreams;
   }
 
   // Updates Upvotes from Dream
   likeDream(dreamID: number, liked: boolean) {
-    const dreamIndex = this.dreams.findIndex(element => element.ID === dreamID);
+    const dreamIndex = this.publicDreams.findIndex(
+      element => element.ID === dreamID
+    );
 
-    liked ? this.dreams[dreamIndex].upvote++ : this.dreams[dreamIndex].upvote--;
+    liked
+      ? this.publicDreams[dreamIndex].upvote++
+      : this.publicDreams[dreamIndex].upvote--;
 
     this.apiService.UpdateDream({
       dreamID: this.dreams[dreamIndex].ID,

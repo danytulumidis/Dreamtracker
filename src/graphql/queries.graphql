@@ -21,6 +21,17 @@ query ListDreams($userID: String!) {
     created
   }
 }
+query ListPublicDreams {
+  listPublicDreams {
+    dreamID
+    name
+    description
+    private
+    userID
+    upvotes
+    created
+  }
+}
 query GetFriendship($userB: String!) {
   getFriendship(userB: $userB) {
     userA

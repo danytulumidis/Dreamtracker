@@ -281,6 +281,17 @@ export type ListDreamsQuery = {
   created: string | null;
 };
 
+export type ListPublicDreamsQuery = {
+  __typename: "Dream";
+  dreamID: number;
+  name: string;
+  description: string;
+  private: number | null;
+  userID: string;
+  upvotes: number | null;
+  created: string | null;
+};
+
 export type GetFriendshipQuery = {
   __typename: "Friendship";
   userA: string;
@@ -828,6 +839,22 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<ListDreamsQuery>>response.data.listDreams;
+  }
+  async ListPublicDreams(): Promise<Array<ListPublicDreamsQuery>> {
+    const statement = `query ListPublicDreams {
+        listPublicDreams {
+          __typename
+          dreamID
+          name
+          description
+          private
+          userID
+          upvotes
+          created
+        }
+      }`;
+    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    return <Array<ListPublicDreamsQuery>>response.data.listPublicDreams;
   }
   async GetFriendship(userB: string): Promise<GetFriendshipQuery> {
     const statement = `query GetFriendship($userB: String!) {

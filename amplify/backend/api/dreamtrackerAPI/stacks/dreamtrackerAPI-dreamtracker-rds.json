@@ -51,10 +51,7 @@
           "Ref": "AppSyncApiId"
         },
         "ServiceRoleArn": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseAccessRole",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseAccessRole", "Arn"]
         },
         "RelationalDatabaseConfig": {
           "RelationalDatabaseSourceType": "RDS_HTTP_ENDPOINT",
@@ -75,9 +72,7 @@
           }
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseAccessRole"
-      ]
+      "DependsOn": ["RelationalDatabaseAccessRole"]
     },
     "RelationalDatabaseAccessRole": {
       "Type": "AWS::IAM::Role",
@@ -132,9 +127,7 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": [
-                    "secretsmanager:GetSecretValue"
-                  ],
+                  "Action": ["secretsmanager:GetSecretValue"],
                   "Resource": [
                     {
                       "Ref": "rdsSecretStoreArn"
@@ -154,10 +147,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createDream",
@@ -190,9 +180,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "DreamGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -201,10 +189,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getDream",
         "TypeName": "Query",
@@ -237,9 +222,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "DreamUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -248,10 +231,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateDream",
@@ -284,9 +264,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "DreamDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -295,10 +273,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteDream",
@@ -331,9 +306,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "DreamListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -342,10 +315,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listDreams",
@@ -378,9 +348,49 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
+    },
+    "PublicDreamListResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "AppSyncApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
+        },
+        "TypeName": "Query",
+        "FieldName": "listPublicDreams",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Query.listPublicDreams.req.vtl"
+            }
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Query.listPublicDreams.res.vtl"
+            }
+          ]
+        }
+      },
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "FriendshipCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -389,10 +399,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createFriendship",
@@ -425,9 +432,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "FriendshipGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -436,10 +441,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getFriendship",
         "TypeName": "Query",
@@ -472,9 +474,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "FriendshipUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -483,10 +483,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateFriendship",
@@ -519,9 +516,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "FriendshipDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -530,10 +525,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteFriendship",
@@ -566,9 +558,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "FriendshipListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -577,10 +567,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listFriendships",
@@ -613,9 +600,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "GoalCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -624,10 +609,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createGoal",
@@ -660,9 +642,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "GoalGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -671,10 +651,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getGoal",
         "TypeName": "Query",
@@ -707,9 +684,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "GoalUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -718,10 +693,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateGoal",
@@ -754,9 +726,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "GoalDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -765,10 +735,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteGoal",
@@ -801,9 +768,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "GoalListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -812,10 +777,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listGoals",
@@ -848,9 +810,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UpvoteCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -859,10 +819,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createUpvote",
@@ -895,9 +852,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UpvoteGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -906,10 +861,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getUpvote",
         "TypeName": "Query",
@@ -942,9 +894,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UpvoteUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -953,10 +903,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateUpvote",
@@ -989,9 +936,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UpvoteDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1000,10 +945,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteUpvote",
@@ -1036,9 +978,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UpvoteListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1047,10 +987,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listUpvotes",
@@ -1083,9 +1020,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1094,10 +1029,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createUser",
@@ -1130,9 +1062,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1141,10 +1071,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getUser",
         "TypeName": "Query",
@@ -1177,9 +1104,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1188,10 +1113,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateUser",
@@ -1224,9 +1146,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1235,10 +1155,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteUser",
@@ -1271,9 +1188,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1282,10 +1197,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listUsers",
@@ -1318,9 +1230,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserSettingCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1329,10 +1239,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "createUserSetting",
@@ -1365,9 +1272,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserSettingGetResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1376,10 +1281,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "FieldName": "getUserSetting",
         "TypeName": "Query",
@@ -1412,9 +1314,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserSettingUpdateResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1423,10 +1323,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "updateUserSetting",
@@ -1459,9 +1356,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserSettingDeleteResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1470,10 +1365,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Mutation",
         "FieldName": "deleteUserSetting",
@@ -1506,9 +1398,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     },
     "UserSettingListResolver": {
       "Type": "AWS::AppSync::Resolver",
@@ -1517,10 +1407,7 @@
           "Ref": "AppSyncApiId"
         },
         "DataSourceName": {
-          "Fn::GetAtt": [
-            "RelationalDatabaseDataSource",
-            "Name"
-          ]
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
         },
         "TypeName": "Query",
         "FieldName": "listUserSettings",
@@ -1553,9 +1440,7 @@
           ]
         }
       },
-      "DependsOn": [
-        "RelationalDatabaseDataSource"
-      ]
+      "DependsOn": ["RelationalDatabaseDataSource"]
     }
   }
 }
