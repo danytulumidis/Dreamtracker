@@ -42,8 +42,7 @@
             type="button"
             class="btn btn-danger btn-round"
             [ngClass]="{
-              unlike:
-                dreamsLiked.length === 0 || dreamsLiked[dream.ID] === false
+              unlike: !dreamsLiked[dream.ID] || dreamsLiked[dream.ID] === false
             }"
             (click)="onLikeDream(dream.ID)"
           >
