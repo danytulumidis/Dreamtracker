@@ -62,8 +62,7 @@ export class DreamsService {
     });
   }
 
-  async getPublicDreams() {
-    await this.fetchPublicDreams();
+  getPublicDreams() {
     return this.publicDreams;
   }
 
