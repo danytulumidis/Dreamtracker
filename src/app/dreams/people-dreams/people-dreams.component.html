@@ -41,20 +41,13 @@
           <button
             type="button"
             class="btn btn-danger btn-round"
+            [ngClass]="{
+              unlike:
+                dreamsLiked.length === 0 || dreamsLiked[dream.ID] === false
+            }"
             (click)="onLikeDream(dream.ID)"
           >
             <i class="fa fa-heart"></i>Like
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <button
-            type="button"
-            class="btn btn-primary btn-round button-margin"
-            (click)="goToUserProfile()"
-          >
-            Go to Profile
           </button>
         </div>
       </div>

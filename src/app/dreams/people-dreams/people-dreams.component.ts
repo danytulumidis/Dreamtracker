@@ -13,6 +13,7 @@ export class PeopleDreamsComponent implements OnInit {
   publicDreams: Dream[] = [];
   user: any;
   userUpvotes: any[];
+  dreamsLiked: any[] = [];
 
   constructor(
     private dreamsService: DreamsService,
@@ -25,11 +26,14 @@ export class PeopleDreamsComponent implements OnInit {
 
     this.user = await this.userService.getCurrentUser();
 
-    // TODO: Make this more generic, DRY!
+    // TODO: Make this more generic, DRY! Check Subscription
     // Get info if user liked dream already or not
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
     );
+    this.userUpvotes.forEach(element => {
+      this.dreamsLiked[element.dreamID] = true;
+    });
   }
 
   async onLikeDream(dreamID: number) {
@@ -47,7 +51,10 @@ export class PeopleDreamsComponent implements OnInit {
       this.dreamsService.likeDream(dreamID, true);
     }
 
-    // TODO: Make this more generic, DRY!
+    // Toggle if dream is liked from user to toggle like button class
+    this.dreamsLiked[dreamID] = !this.dreamsLiked[dreamID];
+
+    // TODO: Make this more generic, DRY! Check Subscription
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
     );
