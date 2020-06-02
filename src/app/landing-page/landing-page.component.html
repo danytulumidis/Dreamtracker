@@ -269,16 +269,19 @@
       <!-- Impressum and Legaly Stuff -->
       <div class="row">
         <div class="col-md-12 mr-auto ml-auto">
-          <a href="#" class="btn btn-link btn-neutral">
-            Impressum
+          <a
+            [routerLink]="['compliance/legal']"
+            class="btn btn-link btn-neutral"
+          >
+            Legal Notice
           </a>
-          <a href="#" class="btn btn-link btn-neutral">
+          <a
+            [routerLink]="['compliance/privacy']"
+            class="btn btn-link btn-neutral"
+          >
             Privacy Policy
           </a>
-          <a href="#" class="btn btn-link btn-neutral">
-            Legal Stuff
-          </a>
-          <a href="#" class="btn btn-link btn-neutral">
+          <a [routerLink]="['faq']" class="btn btn-link btn-neutral">
             FAQ
           </a>
         </div>
@@ -290,5 +293,4 @@
       </div>
     </div>
   </div>
-  <!-- TODO Impressum etc. -->
 </footer>

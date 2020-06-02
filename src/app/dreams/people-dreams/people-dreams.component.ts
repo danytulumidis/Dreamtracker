@@ -64,5 +64,7 @@ export class PeopleDreamsComponent implements OnInit {
     return this.userUpvotes.some(element => element.dreamID === dreamID);
   }
 
+  getUserName() {}
+
   goToUserProfile() {}
 }

@@ -27,7 +27,8 @@ import {
 import Auth from "@aws-amplify/auth";
 import { FormsModule } from "@angular/forms";
 import { PeopleDreamsComponent } from "./dreams/people-dreams/people-dreams.component";
-import { OtherUserProfileComponent } from './profile/other-user-profile/other-user-profile.component';
+import { OtherUserProfileComponent } from "./profile/other-user-profile/other-user-profile.component";
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OtherUserProfileComponent } from './profile/other-user-profile/other-us
     AboutComponent,
     AuthComponent,
     PeopleDreamsComponent,
-    OtherUserProfileComponent
+    OtherUserProfileComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

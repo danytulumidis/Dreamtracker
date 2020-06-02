@@ -10,6 +10,7 @@ import { GoalsComponent } from "./goals/goals.component";
 import { AboutComponent } from "./about/about.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AuthGuard } from "./auth/auth-guard.service";
+import { FaqComponent } from "./faq/faq.component";
 
 const routes: Routes = [
   { path: "", component: LandingPageComponent },
@@ -22,12 +23,20 @@ const routes: Routes = [
   { path: "goals", canActivate: [AuthGuard], component: GoalsComponent },
   { path: "auth", component: AuthComponent },
   { path: "about", component: AboutComponent },
+  { path: "faq", component: FaqComponent },
   //! TODO Parameter for user id
   { path: "profile", canActivate: [AuthGuard], component: ProfileComponent },
   {
     path: "profile/settings",
     loadChildren: () =>
       import("./settings/settings.module").then(m => m.SettingsModule)
+  },
+  {
+    path: "compliance",
+    loadChildren: () =>
+      import("./shared/modules/compliance/compliance.module").then(
+        m => m.ComplianceModule
+      )
   }
 ];
 
