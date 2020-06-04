@@ -43,6 +43,7 @@ export class AppComponent {
           this.userService.insertNewUser(user);
           this.dreamService.fetchDreams(user);
           this.dreamService.fetchPublicDreams();
+          this.userService.fetchUserSetting();
         })
         .catch(err => console.log(err));
     }, 500);

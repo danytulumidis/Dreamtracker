@@ -14,6 +14,7 @@ export class PeopleDreamsComponent implements OnInit {
   user: any;
   userUpvotes: any[];
   dreamsLiked: any[] = [];
+  userName: string = "";
 
   constructor(
     private dreamsService: DreamsService,
@@ -26,7 +27,6 @@ export class PeopleDreamsComponent implements OnInit {
 
     this.user = await this.userService.getCurrentUser();
 
-    // TODO: Make this more generic, DRY! Check Subscription
     // Get info if user liked dream already or not
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
@@ -34,6 +34,7 @@ export class PeopleDreamsComponent implements OnInit {
     this.userUpvotes.forEach(element => {
       this.dreamsLiked[element.dreamID] = true;
     });
+    this.getUserName();
   }
 
   async onLikeDream(dreamID: number) {
@@ -54,7 +55,6 @@ export class PeopleDreamsComponent implements OnInit {
     // Toggle if dream is liked from user to toggle like button class
     this.dreamsLiked[dreamID] = !this.dreamsLiked[dreamID];
 
-    // TODO: Make this more generic, DRY! Check Subscription
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
     );
@@ -64,7 +64,10 @@ export class PeopleDreamsComponent implements OnInit {
     return this.userUpvotes.some(element => element.dreamID === dreamID);
   }
 
-  getUserName() {}
+  // Get the User Name from the User Settings
+  getUserName() {
+    this.userName = this.userService.getUserName();
+  }
 
   goToUserProfile() {}
 }

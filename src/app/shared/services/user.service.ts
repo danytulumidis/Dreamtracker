@@ -5,7 +5,7 @@ import { UserSettings } from "../models/user-settings.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
-  userSettings: any = {
+  userSettings: UserSettings = {
     name: "",
     jobTitle: "",
     description: ""
@@ -66,7 +66,12 @@ export class UserService {
     });
   }
 
-  getUserSettings() {
+  getUserSettings(): UserSettings {
     return this.userSettings;
+  }
+
+  getUserName(): string {
+    const { name } = this.userSettings;
+    return name;
   }
 }

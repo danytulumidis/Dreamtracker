@@ -52,22 +52,22 @@ export class UserSettingsComponent implements OnInit {
         userID: this.user.attributes.email
       });
     } else {
-      currentUserSettings.forEach(element => {
+      currentUserSettings.forEach(async element => {
         switch (element.settingName) {
           case "Name":
-            this.apiService.UpdateUserSetting({
+            await this.apiService.UpdateUserSetting({
               settingID: element.settingID,
               settingValue: this.userSettings.name
             });
             break;
           case "JobTitle":
-            this.apiService.UpdateUserSetting({
+            await this.apiService.UpdateUserSetting({
               settingID: element.settingID,
               settingValue: this.userSettings.jobTitle
             });
             break;
           case "Description":
-            this.apiService.UpdateUserSetting({
+            await this.apiService.UpdateUserSetting({
               settingID: element.settingID,
               settingValue: this.userSettings.description
             });
@@ -79,5 +79,6 @@ export class UserSettingsComponent implements OnInit {
     }
 
     this.settingsSaved = true;
+    this.userService.fetchUserSetting();
   }
 }
