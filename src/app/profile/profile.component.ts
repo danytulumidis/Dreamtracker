@@ -11,7 +11,6 @@ import { UserService } from "../shared/services/user.service";
 })
 export class ProfileComponent implements OnInit {
   userDreams: Dream[];
-  user: any;
   userSettings: UserSettings = {
     name: "",
     jobTitle: "",
@@ -24,7 +23,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.user = await this.userService.getCurrentUser();
     this.userDreams = this.dreamsService.getUserDreams();
     this.userSettings = this.userService.getUserSettings();
   }

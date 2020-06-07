@@ -11,6 +11,12 @@ export class UserService {
     description: ""
   };
 
+  anotherUserSettings: UserSettings = {
+    name: "",
+    jobTitle: "",
+    description: ""
+  };
+
   constructor(private apiService: APIService) {}
 
   insertNewUser(user: any) {
@@ -40,6 +46,7 @@ export class UserService {
     return today;
   }
 
+  // Get current authenticated User Settings
   async fetchUserSetting() {
     const user = await this.getCurrentUser();
     const settings = await this.apiService.ListUserSettings(
@@ -47,6 +54,16 @@ export class UserService {
     );
 
     this.setUserSettings(settings);
+  }
+
+  // Get User Settings of another user
+  async fetchAnotherUserSettings() {
+    const user = await this.getCurrentUser();
+    const settings = await this.apiService.ListUserSettings(
+      user.attributes.email
+    );
+
+    this.setAnotherUserSettings(settings);
   }
 
   setUserSettings(settings: any) {
@@ -66,8 +83,29 @@ export class UserService {
     });
   }
 
+  setAnotherUserSettings(settings: any) {
+    settings.forEach(element => {
+      switch (element.settingName) {
+        case "Name":
+          this.anotherUserSettings.name = element.settingValue;
+        case "JobTitle":
+          this.anotherUserSettings.jobTitle = element.settingValue;
+          break;
+        case "Description":
+          this.anotherUserSettings.description = element.settingValue;
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
   getUserSettings(): UserSettings {
     return this.userSettings;
+  }
+
+  getAnotherUserSettings(): UserSettings {
+    return this.anotherUserSettings;
   }
 
   getUserName(): string {

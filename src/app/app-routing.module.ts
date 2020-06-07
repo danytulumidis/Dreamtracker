@@ -11,6 +11,7 @@ import { AboutComponent } from "./about/about.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AuthGuard } from "./auth/auth-guard.service";
 import { FaqComponent } from "./faq/faq.component";
+import { OtherUserProfileComponent } from "./profile/other-user-profile/other-user-profile.component";
 
 const routes: Routes = [
   { path: "", component: LandingPageComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: "about", component: AboutComponent },
   { path: "faq", component: FaqComponent },
   //! TODO Parameter for user id
+  { path: "userProfile/:id", component: OtherUserProfileComponent },
   { path: "profile", canActivate: [AuthGuard], component: ProfileComponent },
   {
     path: "profile/settings",

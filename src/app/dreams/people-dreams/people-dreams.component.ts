@@ -3,6 +3,7 @@ import { DreamsService } from "src/app/shared/services/dream.service";
 import { Dream } from "src/app/shared/models/dream.model";
 import { APIService } from "src/app/API.service";
 import { UserService } from "src/app/shared/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-people-dreams",
@@ -19,7 +20,8 @@ export class PeopleDreamsComponent implements OnInit {
   constructor(
     private dreamsService: DreamsService,
     private apiService: APIService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -31,6 +33,7 @@ export class PeopleDreamsComponent implements OnInit {
     this.userUpvotes = await this.apiService.ListUpvotes(
       this.user.attributes.email
     );
+    // Save user upvotes in a hash table to identify if a user upvotes a dream or not
     this.userUpvotes.forEach(element => {
       this.dreamsLiked[element.dreamID] = true;
     });
@@ -69,5 +72,7 @@ export class PeopleDreamsComponent implements OnInit {
     this.userName = this.userService.getUserName();
   }
 
-  goToUserProfile() {}
+  goToUserProfile() {
+    this.router.navigate(["/userProfile", this.user.attributes.email]);
+  }
 }

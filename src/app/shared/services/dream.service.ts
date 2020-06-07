@@ -66,6 +66,11 @@ export class DreamsService {
     return this.publicDreams;
   }
 
+  // Get Public Dream from a User
+  getPublicUserDream(user: string) {
+    return this.publicDreams.filter(dream => dream.user === user);
+  }
+
   // Updates Upvotes from Dream
   likeDream(dreamID: number, liked: boolean) {
     const dreamIndex = this.publicDreams.findIndex(
