@@ -157,6 +157,16 @@ export class DreamsService {
       private: privateNumber,
       upvotes: editedDream.upvote
     });
+
+    // Refresh private status of the dream
+    if (editedDream.isPrivate) {
+      const index = this.publicDreams.findIndex(
+        element => element.ID === editedDream.ID
+      );
+      this.publicDreams.splice(index, 1);
+    } else {
+      this.publicDreams.push(editedDream);
+    }
   }
 
   addGoalToADream(dreamID: number, goalID: number) {
