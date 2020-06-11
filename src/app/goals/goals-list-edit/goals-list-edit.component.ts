@@ -23,6 +23,7 @@ export class GoalsListEditComponent implements OnInit {
 
   saveGoal() {
     this.goalsService.saveGoals(this.goals);
+    this.dreamService.updateProgressBar(this.dreamID);
     this.activeModal.close();
   }
 
