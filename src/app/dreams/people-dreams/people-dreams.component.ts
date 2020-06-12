@@ -37,14 +37,13 @@ export class PeopleDreamsComponent implements OnInit {
     this.userUpvotes.forEach(element => {
       this.dreamsLiked[element.dreamID] = true;
     });
-    this.getUserName();
   }
 
   async onLikeDream(dreamID: number) {
     // if true then its a unlike else a like
     if (this.checkDreamIsLiked(dreamID)) {
       await this.apiService
-        .DeleteUpvote(dreamID)
+        .DeleteUserUpvote(dreamID, this.user.attributes.email)
         .then(data => console.log(data));
       this.dreamsService.likeDream(dreamID, false);
     } else {
@@ -67,12 +66,7 @@ export class PeopleDreamsComponent implements OnInit {
     return this.userUpvotes.some(element => element.dreamID === dreamID);
   }
 
-  // Get the User Name from the User Settings
-  getUserName() {
-    this.userName = this.userService.getUserName();
-  }
-
-  goToUserProfile() {
-    this.router.navigate(["/userProfile", this.user.attributes.email]);
+  goToUserProfile(userID: string) {
+    this.router.navigate(["/userProfile", userID]);
   }
 }

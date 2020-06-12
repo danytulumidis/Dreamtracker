@@ -1,0 +1,9 @@
+{
+  "version": "2018-05-29",
+  "statements":   ["SELECT * FROM Upvote WHERE dreamID = :dreamID AND userID = :userID", "DELETE FROM Upvote WHERE dreamID = :dreamID AND userID = :userID"],
+
+  "variableMap": {
+    ":dreamID": $util.toJson($ctx.args.dreamID),
+    ":userID": $util.toJson($ctx.args.userID)
+  }
+}

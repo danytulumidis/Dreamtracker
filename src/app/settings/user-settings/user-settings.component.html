@@ -16,7 +16,7 @@
   <div class="section profile-content text-center">
     <div class="container">
       <div class="owner">
-        <div class="avatar">
+        <!-- <div class="avatar">
           <img
             src="https://images.unsplash.com/photo-1563902452959-f07de6bf4d7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
             alt="Circle Image"
@@ -26,70 +26,71 @@
             Upload
           </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 ml-auto mr-auto text-center">
-          <br />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8 mr-auto ml-auto">
-          <h2>Your Settings</h2>
-          <hr />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 mr-auto ml-auto">
-          <h3>Name</h3>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Your real name or a nickname"
-              [(ngModel)]="userSettings.name"
-            />
+      </div> -->
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto text-center">
+            <br />
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 mr-auto ml-auto">
-          <h3>Job Title</h3>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Job Title"
-              [(ngModel)]="userSettings.jobTitle"
-            />
+        <div class="row">
+          <div class="col-md-8 mr-auto ml-auto">
+            <h2>Your Settings</h2>
+            <hr />
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 mr-auto ml-auto">
-          <h3>Description</h3>
-          <div class="form-group">
-            <textarea
-              class="form-control"
-              placeholder="Tell us about you and your dreams!"
-              rows="5"
-              [(ngModel)]="userSettings.description"
-            ></textarea>
+        <div class="row">
+          <div class="col-sm-6 mr-auto ml-auto">
+            <h3>Name</h3>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Your real name or a nickname"
+                [(ngModel)]="userSettings.name"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 mr-auto ml-auto">
-          <div class="form-group">
-            <button
-              type="button"
-              class="btn btn-outline-primary btn-round more-margin"
-              (click)="saveSettings()"
-            >
-              Save
-            </button>
-            <p class="saved-success" *ngIf="settingsSaved">
-              Settings saved successfully
-            </p>
+        <div class="row">
+          <div class="col-sm-6 mr-auto ml-auto">
+            <h3>Job Title</h3>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Job Title"
+                [(ngModel)]="userSettings.jobTitle"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mr-auto ml-auto">
+            <h3>Description</h3>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                placeholder="Tell us about you and your dreams!"
+                rows="5"
+                [(ngModel)]="userSettings.description"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mr-auto ml-auto">
+            <div class="form-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-round more-margin"
+                (click)="saveSettings()"
+              >
+                Save
+              </button>
+              <p class="saved-success" *ngIf="settingsSaved">
+                Settings saved successfully
+              </p>
+            </div>
           </div>
         </div>
       </div>

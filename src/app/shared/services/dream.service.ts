@@ -82,8 +82,8 @@ export class DreamsService {
       : this.publicDreams[dreamIndex].upvote--;
 
     this.apiService.UpdateDream({
-      dreamID: this.dreams[dreamIndex].ID,
-      upvotes: this.dreams[dreamIndex].upvote
+      dreamID: this.publicDreams[dreamIndex].ID,
+      upvotes: this.publicDreams[dreamIndex].upvote
     });
   }
 

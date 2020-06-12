@@ -27,7 +27,7 @@ export class OtherUserProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.userID = this.route.snapshot.params["id"];
-    await this.userService.fetchAnotherUserSettings();
+    await this.userService.fetchAnotherUserSettings(this.userID);
     this.userInfo = this.userService.getAnotherUserSettings();
     this.userDreams = this.dreamsService.getPublicUserDream(this.userID);
   }

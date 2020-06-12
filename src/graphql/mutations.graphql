@@ -92,6 +92,12 @@ mutation DeleteUpvote($dreamID: Int!) {
     dreamID
   }
 }
+mutation DeleteUserUpvote($dreamID: Int!, $userID: String!) {
+  deleteUserUpvote(dreamID: $dreamID, userID: $userID) {
+    userID
+    dreamID
+  }
+}
 mutation CreateUpvote($createUpvoteInput: CreateUpvoteInput!) {
   createUpvote(createUpvoteInput: $createUpvoteInput) {
     userID

@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: "auth", component: AuthComponent },
   { path: "about", component: AboutComponent },
   { path: "faq", component: FaqComponent },
-  //! TODO Parameter for user id
   { path: "userProfile/:id", component: OtherUserProfileComponent },
   { path: "profile", canActivate: [AuthGuard], component: ProfileComponent },
   {

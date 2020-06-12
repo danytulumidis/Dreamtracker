@@ -193,6 +193,12 @@ export type DeleteUpvoteMutation = {
   dreamID: number;
 };
 
+export type DeleteUserUpvoteMutation = {
+  __typename: "Upvote";
+  userID: string;
+  dreamID: number;
+};
+
 export type CreateUpvoteMutation = {
   __typename: "Upvote";
   userID: string;
@@ -637,6 +643,26 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteUpvoteMutation>response.data.deleteUpvote;
+  }
+  async DeleteUserUpvote(
+    dreamID: number,
+    userID: string
+  ): Promise<DeleteUserUpvoteMutation> {
+    const statement = `mutation DeleteUserUpvote($dreamID: Int!, $userID: String!) {
+        deleteUserUpvote(dreamID: $dreamID, userID: $userID) {
+          __typename
+          userID
+          dreamID
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      dreamID,
+      userID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteUserUpvoteMutation>response.data.deleteUserUpvote;
   }
   async CreateUpvote(
     createUpvoteInput: CreateUpvoteInput

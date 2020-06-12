@@ -46,6 +46,11 @@ export class UserService {
     return today;
   }
 
+  // Fetch all users that are on the public dreams
+  async fetchPublicDreamUsers() {
+    return await this.apiService.ListUsers();
+  }
+
   // Get current authenticated User Settings
   async fetchUserSetting() {
     const user = await this.getCurrentUser();
@@ -57,11 +62,8 @@ export class UserService {
   }
 
   // Get User Settings of another user
-  async fetchAnotherUserSettings() {
-    const user = await this.getCurrentUser();
-    const settings = await this.apiService.ListUserSettings(
-      user.attributes.email
-    );
+  async fetchAnotherUserSettings(userID: string) {
+    const settings = await this.apiService.ListUserSettings(userID);
 
     this.setAnotherUserSettings(settings);
   }
@@ -106,10 +108,5 @@ export class UserService {
 
   getAnotherUserSettings(): UserSettings {
     return this.anotherUserSettings;
-  }
-
-  getUserName(): string {
-    const { name } = this.userSettings;
-    return name;
   }
 }

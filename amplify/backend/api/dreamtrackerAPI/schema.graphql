@@ -150,6 +150,7 @@ type Mutation {
   createGoal(createGoalInput: CreateGoalInput!): Goal
   updateGoal(updateGoalInput: UpdateGoalInput!): Goal
   deleteUpvote(dreamID: Int!): Upvote
+  deleteUserUpvote(dreamID: Int!, userID: String!): Upvote
   createUpvote(createUpvoteInput: CreateUpvoteInput!): Upvote
   updateUpvote(updateUpvoteInput: UpdateUpvoteInput!): Upvote
   deleteUser(userID: String!): User

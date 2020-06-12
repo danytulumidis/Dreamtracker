@@ -392,6 +392,48 @@
       },
       "DependsOn": ["RelationalDatabaseDataSource"]
     },
+    "DeleteUserUpvoteResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "AppSyncApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
+        },
+        "TypeName": "Mutation",
+        "FieldName": "deleteUserUpvote",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Mutation.deleteUserUpvote.req.vtl"
+            }
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Mutation.deleteUserUpvote.res.vtl"
+            }
+          ]
+        }
+      },
+      "DependsOn": ["RelationalDatabaseDataSource"]
+    },
     "FriendshipCreateResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
