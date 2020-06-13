@@ -350,6 +350,48 @@
       },
       "DependsOn": ["RelationalDatabaseDataSource"]
     },
+    "UserFriendshipListResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "AppSyncApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": ["RelationalDatabaseDataSource", "Name"]
+        },
+        "TypeName": "Query",
+        "FieldName": "listUserFriendships",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Query.listUserFriendships.req.vtl"
+            }
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Sub": [
+            "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+            {
+              "S3DeploymentBucket": {
+                "Ref": "S3DeploymentBucket"
+              },
+              "S3DeploymentRootKey": {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "ResolverFileName": "Query.listUserFriendships.res.vtl"
+            }
+          ]
+        }
+      },
+      "DependsOn": ["RelationalDatabaseDataSource"]
+    },
     "PublicDreamListResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {

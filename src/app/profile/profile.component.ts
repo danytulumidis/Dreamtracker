@@ -3,6 +3,7 @@ import { DreamsService } from "../shared/services/dream.service";
 import { Dream } from "../shared/models/dream.model";
 import { UserSettings } from "../shared/models/user-settings.model";
 import { UserService } from "../shared/services/user.service";
+import { Friendship } from "../shared/models/friendship.model";
 
 @Component({
   selector: "app-profile",
@@ -16,6 +17,9 @@ export class ProfileComponent implements OnInit {
     jobTitle: "",
     description: ""
   };
+  userFriendships: Friendship[];
+  friendRequests: Friendship[];
+  friends: Friendship[];
 
   constructor(
     private dreamsService: DreamsService,
@@ -25,5 +29,8 @@ export class ProfileComponent implements OnInit {
   async ngOnInit() {
     this.userDreams = this.dreamsService.getUserDreams();
     this.userSettings = this.userService.getUserSettings();
+    this.userFriendships = await this.userService.getUserFriendships();
+    this.friendRequests = this.userService.getFriendRequests();
+    this.friends = this.userService.getFriends();
   }
 }

@@ -32,8 +32,8 @@ query ListPublicDreams {
     created
   }
 }
-query GetFriendship($userB: String!) {
-  getFriendship(userB: $userB) {
+query GetFriendship($userA: String!, $userB: String!) {
+  getFriendship(userA: $userA, userB: $userB) {
     userA
     userB
     created
@@ -42,6 +42,14 @@ query GetFriendship($userB: String!) {
 }
 query ListFriendships {
   listFriendships {
+    userA
+    userB
+    created
+    status
+  }
+}
+query ListUserFriendships($userID: String!) {
+  listUserFriendships(userID: $userID) {
     userA
     userB
     created

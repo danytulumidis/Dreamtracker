@@ -169,8 +169,9 @@ type Query {
   getDream(dreamID: Int!): Dream
   listDreams(userID: String!): [Dream]
   listPublicDreams: [Dream]
-  getFriendship(userB: String!): Friendship
+  getFriendship(userA: String!, userB: String!): Friendship
   listFriendships: [Friendship]
+  listUserFriendships(userID: String!): [Friendship]
   getGoal(goalID: Int!): Goal
   listGoals(dreamID: Int!): [Goal]
   getUpvote(dreamID: Int!): Upvote

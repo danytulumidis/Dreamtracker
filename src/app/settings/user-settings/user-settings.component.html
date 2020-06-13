@@ -79,18 +79,27 @@
         </div>
         <div class="row">
           <div class="col-sm-6 mr-auto ml-auto">
-            <div class="form-group">
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-round more-margin"
-                (click)="saveSettings()"
-              >
-                Save
-              </button>
-              <p class="saved-success" *ngIf="settingsSaved">
-                Settings saved successfully
-              </p>
-            </div>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-round more-margin"
+              (click)="saveSettings()"
+            >
+              Save
+            </button>
+            <p class="saved-success" *ngIf="settingsSaved">
+              Settings saved successfully
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mr-auto ml-auto">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-round more-margin"
+              [routerLink]="['/profile']"
+            >
+              Back to Profile
+            </button>
           </div>
         </div>
       </div>

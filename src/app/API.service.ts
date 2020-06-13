@@ -314,6 +314,14 @@ export type ListFriendshipsQuery = {
   status: string | null;
 };
 
+export type ListUserFriendshipsQuery = {
+  __typename: "Friendship";
+  userA: string;
+  userB: string;
+  created: string | null;
+  status: string | null;
+};
+
 export type GetGoalQuery = {
   __typename: "Goal";
   goalID: number;
@@ -882,9 +890,12 @@ export class APIService {
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <Array<ListPublicDreamsQuery>>response.data.listPublicDreams;
   }
-  async GetFriendship(userB: string): Promise<GetFriendshipQuery> {
-    const statement = `query GetFriendship($userB: String!) {
-        getFriendship(userB: $userB) {
+  async GetFriendship(
+    userA: string,
+    userB: string
+  ): Promise<GetFriendshipQuery> {
+    const statement = `query GetFriendship($userA: String!, $userB: String!) {
+        getFriendship(userA: $userA, userB: $userB) {
           __typename
           userA
           userB
@@ -893,6 +904,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
+      userA,
       userB
     };
     const response = (await API.graphql(
@@ -912,6 +924,26 @@ export class APIService {
       }`;
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <Array<ListFriendshipsQuery>>response.data.listFriendships;
+  }
+  async ListUserFriendships(
+    userID: string
+  ): Promise<Array<ListUserFriendshipsQuery>> {
+    const statement = `query ListUserFriendships($userID: String!) {
+        listUserFriendships(userID: $userID) {
+          __typename
+          userA
+          userB
+          created
+          status
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      userID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<ListUserFriendshipsQuery>>response.data.listUserFriendships;
   }
   async GetGoal(goalID: number): Promise<GetGoalQuery> {
     const statement = `query GetGoal($goalID: Int!) {

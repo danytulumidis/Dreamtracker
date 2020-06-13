@@ -1,0 +1,8 @@
+{
+  "version": "2018-05-29",
+  "statements":   ["SELECT * FROM Friendship WHERE userA = :userID OR userB = :userID"],
+
+  "variableMap": {
+    ":userID": $util.toJson($ctx.args.userID)
+  }
+}

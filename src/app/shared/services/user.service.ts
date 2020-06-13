@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { APIService } from "src/app/API.service";
 import { Auth } from "aws-amplify";
 import { UserSettings } from "../models/user-settings.model";
+import { Friendship, status } from "../models/friendship.model";
+import { element } from "protractor";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -17,7 +19,12 @@ export class UserService {
     description: ""
   };
 
-  constructor(private apiService: APIService) {}
+  userFriendships: Friendship[] = [];
+  currentUser: any;
+
+  constructor(private apiService: APIService) {
+    this.setCurrentUser();
+  }
 
   insertNewUser(user: any) {
     this.apiService
@@ -29,6 +36,10 @@ export class UserService {
       })
       .then(() => console.log)
       .catch(err => console.log(err));
+  }
+
+  async setCurrentUser() {
+    this.currentUser = await Auth.currentAuthenticatedUser();
   }
 
   // Get the current user from Cognito
@@ -108,5 +119,65 @@ export class UserService {
 
   getAnotherUserSettings(): UserSettings {
     return this.anotherUserSettings;
+  }
+
+  async addFriend(userID: string) {
+    const currentUser = await this.getCurrentUser();
+    await this.apiService.CreateFriendship({
+      userA: currentUser.attributes.email,
+      userB: userID,
+      created: this.getCurrentDate(),
+      status: "requested"
+    });
+  }
+
+  async getFriendshipStatus(userID: string) {
+    const currentUser = await this.getCurrentUser();
+    // Check if two users are in a frriendship status vice versa
+    const friendship =
+      (await this.apiService.GetFriendship(
+        currentUser.attributes.email,
+        userID
+      )) ||
+      (await this.apiService.GetFriendship(
+        userID,
+        currentUser.attributes.email
+      ));
+
+    return friendship;
+  }
+
+  async listUserFriendships() {
+    const friendships = await this.apiService.ListUserFriendships(
+      this.currentUser.attributes.email
+    );
+
+    friendships.forEach(element => {
+      this.userFriendships.push({
+        userA: element.userA,
+        userB: element.userB,
+        created: element.created,
+        status: element.status as status
+      });
+    });
+  }
+
+  async getUserFriendships() {
+    await this.listUserFriendships();
+    return this.userFriendships;
+  }
+
+  getFriendRequests(): Friendship[] {
+    return this.userFriendships.filter(
+      element =>
+        element.userB === this.currentUser.attributes.email &&
+        element.status === "requested"
+    );
+  }
+
+  getFriends(): Friendship[] {
+    return this.userFriendships.filter(
+      element => element.status === "accepted"
+    );
   }
 }
