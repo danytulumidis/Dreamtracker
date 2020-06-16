@@ -33,4 +33,20 @@ export class ProfileComponent implements OnInit {
     this.friendRequests = this.userService.getFriendRequests();
     this.friends = this.userService.getFriends();
   }
+
+  async acceptFriend(request: Friendship) {
+    try {
+      await this.userService.acceptFriend(request);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async declineFriend(request: Friendship) {
+    try {
+      await this.userService.declineFriend(request);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

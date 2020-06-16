@@ -49,9 +49,21 @@
             <ngb-tab title="Friend Requests">
               <ng-template ngbTabContent>
                 <div *ngFor="let request of friendRequests">
-                  <h3 class="text-muted">
+                  <h4 class="text-muted">
                     {{ request.userA }}
-                  </h3>
+                  </h4>
+                  <button
+                    class="btn btn-outline-primary btn-round more-margin"
+                    (click)="acceptFriend(request)"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="btn btn-outline-danger btn-round more-margin"
+                    (click)="declineFriend(request)"
+                  >
+                    Decline
+                  </button>
                 </div>
               </ng-template>
             </ngb-tab>

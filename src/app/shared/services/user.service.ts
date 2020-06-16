@@ -127,7 +127,7 @@ export class UserService {
       userA: currentUser.attributes.email,
       userB: userID,
       created: this.getCurrentDate(),
-      status: "requested"
+      status: "requested" as status
     });
   }
 
@@ -167,6 +167,17 @@ export class UserService {
     return this.userFriendships;
   }
 
+  setUserFriendship(friendship: Friendship, newStatus: status) {
+    const index = this.userFriendships.findIndex(
+      element =>
+        element.userA === friendship.userA && element.userB === friendship.userB
+    );
+    if (index !== -1) {
+      this.userFriendships[index].status = newStatus;
+      this.userFriendships[index].created = this.getCurrentDate();
+    }
+  }
+
   getFriendRequests(): Friendship[] {
     return this.userFriendships.filter(
       element =>
@@ -179,5 +190,27 @@ export class UserService {
     return this.userFriendships.filter(
       element => element.status === "accepted"
     );
+  }
+
+  async acceptFriend(request: Friendship) {
+    await this.apiService.UpdateFriendship({
+      userA: request.userA,
+      userB: request.userB,
+      created: this.getCurrentDate(),
+      status: "accepted" as status
+    });
+    this.setUserFriendship(request, "accepted");
+    console.log(this.userFriendships);
+  }
+
+  async declineFriend(request: Friendship) {
+    await this.apiService.UpdateFriendship({
+      userA: request.userA,
+      userB: request.userB,
+      created: this.getCurrentDate(),
+      status: "declined" as status
+    });
+    this.setUserFriendship(request, "declined");
+    console.log(this.userFriendships);
   }
 }
