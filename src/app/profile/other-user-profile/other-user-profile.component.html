@@ -31,14 +31,10 @@
           >
             Add Friend
           </button>
-          <button
-            *ngSwitchCase="'accepted'"
-            class="btn btn-outline-primary btn-round alter-button"
-            (click)="removeFriend()"
-          >
-            Remove Friend
-          </button>
-          <h4 *ngSwitchCase="'requested'" class="friendship-border">
+          <h4 *ngSwitchCase="'accepted'" class="friendship-border-accepted">
+            Friends
+          </h4>
+          <h4 *ngSwitchCase="'requested'" class="friendship-border-request">
             Friendship request open
           </h4>
         </div>

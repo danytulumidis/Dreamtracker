@@ -42,13 +42,6 @@ type Friendship {
   status: String
 }
 
-input UpdateFriendshipInput {
-  userA: String!
-  userB: String!
-  created: String
-  status: String
-}
-
 input CreateGoalInput {
   goalID: Int
   name: String!
@@ -143,9 +136,9 @@ type Mutation {
   deleteDream(dreamID: Int!): Dream
   createDream(createDreamInput: CreateDreamInput!): Dream
   updateDream(updateDreamInput: UpdateDreamInput!): Dream
-  deleteFriendship(userB: String!): Friendship
+  deleteFriendship(userA: String!, userB: String!): Friendship
   createFriendship(createFriendshipInput: CreateFriendshipInput!): Friendship
-  updateFriendship(updateFriendshipInput: UpdateFriendshipInput!): Friendship
+  updateFriendship(userA: String!, userB: String!, status: String!): Friendship
   deleteGoal(goalID: Int!): Goal
   createGoal(createGoalInput: CreateGoalInput!): Goal
   updateGoal(updateGoalInput: UpdateGoalInput!): Goal

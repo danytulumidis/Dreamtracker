@@ -68,7 +68,19 @@
               </ng-template>
             </ngb-tab>
             <ngb-tab title="Friends">
-              <ng-template ngbTabContent> </ng-template>
+              <ng-template ngbTabContent>
+                <div *ngFor="let friend of friends">
+                  <h4 class="text-muted">
+                    {{ friend.userA }}
+                  </h4>
+                  <button
+                    class="btn btn-outline-danger btn-round more-margin"
+                    (click)="removeFriend(friend)"
+                  >
+                    Remove Friend
+                  </button>
+                </div>
+              </ng-template>
             </ngb-tab>
             <ngb-tab title="Dreams">
               <ng-template ngbTabContent>

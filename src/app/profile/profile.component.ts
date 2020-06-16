@@ -37,6 +37,8 @@ export class ProfileComponent implements OnInit {
   async acceptFriend(request: Friendship) {
     try {
       await this.userService.acceptFriend(request);
+      this.friends.push(request);
+      this.deleteFromFriendRequest(request);
     } catch (error) {
       console.log(error);
     }
@@ -45,8 +47,34 @@ export class ProfileComponent implements OnInit {
   async declineFriend(request: Friendship) {
     try {
       await this.userService.declineFriend(request);
+      this.deleteFromFriendRequest(request);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async removeFriend(friend: Friendship) {
+    try {
+      await this.userService.deleteFriend(friend.userA, friend.userB);
+      this.deleteFromFriend(friend);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  deleteFromFriendRequest(request: Friendship) {
+    const index = this.friendRequests.findIndex(
+      element =>
+        element.userA === request.userA && element.userB === request.userB
+    );
+    this.friendRequests.splice(index, 1);
+  }
+
+  deleteFromFriend(friend: Friendship) {
+    const index = this.friends.findIndex(
+      element =>
+        element.userA === friend.userA && element.userB === friend.userB
+    );
+    this.friends.splice(index, 1);
   }
 }

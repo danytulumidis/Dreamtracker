@@ -131,6 +131,10 @@ export class UserService {
     });
   }
 
+  async deleteFriend(userA: string, userB: string) {
+    await this.apiService.DeleteFriendship(userA, userB);
+  }
+
   async getFriendshipStatus(userID: string) {
     const currentUser = await this.getCurrentUser();
     // Check if two users are in a frriendship status vice versa
@@ -151,6 +155,8 @@ export class UserService {
     const friendships = await this.apiService.ListUserFriendships(
       this.currentUser.attributes.email
     );
+
+    this.userFriendships = [];
 
     friendships.forEach(element => {
       this.userFriendships.push({
@@ -193,24 +199,20 @@ export class UserService {
   }
 
   async acceptFriend(request: Friendship) {
-    await this.apiService.UpdateFriendship({
-      userA: request.userA,
-      userB: request.userB,
-      created: this.getCurrentDate(),
-      status: "accepted" as status
-    });
+    await this.apiService.UpdateFriendship(
+      request.userA,
+      request.userB,
+      "accepted" as status
+    );
     this.setUserFriendship(request, "accepted");
-    console.log(this.userFriendships);
   }
 
   async declineFriend(request: Friendship) {
-    await this.apiService.UpdateFriendship({
-      userA: request.userA,
-      userB: request.userB,
-      created: this.getCurrentDate(),
-      status: "declined" as status
-    });
+    await this.apiService.UpdateFriendship(
+      request.userA,
+      request.userB,
+      "declined" as status
+    );
     this.setUserFriendship(request, "declined");
-    console.log(this.userFriendships);
   }
 }

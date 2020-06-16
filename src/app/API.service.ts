@@ -33,13 +33,6 @@ export type CreateFriendshipInput = {
   status?: string | null;
 };
 
-export type UpdateFriendshipInput = {
-  userA: string;
-  userB: string;
-  created?: string | null;
-  status?: string | null;
-};
-
 export type CreateGoalInput = {
   goalID?: number | null;
   name: string;
@@ -514,9 +507,12 @@ export class APIService {
     )) as any;
     return <UpdateDreamMutation>response.data.updateDream;
   }
-  async DeleteFriendship(userB: string): Promise<DeleteFriendshipMutation> {
-    const statement = `mutation DeleteFriendship($userB: String!) {
-        deleteFriendship(userB: $userB) {
+  async DeleteFriendship(
+    userA: string,
+    userB: string
+  ): Promise<DeleteFriendshipMutation> {
+    const statement = `mutation DeleteFriendship($userA: String!, $userB: String!) {
+        deleteFriendship(userA: $userA, userB: $userB) {
           __typename
           userA
           userB
@@ -525,6 +521,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
+      userA,
       userB
     };
     const response = (await API.graphql(
@@ -553,10 +550,12 @@ export class APIService {
     return <CreateFriendshipMutation>response.data.createFriendship;
   }
   async UpdateFriendship(
-    updateFriendshipInput: UpdateFriendshipInput
+    userA: string,
+    userB: string,
+    status: string
   ): Promise<UpdateFriendshipMutation> {
-    const statement = `mutation UpdateFriendship($updateFriendshipInput: UpdateFriendshipInput!) {
-        updateFriendship(updateFriendshipInput: $updateFriendshipInput) {
+    const statement = `mutation UpdateFriendship($userA: String!, $userB: String!, $status: String!) {
+        updateFriendship(userA: $userA, userB: $userB, status: $status) {
           __typename
           userA
           userB
@@ -565,7 +564,9 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      updateFriendshipInput
+      userA,
+      userB,
+      status
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
