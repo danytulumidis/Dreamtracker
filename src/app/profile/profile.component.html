@@ -46,44 +46,39 @@
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
           <ngb-tabset [justify]="'center'">
+            <ngb-tab title="Friend Requests">
+              <ng-template ngbTabContent>
+                <div *ngFor="let request of friendRequests">
+                  <h4 class="text-muted">
+                    {{ request.userA }}
+                  </h4>
+                  <button
+                    class="btn btn-outline-primary btn-round more-margin"
+                    (click)="acceptFriend(request)"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="btn btn-outline-danger btn-round more-margin"
+                    (click)="declineFriend(request)"
+                  >
+                    Decline
+                  </button>
+                </div>
+              </ng-template>
+            </ngb-tab>
             <ngb-tab title="Friends">
               <ng-template ngbTabContent>
-                <div class="row following" id="follows">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <ul class="list-unstyled follows">
-                      <li>
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img
-                              src="https://images.unsplash.com/photo-1534294668821-28a3054f4256?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"
-                              alt="Circle Image"
-                              class="img-circle img-no-padding img-responsive"
-                            />
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Joker<br /><small>Comedian</small></h6>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto"></div>
-                        </div>
-                      </li>
-                      <hr />
-                      <li>
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img
-                              src="https://images.unsplash.com/photo-1534294668821-28a3054f4256?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"
-                              alt="Circle Image"
-                              class="img-circle img-no-padding img-responsive"
-                            />
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Greg. House<br /><small>Doctor</small></h6>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto"></div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                <div *ngFor="let friend of friends">
+                  <h4 class="text-muted">
+                    {{ friend.userA }}
+                  </h4>
+                  <button
+                    class="btn btn-outline-danger btn-round more-margin"
+                    (click)="removeFriend(friend)"
+                  >
+                    Remove Friend
+                  </button>
                 </div>
               </ng-template>
             </ngb-tab>

@@ -33,13 +33,6 @@ export type CreateFriendshipInput = {
   status?: string | null;
 };
 
-export type UpdateFriendshipInput = {
-  userA: string;
-  userB: string;
-  created?: string | null;
-  status?: string | null;
-};
-
 export type CreateGoalInput = {
   goalID?: number | null;
   name: string;
@@ -314,6 +307,14 @@ export type ListFriendshipsQuery = {
   status: string | null;
 };
 
+export type ListUserFriendshipsQuery = {
+  __typename: "Friendship";
+  userA: string;
+  userB: string;
+  created: string | null;
+  status: string | null;
+};
+
 export type GetGoalQuery = {
   __typename: "Goal";
   goalID: number;
@@ -506,9 +507,12 @@ export class APIService {
     )) as any;
     return <UpdateDreamMutation>response.data.updateDream;
   }
-  async DeleteFriendship(userB: string): Promise<DeleteFriendshipMutation> {
-    const statement = `mutation DeleteFriendship($userB: String!) {
-        deleteFriendship(userB: $userB) {
+  async DeleteFriendship(
+    userA: string,
+    userB: string
+  ): Promise<DeleteFriendshipMutation> {
+    const statement = `mutation DeleteFriendship($userA: String!, $userB: String!) {
+        deleteFriendship(userA: $userA, userB: $userB) {
           __typename
           userA
           userB
@@ -517,6 +521,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
+      userA,
       userB
     };
     const response = (await API.graphql(
@@ -545,10 +550,12 @@ export class APIService {
     return <CreateFriendshipMutation>response.data.createFriendship;
   }
   async UpdateFriendship(
-    updateFriendshipInput: UpdateFriendshipInput
+    userA: string,
+    userB: string,
+    status: string
   ): Promise<UpdateFriendshipMutation> {
-    const statement = `mutation UpdateFriendship($updateFriendshipInput: UpdateFriendshipInput!) {
-        updateFriendship(updateFriendshipInput: $updateFriendshipInput) {
+    const statement = `mutation UpdateFriendship($userA: String!, $userB: String!, $status: String!) {
+        updateFriendship(userA: $userA, userB: $userB, status: $status) {
           __typename
           userA
           userB
@@ -557,7 +564,9 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      updateFriendshipInput
+      userA,
+      userB,
+      status
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -882,9 +891,12 @@ export class APIService {
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <Array<ListPublicDreamsQuery>>response.data.listPublicDreams;
   }
-  async GetFriendship(userB: string): Promise<GetFriendshipQuery> {
-    const statement = `query GetFriendship($userB: String!) {
-        getFriendship(userB: $userB) {
+  async GetFriendship(
+    userA: string,
+    userB: string
+  ): Promise<GetFriendshipQuery> {
+    const statement = `query GetFriendship($userA: String!, $userB: String!) {
+        getFriendship(userA: $userA, userB: $userB) {
           __typename
           userA
           userB
@@ -893,6 +905,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
+      userA,
       userB
     };
     const response = (await API.graphql(
@@ -912,6 +925,26 @@ export class APIService {
       }`;
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <Array<ListFriendshipsQuery>>response.data.listFriendships;
+  }
+  async ListUserFriendships(
+    userID: string
+  ): Promise<Array<ListUserFriendshipsQuery>> {
+    const statement = `query ListUserFriendships($userID: String!) {
+        listUserFriendships(userID: $userID) {
+          __typename
+          userA
+          userB
+          created
+          status
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      userID
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<ListUserFriendshipsQuery>>response.data.listUserFriendships;
   }
   async GetGoal(goalID: number): Promise<GetGoalQuery> {
     const statement = `query GetGoal($goalID: Int!) {

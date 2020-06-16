@@ -32,8 +32,8 @@ mutation UpdateDream($updateDreamInput: UpdateDreamInput!) {
     created
   }
 }
-mutation DeleteFriendship($userB: String!) {
-  deleteFriendship(userB: $userB) {
+mutation DeleteFriendship($userA: String!, $userB: String!) {
+  deleteFriendship(userA: $userA, userB: $userB) {
     userA
     userB
     created
@@ -48,8 +48,8 @@ mutation CreateFriendship($createFriendshipInput: CreateFriendshipInput!) {
     status
   }
 }
-mutation UpdateFriendship($updateFriendshipInput: UpdateFriendshipInput!) {
-  updateFriendship(updateFriendshipInput: $updateFriendshipInput) {
+mutation UpdateFriendship($userA: String!, $userB: String!, $status: String!) {
+  updateFriendship(userA: $userA, userB: $userB, status: $status) {
     userA
     userB
     created

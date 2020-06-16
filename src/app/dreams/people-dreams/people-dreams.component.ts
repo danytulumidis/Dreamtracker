@@ -67,6 +67,11 @@ export class PeopleDreamsComponent implements OnInit {
   }
 
   goToUserProfile(userID: string) {
-    this.router.navigate(["/userProfile", userID]);
+    // If the Dream is from the current User navigate to his profile
+    if (userID === this.user.attributes.email) {
+      this.router.navigate(["/profile"]);
+    } else {
+      this.router.navigate(["/userProfile", userID]);
+    }
   }
 }

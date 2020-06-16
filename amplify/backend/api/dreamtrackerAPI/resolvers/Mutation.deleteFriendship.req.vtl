@@ -1,4 +1,9 @@
 {
   "version": "2018-05-29",
-  "statements":   ["SELECT * FROM Friendship WHERE userB='$ctx.args.userB'", "DELETE FROM Friendship WHERE userB=$ctx.args.userB"]
+  "statements":   ["SELECT * FROM Friendship WHERE userA= :userA AND userB= :userB", "DELETE FROM Friendship WHERE userA= :userA AND userB= :userB"],
+  
+  "variableMap": {
+    ":userA": $util.toJson($ctx.args.userA),
+    ":userB": $util.toJson($ctx.args.userB)
+  }
 }
