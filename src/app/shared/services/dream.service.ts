@@ -36,6 +36,7 @@ export class DreamsService {
         createdAt: dream.created
       });
       this.updateProgressBar(dream.dreamID);
+      this.sortDreams();
     });
   }
 
@@ -212,5 +213,12 @@ export class DreamsService {
     } else if (dreamDone === 100) {
       this.dreams[dreamIndex].status = "Done";
     }
+  }
+
+  // Sort Dreams to show user the dreams with the most progress at the top
+  sortDreams() {
+    this.dreams.sort((a, b) => {
+      return b.progress - a.progress;
+    });
   }
 }

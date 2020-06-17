@@ -28,6 +28,8 @@ export class GoalsService {
         createdAt: goal.created
       })
     );
+
+    this.sortGoals();
   }
 
   // Return all goals for the requested Dream by the dreamID
@@ -107,5 +109,12 @@ export class GoalsService {
           this.goals.findIndex(element => element.id === data.goalID)
         ].finished = isFinished;
       });
+  }
+
+  // Sort Goals so the user will see the goals that are done at first to show him what he already achieved
+  sortGoals() {
+    this.goals.sort((a, b) => {
+      return +b.finished - +a.finished;
+    });
   }
 }
