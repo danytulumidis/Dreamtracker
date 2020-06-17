@@ -25,10 +25,15 @@ const routes: Routes = [
   { path: "auth", component: AuthComponent },
   { path: "about", component: AboutComponent },
   { path: "faq", component: FaqComponent },
-  { path: "userProfile/:id", component: OtherUserProfileComponent },
+  {
+    path: "userProfile/:id",
+    canActivate: [AuthGuard],
+    component: OtherUserProfileComponent
+  },
   { path: "profile", canActivate: [AuthGuard], component: ProfileComponent },
   {
     path: "profile/settings",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./settings/settings.module").then(m => m.SettingsModule)
   },

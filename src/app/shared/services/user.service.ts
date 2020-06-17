@@ -22,14 +22,12 @@ export class UserService {
   userFriendships: Friendship[] = [];
   currentUser: any;
 
-  constructor(private apiService: APIService) {
-    this.setCurrentUser();
-  }
+  constructor(private apiService: APIService) {}
 
-  insertNewUser(user: any) {
+  insertNewUser() {
     this.apiService
       .CreateUser({
-        userID: user.attributes.email,
+        userID: this.currentUser.attributes.email,
         name: "Dreamchaser XYZ",
         description: "Tell us about you!",
         created: this.getCurrentDate()
@@ -38,13 +36,13 @@ export class UserService {
       .catch(err => console.log(err));
   }
 
-  async setCurrentUser() {
-    this.currentUser = await Auth.currentAuthenticatedUser();
+  async setCurrentUser(user: any) {
+    this.currentUser = user;
   }
 
   // Get the current user from Cognito
-  getCurrentUser() {
-    return Auth.currentAuthenticatedUser();
+  async getCurrentUser() {
+    return await Auth.currentAuthenticatedUser();
   }
 
   getCurrentDate() {
@@ -64,9 +62,8 @@ export class UserService {
 
   // Get current authenticated User Settings
   async fetchUserSetting() {
-    const user = await this.getCurrentUser();
     const settings = await this.apiService.ListUserSettings(
-      user.attributes.email
+      this.currentUser.attributes.email
     );
 
     this.setUserSettings(settings);
@@ -122,9 +119,8 @@ export class UserService {
   }
 
   async addFriend(userID: string) {
-    const currentUser = await this.getCurrentUser();
-    await this.apiService.CreateFriendship({
-      userA: currentUser.attributes.email,
+    return await this.apiService.CreateFriendship({
+      userA: this.currentUser.attributes.email,
       userB: userID,
       created: this.getCurrentDate(),
       status: "requested" as status
@@ -136,16 +132,15 @@ export class UserService {
   }
 
   async getFriendshipStatus(userID: string) {
-    const currentUser = await this.getCurrentUser();
     // Check if two users are in a frriendship status vice versa
     const friendship =
       (await this.apiService.GetFriendship(
-        currentUser.attributes.email,
+        this.currentUser.attributes.email,
         userID
       )) ||
       (await this.apiService.GetFriendship(
         userID,
-        currentUser.attributes.email
+        this.currentUser.attributes.email
       ));
 
     return friendship;

@@ -43,15 +43,19 @@ export class OtherUserProfileComponent implements OnInit {
     this.userDreams = this.dreamsService.getPublicUserDream(this.userID);
     // Get Info about Friendship status to decide which button to show
     const friendship = await this.userService.getFriendshipStatus(this.userID);
-    this.friendshipStatus = {
-      userA: friendship.userA,
-      userB: friendship.userB,
-      created: friendship.created,
-      status: friendship.status as status
-    };
+    if (friendship !== null) {
+      this.friendshipStatus = {
+        userA: friendship.userA,
+        userB: friendship.userB,
+        created: friendship.created,
+        status: friendship.status as status
+      };
+    }
   }
 
   async addFriend() {
-    await this.userService.addFriend(this.userID);
+    this.friendshipStatus = (await this.userService.addFriend(
+      this.userID
+    )) as Friendship;
   }
 }

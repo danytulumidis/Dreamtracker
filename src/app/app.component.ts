@@ -33,20 +33,16 @@ export class AppComponent {
     private userService: UserService,
     private dreamService: DreamsService
   ) {}
-  ngOnInit() {
+  async ngOnInit() {
     // Create current User in DB if not exist yet
-    setTimeout(() => {
-      this.userService
-        .getCurrentUser()
-        .then(user => {
-          console.log("Current User:", user);
-          this.userService.insertNewUser(user);
-          this.dreamService.fetchDreams(user);
-          this.dreamService.fetchPublicDreams();
-          this.userService.fetchUserSetting();
-        })
-        .catch(err => console.log(err));
-    }, 500);
+    const user = await this.userService.getCurrentUser();
+
+    // console.log("Current User:", user);
+    this.userService.setCurrentUser(user);
+    this.userService.insertNewUser();
+    this.dreamService.fetchDreams(user);
+    this.dreamService.fetchPublicDreams();
+    this.userService.fetchUserSetting();
 
     var navbar: HTMLElement = this.element.nativeElement.children[0]
       .children[0];
