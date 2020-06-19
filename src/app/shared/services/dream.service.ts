@@ -116,6 +116,21 @@ export class DreamsService {
       user: newDream.userID,
       createdAt: newDream.created
     });
+
+    if (!dreamPrivate) {
+      this.publicDreams.push({
+        ID: newDream.dreamID,
+        name: newDream.name,
+        description: newDream.description,
+        goals: [],
+        isPrivate: dreamPrivate,
+        upvote: 0,
+        progress: 0,
+        status: "To Do",
+        user: newDream.userID,
+        createdAt: newDream.created
+      });
+    }
   }
 
   checkDreamCount() {
@@ -143,6 +158,14 @@ export class DreamsService {
     this.apiService.DeleteDream(this.dreams[selectedDreamIndex].ID).then(() => {
       this.dreams.splice(selectedDreamIndex, 1);
     });
+
+    // Delete public dream aswell
+    if (!this.dreams[selectedDreamIndex].isPrivate) {
+      const publicIndex = this.findPublicDream(
+        this.dreams[selectedDreamIndex].ID
+      );
+      this.publicDreams.splice(publicIndex, 1);
+    }
   }
 
   saveEditedDream(editedDream: Dream) {
@@ -163,7 +186,10 @@ export class DreamsService {
       );
       this.publicDreams.splice(index, 1);
     } else {
-      this.publicDreams.push(editedDream);
+      const publicIndex = this.findPublicDream(editedDream.ID);
+      publicIndex < 0
+        ? this.publicDreams.push(editedDream)
+        : (this.publicDreams[publicIndex] = editedDream);
     }
   }
 
@@ -217,5 +243,10 @@ export class DreamsService {
     this.dreams.sort((a, b) => {
       return b.progress - a.progress;
     });
+  }
+
+  // Find public dream to make changes equal to the original dream (editing/deleting)
+  findPublicDream(id: number): number {
+    return this.publicDreams.findIndex(element => element.ID === id);
   }
 }

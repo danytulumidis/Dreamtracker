@@ -27,16 +27,19 @@ export class PeopleDreamsComponent implements OnInit {
   async ngOnInit() {
     this.publicDreams = await this.dreamsService.getPublicDreams();
 
-    this.user = this.userService.user;
+    // Have to wait till the user is loaded to fetch database
+    setTimeout(async () => {
+      this.user = this.userService.user;
 
-    // Get info if user liked dream already or not
-    this.userUpvotes = await this.apiService.ListUpvotes(
-      this.user.attributes.email
-    );
-    // Save user upvotes in a hash table to identify if a user upvotes a dream or not
-    this.userUpvotes.forEach(element => {
-      this.dreamsLiked[element.dreamID] = true;
-    });
+      // Get info if user liked dream already or not
+      this.userUpvotes = await this.apiService.ListUpvotes(
+        this.user.attributes.email
+      );
+      // Save user upvotes in a hash table to identify if a user upvotes a dream or not
+      this.userUpvotes.forEach(element => {
+        this.dreamsLiked[element.dreamID] = true;
+      });
+    }, 1000);
   }
 
   async onLikeDream(dreamID: number) {
