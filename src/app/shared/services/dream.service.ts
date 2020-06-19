@@ -88,37 +88,34 @@ export class DreamsService {
     });
   }
 
-  saveNewDream(dreamName: string, dreamDescr: string, dreamPrivate: boolean) {
+  async saveNewDream(
+    dreamName: string,
+    dreamDescr: string,
+    dreamPrivate: boolean
+  ) {
     let privateNumber = dreamPrivate ? 1 : 0;
 
-    this.userService
-      .getCurrentUser()
-      .then(user => {
-        this.apiService
-          .CreateDream({
-            name: dreamName,
-            description: dreamDescr,
-            private: privateNumber,
-            userID: user.attributes.email,
-            upvotes: 0,
-            created: this.userService.getCurrentDate()
-          })
-          .then(dream => {
-            this.dreams.push({
-              ID: dream.dreamID,
-              name: dream.name,
-              description: dream.description,
-              goals: [],
-              isPrivate: dreamPrivate,
-              upvote: 0,
-              progress: 0,
-              status: "To Do",
-              user: dream.userID,
-              createdAt: dream.created
-            });
-          });
-      })
-      .catch(err => console.log(err));
+    const newDream = await this.apiService.CreateDream({
+      name: dreamName,
+      description: dreamDescr,
+      private: privateNumber,
+      userID: this.userService.user.attirbutes.email,
+      upvotes: 0,
+      created: this.userService.getCurrentDate()
+    });
+
+    this.dreams.push({
+      ID: newDream.dreamID,
+      name: newDream.name,
+      description: newDream.description,
+      goals: [],
+      isPrivate: dreamPrivate,
+      upvote: 0,
+      progress: 0,
+      status: "To Do",
+      user: newDream.userID,
+      createdAt: newDream.created
+    });
   }
 
   checkDreamCount() {

@@ -27,7 +27,7 @@ export class PeopleDreamsComponent implements OnInit {
   async ngOnInit() {
     this.publicDreams = await this.dreamsService.getPublicDreams();
 
-    this.user = await this.userService.getCurrentUser();
+    this.user = this.userService.user;
 
     // Get info if user liked dream already or not
     this.userUpvotes = await this.apiService.ListUpvotes(

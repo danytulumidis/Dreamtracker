@@ -3,7 +3,6 @@ import { APIService } from "src/app/API.service";
 import { Auth } from "aws-amplify";
 import { UserSettings } from "../models/user-settings.model";
 import { Friendship, status } from "../models/friendship.model";
-import { element } from "protractor";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -36,13 +35,17 @@ export class UserService {
       .catch(err => console.log(err));
   }
 
-  async setCurrentUser(user: any) {
-    this.currentUser = user;
-  }
-
   // Get the current user from Cognito
   async getCurrentUser() {
-    return await Auth.currentAuthenticatedUser();
+    try {
+      this.currentUser = await Auth.currentAuthenticatedUser();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  get user(): any {
+    return this.currentUser;
   }
 
   getCurrentDate() {

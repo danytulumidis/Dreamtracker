@@ -22,8 +22,8 @@ export class UserSettingsComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  async ngOnInit() {
-    this.user = await this.userService.getCurrentUser();
+  ngOnInit() {
+    this.user = this.userService.user;
     this.userSettings = this.userService.getUserSettings();
   }
 

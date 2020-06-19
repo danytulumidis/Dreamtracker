@@ -6,6 +6,7 @@ import {
 } from "@angular/common";
 import { AuthService } from "../auth/auth.service";
 import { UserService } from "../shared/services/user.service";
+import { Auth } from "aws-amplify";
 
 @Component({
   selector: "app-navbar",
@@ -21,8 +22,7 @@ export class NavbarComponent implements OnInit {
     public location: Location,
     private element: ElementRef,
     private authService: AuthService,
-    private ngZone: NgZone,
-    private userService: UserService
+    private ngZone: NgZone
   ) {
     this.sidebarVisible = false;
     // Defines if user is signed in and can see and access the whole application
@@ -36,12 +36,13 @@ export class NavbarComponent implements OnInit {
       });
     });
 
-    this.userService
-      .getCurrentUser()
-      .then(user => {
-        user != null ? (this.signedIn = true) : (this.signedIn = false);
-      })
-      .catch(err => console.log(err));
+    setTimeout(async () => {
+      try {
+        this.signedIn = (await Auth.currentAuthenticatedUser()) != null;
+      } catch (error) {
+        console.log(error);
+      }
+    }, 800);
   }
 
   ngOnInit() {
@@ -98,6 +99,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     if (this.signedIn) {
       this.authService.logout();
+      this.signedIn = false;
     }
   }
 }
