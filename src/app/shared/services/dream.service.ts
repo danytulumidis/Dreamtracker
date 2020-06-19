@@ -99,7 +99,7 @@ export class DreamsService {
       name: dreamName,
       description: dreamDescr,
       private: privateNumber,
-      userID: this.userService.user.attirbutes.email,
+      userID: this.userService.user.attributes.email,
       upvotes: 0,
       created: this.userService.getCurrentDate()
     });
