@@ -33,24 +33,28 @@ export class OtherUserProfileComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.userID = this.route.snapshot.params["id"];
+    setTimeout(async () => {
+      this.userID = this.route.snapshot.params["id"];
 
-    // Get the User Info
-    await this.userService.fetchAnotherUserSettings(this.userID);
-    this.userInfo = this.userService.getAnotherUserSettings();
+      // Get the User Info
+      await this.userService.fetchAnotherUserSettings(this.userID);
+      this.userInfo = this.userService.getAnotherUserSettings();
 
-    // Get the Dreams of the User
-    this.userDreams = this.dreamsService.getPublicUserDream(this.userID);
-    // Get Info about Friendship status to decide which button to show
-    const friendship = await this.userService.getFriendshipStatus(this.userID);
-    if (friendship !== null) {
-      this.friendshipStatus = {
-        userA: friendship.userA,
-        userB: friendship.userB,
-        created: friendship.created,
-        status: friendship.status as status
-      };
-    }
+      // Get the Dreams of the User
+      this.userDreams = this.dreamsService.getPublicUserDream(this.userID);
+      // Get Info about Friendship status to decide which button to show
+      const friendship = await this.userService.getFriendshipStatus(
+        this.userID
+      );
+      if (friendship !== null) {
+        this.friendshipStatus = {
+          userA: friendship.userA,
+          userB: friendship.userB,
+          created: friendship.created,
+          status: friendship.status as status
+        };
+      }
+    }, 1100);
   }
 
   async addFriend() {

@@ -27,11 +27,13 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.userDreams = this.dreamsService.getUserDreams();
-    this.userSettings = this.userService.getUserSettings();
-    this.userFriendships = await this.userService.getUserFriendships();
-    this.friendRequests = this.userService.getFriendRequests();
-    this.friends = this.userService.getFriends();
+    setTimeout(async () => {
+      this.userDreams = this.dreamsService.getUserDreams();
+      this.userSettings = this.userService.getUserSettings();
+      this.userFriendships = await this.userService.getUserFriendships();
+      this.friendRequests = this.userService.getFriendRequests();
+      this.friends = this.userService.getFriends();
+    }, 1100);
   }
 
   async acceptFriend(request: Friendship) {
