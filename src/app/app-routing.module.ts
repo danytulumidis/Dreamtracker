@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: "about", component: AboutComponent },
   { path: "faq", component: FaqComponent },
   {
-    path: "userProfile/:id",
+    path: "userProfile",
     canActivate: [AuthGuard],
     component: OtherUserProfileComponent
   },

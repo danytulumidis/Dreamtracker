@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "src/app/shared/services/user.service";
 import { UserSettings } from "src/app/shared/models/user-settings.model";
 import { Dream } from "src/app/shared/models/dream.model";
@@ -27,15 +27,19 @@ export class OtherUserProfileComponent implements OnInit {
   };
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private dreamsService: DreamsService
-  ) {}
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+
+    navigation.extras.state
+      ? (this.userID = navigation.extras.state.user)
+      : this.router.navigate(["/alldreams"]);
+  }
 
   async ngOnInit() {
     setTimeout(async () => {
-      this.userID = this.route.snapshot.params["id"];
-
       // Get the User Info
       await this.userService.fetchAnotherUserSettings(this.userID);
       this.userInfo = this.userService.getAnotherUserSettings();

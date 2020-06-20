@@ -45,9 +45,10 @@ export class PeopleDreamsComponent implements OnInit {
   async onLikeDream(dreamID: number) {
     // if true then its a unlike else a like
     if (this.checkDreamIsLiked(dreamID)) {
-      await this.apiService
-        .DeleteUserUpvote(dreamID, this.user.attributes.email)
-        .then(data => console.log(data));
+      await this.apiService.DeleteUserUpvote(
+        dreamID,
+        this.user.attributes.email
+      );
       this.dreamsService.likeDream(dreamID, false);
     } else {
       await this.apiService.CreateUpvote({
@@ -74,7 +75,7 @@ export class PeopleDreamsComponent implements OnInit {
     if (userID === this.user.attributes.email) {
       this.router.navigate(["/profile"]);
     } else {
-      this.router.navigate(["/userProfile", userID]);
+      this.router.navigateByUrl("/userProfile", { state: { user: userID } });
     }
   }
 }
