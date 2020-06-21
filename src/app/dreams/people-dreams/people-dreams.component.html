@@ -9,49 +9,65 @@
   </div>
 </div>
 
-<div *ngFor="let dream of publicDreams" class="main">
-  <div class="section text-center reduce-padding">
-    <div class="container dream-border">
-      <div class="row">
-        <div class="col-md-6">
-          <h3>Name</h3>
-          <hr />
-          <p>{{ dream.name }}</p>
-        </div>
-        <div class="col-md-6">
-          <h3>Description</h3>
-          <hr />
-          <p>{{ dream.description }}</p>
-        </div>
+<div *ngIf="isLoading" class="container text-center">
+  <div class="row">
+    <div class="col-md-8 mr-auto ml-auto">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Upvotes</h3>
-          <hr />
-          <p>{{ dream.upvote }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngFor="let dream of publicDreams" class="main">
+    <div class="section text-center reduce-padding">
+      <div class="container dream-border">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Name</h3>
+            <hr />
+            <p>{{ dream.name }}</p>
+          </div>
+          <div class="col-md-6">
+            <h3>Description</h3>
+            <hr />
+            <p>{{ dream.description }}</p>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <button
-            type="button"
-            class="btn btn-danger btn-round"
-            [ngClass]="{
-              unlike: !dreamsLiked[dream.ID] || dreamsLiked[dream.ID] === false
-            }"
-            (click)="onLikeDream(dream.ID)"
-          >
-            <i class="fa fa-heart"></i>Like
-          </button>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Upvotes</h3>
+            <hr />
+            <p>{{ dream.upvote }}</p>
+          </div>
         </div>
-        <div class="col-md-6">
-          <button
-            type="button"
-            class="btn btn-outline-primary btn-round more-margin"
-            (click)="goToUserProfile(dream.user)"
-          >
-            Go to User Profile
-          </button>
+        <div class="row">
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn btn-danger btn-round"
+              [ngClass]="{
+                unlike:
+                  !dreamsLiked[dream.ID] || dreamsLiked[dream.ID] === false
+              }"
+              (click)="onLikeDream(dream.ID)"
+            >
+              <i class="fa fa-heart"></i>Like
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-round more-margin"
+              (click)="goToUserProfile(dream.user)"
+            >
+              Go to User Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>

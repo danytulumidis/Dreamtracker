@@ -25,6 +25,7 @@ export class OtherUserProfileComponent implements OnInit {
     created: "",
     status: "" as status
   };
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,6 +40,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.isLoading = true;
     setTimeout(async () => {
       // Get the User Info
       await this.userService.fetchAnotherUserSettings(this.userID);
@@ -58,6 +60,7 @@ export class OtherUserProfileComponent implements OnInit {
           status: friendship.status as status
         };
       }
+      this.isLoading = false;
     }, 1100);
   }
 

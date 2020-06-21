@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   userFriendships: Friendship[];
   friendRequests: Friendship[];
   friends: Friendship[];
+  isLoading: boolean = false;
 
   constructor(
     private dreamsService: DreamsService,
@@ -27,12 +28,14 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.isLoading = true;
     setTimeout(async () => {
       this.userDreams = this.dreamsService.getUserDreams();
       this.userSettings = this.userService.getUserSettings();
       this.userFriendships = await this.userService.getUserFriendships();
       this.friendRequests = this.userService.getFriendRequests();
       this.friends = this.userService.getFriends();
+      this.isLoading = false;
     }, 1100);
   }
 

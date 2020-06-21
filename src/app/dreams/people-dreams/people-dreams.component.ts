@@ -16,6 +16,7 @@ export class PeopleDreamsComponent implements OnInit {
   userUpvotes: any[];
   dreamsLiked: any[] = [];
   userName: string = "";
+  isLoading: boolean = false;
 
   constructor(
     private dreamsService: DreamsService,
@@ -25,6 +26,7 @@ export class PeopleDreamsComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.isLoading = true;
     this.publicDreams = await this.dreamsService.getPublicDreams();
 
     // Have to wait till the user is loaded to fetch database
@@ -39,6 +41,7 @@ export class PeopleDreamsComponent implements OnInit {
       this.userUpvotes.forEach(element => {
         this.dreamsLiked[element.dreamID] = true;
       });
+      this.isLoading = false;
     }, 1000);
   }
 
