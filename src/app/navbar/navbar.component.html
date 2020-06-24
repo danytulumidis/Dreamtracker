@@ -4,6 +4,12 @@
 >
   <div class="container">
     <div class="navbar-translate">
+      <img
+        src="./../../assets/img/dreamtracker-logo.jpg"
+        width="40px"
+        height="40px"
+        class="rounded"
+      />
       <a class="navbar-brand" routerLink="/">Dreamtracker</a>
       <button
         class="navbar-toggler navbar-burger"
@@ -24,27 +30,36 @@
       <ul class="navbar-nav ml-auto">
         <!-- TODO Maybe put "this is how you can act" when not signed in -->
         <li *ngIf="signedIn" class="nav-item">
-          <a [routerLink]="['alldreams']" class="nav-link"
+          <a
+            [routerLink]="['alldreams']"
+            routerLinkActive="active"
+            class="nav-link"
             ><i class="nc-icon nc-spaceship"></i>All Dreams</a
           >
         </li>
         <li *ngIf="signedIn" class="nav-item">
-          <a [routerLink]="['mydreams']" class="nav-link"
+          <a
+            [routerLink]="['mydreams']"
+            routerLinkActive="active"
+            class="nav-link"
             ><i class="nc-icon nc-spaceship"></i>My Dreams</a
           >
         </li>
         <li *ngIf="signedIn" class="nav-item">
-          <a [routerLink]="['profile']" class="nav-link"
+          <a
+            [routerLink]="['profile']"
+            routerLinkActive="active"
+            class="nav-link"
             ><i class="nc-icon nc-single-02"></i>Profile</a
           >
         </li>
         <li *ngIf="!signedIn" class="nav-item">
-          <a [routerLink]="['auth']" class="nav-link"
+          <a [routerLink]="['auth']" routerLinkActive="active" class="nav-link"
             ><i class="nc-icon nc-single-02"></i>Login</a
           >
         </li>
         <li class="nav-item">
-          <a [routerLink]="['about']" class="nav-link"
+          <a [routerLink]="['about']" routerLinkActive="active" class="nav-link"
             ><i class="nc-icon nc-alert-circle-i"></i>About</a
           >
         </li>

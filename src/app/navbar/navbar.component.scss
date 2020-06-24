@@ -1,3 +1,13 @@
+@import "./../shared/scss/variables";
+
 .nav-link {
   cursor: pointer;
+}
+
+.active {
+  color: $main-color !important;
+}
+
+.rounded {
+  border-radius: 10px !important;
 }
