@@ -29,6 +29,7 @@ import { FormsModule } from "@angular/forms";
 import { PeopleDreamsComponent } from "./dreams/people-dreams/people-dreams.component";
 import { OtherUserProfileComponent } from "./profile/other-user-profile/other-user-profile.component";
 import { FaqComponent } from './faq/faq.component';
+import { InspiringPoepleComponent } from './inspiring-poeple/inspiring-poeple.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FaqComponent } from './faq/faq.component';
     AuthComponent,
     PeopleDreamsComponent,
     OtherUserProfileComponent,
-    FaqComponent
+    FaqComponent,
+    InspiringPoepleComponent
   ],
   imports: [
     BrowserModule,
