@@ -1,4 +1,5 @@
-@import "./../../shared/scss/loading-spinner.scss";
+@import "./../../shared/scss/loading-spinner";
+@import "./../../shared/scss/variables";
 
 .all-dreams-header {
   background-image: url("https://images.unsplash.com/photo-1558613913-4d5fdd9b7497?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
@@ -7,7 +8,7 @@
 .dream-border {
   border-radius: 50px;
   padding: 20px;
-  box-shadow: inset 0 0 20px #11d44b7e;
+  box-shadow: inset 0 0 20px $main-color;
 }
 
 .unlike {
