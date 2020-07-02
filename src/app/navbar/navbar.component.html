@@ -34,7 +34,7 @@
             [routerLink]="['alldreams']"
             routerLinkActive="active"
             class="nav-link"
-            ><i class="nc-icon nc-spaceship"></i>All Dreams</a
+            ><i class="nc-icon nc-world-2"></i>All Dreams</a
           >
         </li>
         <li *ngIf="signedIn" class="nav-item">
@@ -43,6 +43,14 @@
             routerLinkActive="active"
             class="nav-link"
             ><i class="nc-icon nc-spaceship"></i>My Dreams</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['inspiring']"
+            routerLinkActive="active"
+            class="nav-link"
+            ><i class="nc-icon nc-bulb-63"></i>Inspiring Poeple</a
           >
         </li>
         <li *ngIf="signedIn" class="nav-item">
