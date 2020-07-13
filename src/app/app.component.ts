@@ -39,6 +39,7 @@ export class AppComponent {
       await this.userService.getCurrentUser();
       const user = this.userService.user;
 
+      // Fetch all informations from current user to display the data
       if (user) {
         this.userService.insertNewUser();
         this.dreamService.fetchDreams(user);
