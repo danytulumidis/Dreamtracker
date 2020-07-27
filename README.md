@@ -16,3 +16,5 @@ Motivate and inspire each other. Nothing motivates you more than
 surrounding yourself with people chasing a dream.
 
 Chase your dreams!
+
+Built with the help of the Paper Kit 2 Pro Angular Template from Creative Tim (https://www.creative-tim.com/).

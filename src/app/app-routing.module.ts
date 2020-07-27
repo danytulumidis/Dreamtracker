@@ -12,7 +12,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { AuthGuard } from "./auth/auth-guard.service";
 import { FaqComponent } from "./faq/faq.component";
 import { OtherUserProfileComponent } from "./profile/other-user-profile/other-user-profile.component";
-import { InspiringPoepleComponent } from "./inspiring-poeple/inspiring-poeple.component";
+import { InspiringPoepleComponent } from "./inspiring-poeple/inspiring-people.component";
 
 const routes: Routes = [
   { path: "", component: LandingPageComponent },

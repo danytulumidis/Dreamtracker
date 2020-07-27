@@ -28,8 +28,8 @@ import Auth from "@aws-amplify/auth";
 import { FormsModule } from "@angular/forms";
 import { PeopleDreamsComponent } from "./dreams/people-dreams/people-dreams.component";
 import { OtherUserProfileComponent } from "./profile/other-user-profile/other-user-profile.component";
-import { FaqComponent } from './faq/faq.component';
-import { InspiringPoepleComponent } from './inspiring-poeple/inspiring-poeple.component';
+import { FaqComponent } from "./faq/faq.component";
+import { InspiringPoepleComponent } from "./inspiring-poeple/inspiring-people.component";
 
 @NgModule({
   declarations: [
