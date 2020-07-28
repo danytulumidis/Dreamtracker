@@ -1,33 +1,47 @@
-.form-control::-moz-placeholder{
-   @include placeholder($placeholder-gray,1);
-}
-.form-control:-moz-placeholder{
-   @include placeholder($placeholder-gray,1);
-}
-.form-control::-webkit-input-placeholder{
-   @include placeholder($placeholder-gray,1);
-}
-.form-control:-ms-input-placeholder{
-   @include placeholder($placeholder-gray,1);
-}
+@include placeholder() {
+  color: $dark-gray;
+};
 
+.form-control:focus + .input-group-text{
+    border: 1px solid black;
+}
 .form-control {
     background-color: $white-bg;
     border: 1px solid $medium-gray;
     border-radius: $border-radius-base;
     color: $font-color;
     font-size: $font-size-base;
+    transition: background-color 0.3s ease 0s;
+    padding-right: 0 !important;
     @include input-size($padding-base-vertical, $padding-label-horizontal, $height-base);
     @include box-shadow(none);
+
     &:focus{
-           background-color: $white-bg;
-           border: 1px solid $dark-gray;
-           @include box-shadow(none);
-           outline: 0 !important;
+       background-color: $white-bg;
+       border: 1px solid $table-line-color;
+       @include box-shadow(none);
+       outline: 0 !important;
+
+       + .input-group-prepend,
+       + .input-group-append {
+            .input-group-text {
+              border: 1px solid $table-line-color;
+              border-left: none;
+            }
+       }
     }
 
     &.no-border{
         border: medium none !important;
+
+        &:focus {
+          + .input-group-prepend,
+          + .input-group-append {
+               .input-group-text {
+                 border: none;
+               }
+          }
+        }
     }
 
     .has-success &,
@@ -40,6 +54,10 @@
     .has-success &{
         border: 1px solid $table-line-color;
         color: $font-color;
+
+        &.form-control-success{
+            padding-right: 2.5em !important;
+        }
     }
     .has-success &:focus{
         border: 1px solid $success-color;
@@ -49,6 +67,10 @@
         background-color: $danger-input-bg;
         border: 1px solid $danger-color;
         color: $danger-color;
+
+        &.form-control-danger{
+            padding-right: 2.5em !important;
+        }
     }
     .has-danger &:focus{
         background-color: $white-color;
@@ -70,11 +92,20 @@
         border-radius: $border-radius-base $border-radius-base 0 0;
         border-bottom-color: transparent;
     }
-}
 
-.input-lg{
-    height: 55px;
-    padding: $padding-large-vertical $padding-large-horizontal;
+    &.form-control-lg {
+      height: 55px;
+      padding: $padding-large-vertical 13px;
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    &.form-control-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      line-height: 1.5;
+      height: 31px;
+    }
 }
 
 .has-error{
@@ -88,13 +119,44 @@
     }
 }
 
+
+.input-group-text {
+    background-color: $white-bg;
+    border-radius: $border-radius-base;
+    border: 1px solid #DDDDDD;
+
+    .has-success &,
+    .has-error &{
+        background-color: $white-color;
+    }
+    .has-error .form-control:focus + &{
+        color: $danger-color;
+    }
+    .has-success .form-control:focus + &{
+        color: $success-color;
+    }
+    .form-control:focus + &,
+    .form-control:focus ~ &{
+        background-color: $white-color;
+    }
+}
+
+.input-group {
+  &.no-border{
+    .input-group-text {
+      border: 0;
+    }
+  }
+}
+
 .input-group .form-control:first-child,
+.input-group:not(.input-group-text):first-child,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
     border-right: 0 none;
-    padding-right: 0;
 }
 .input-group .form-control:last-child,
+.input-group-text:last-child,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child) {
     border-left: 0 none;
@@ -103,6 +165,13 @@
     background-color: $light-gray;
     color: $default-color;
     cursor: not-allowed;
+}
+.input-group[disabled]{
+    & .input-group-text{
+        background-color: $light-gray;
+        cursor: not-allowed;
+        border-color: $medium-gray;
+    }
 }
 
 .input-group-btn .btn{
@@ -136,48 +205,9 @@ textarea.form-control{
 }
 
 .card-form-horizontal{
-    .card-block{
+    .card-body{
         .form-group{
             margin-bottom: 0;
         }
     }
-}
-.input-group{
-  background: $white-color;
-  .input-group-append .input-group-text{
-    background: transparent;
-    border: 1px solid #DDDDDD;
-    border-left: none;
-    @include transition(300ms, linear);
-
-  }
-  .input-group-prepend .input-group-text{
-    margin-right: 0;
-    background: transparent;
-    border: 1px solid #DDDDDD;
-    @include transition(300ms, linear);
-  }
-  &.input-group-focus {
-    .input-group-prepend .input-group-text {
-      border: 1px solid $dark-gray !important;
-    }
-    .input-group-append .input-group-text {
-      border: 1px solid $dark-gray !important;
-    }
-  }
-  &.form-group-no-border{
-
-    .input-group-prepend .input-group-text{
-      border-right: transparent !important;
-      background: $white-color !important;
-        border: 1px solid $white-color !important;
-      @include transition(300ms, linear);
-    }
-    .input-group-append .input-group-text{
-      border-left: transparent !important;
-      background: $white-color !important;
-        border: 1px solid $white-color !important;
-      @include transition(300ms, linear);
-    }
-  }
 }

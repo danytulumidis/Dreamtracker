@@ -1,19 +1,23 @@
 <div class="wrapper">
-  <div
-    class="page-header page-header-xs"
-    data-parallax="true"
-    style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1371&q=80');"
-  >
+  <div class="page-header page-header-small">
+    <div
+      class="page-header-image rellax-header"
+      data-rellax-speed="-7"
+      style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1371&q=80')"
+    ></div>
     <div class="filter"></div>
-    <div class="container">
-      <div class="motto text-center">
-        <h1>Its your Story</h1>
-        <h3>Tell us about you and your dreams</h3>
-        <br />
+    <div class="content-center">
+      <div class="container">
+        <div class="motto">
+          <h1 class="title">Its your Story</h1>
+          <h3 class="description">
+            Tell us about you and your dreams
+          </h3>
+          <br />
+        </div>
       </div>
     </div>
   </div>
-
   <div *ngIf="isLoading" class="container text-center">
     <div class="row">
       <div class="col-md-8 mr-auto ml-auto">
@@ -27,24 +31,34 @@
     </div>
   </div>
 
-  <div *ngIf="!isLoading" class="section profile-content">
+  <div *ngIf="!isLoading" class="profile-content section">
     <div class="container">
-      <div class="owner">
-        <!-- <div class="avatar">
-          <img
-            src="./assets/img/landing_page/itsme.jpg"
-            alt="Circle Image"
-            class="img-circle img-no-padding img-responsive"
-          />
-        </div> -->
-        <h1>Profile</h1>
-        <div class="name">
-          <h3>Name</h3>
-          <h4 class="title">{{ userSettings.name }}<br /></h4>
-          <h3>Job Title</h3>
-          <h4 class="title">{{ userSettings.jobTitle }}</h4>
-          <h3>Description</h3>
-          <h4 class="title">{{ userSettings.description }}</h4>
+      <div class="row">
+        <div class="profile-picture">
+          <div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-new img-no-padding align-middle">
+              <img
+                src="https://images.unsplash.com/photo-1595452767427-0905ad9b036d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                alt="..."
+              />
+            </div>
+
+            <div class="name">
+              <h4 class="title text-center">
+                {{ userSettings.name }}<br /><small>{{
+                  userSettings.jobTitle
+                }}</small>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <p>
+            {{ userSettings.description }}
+          </p>
+          <br />
         </div>
       </div>
       <div class="row">
@@ -102,7 +116,6 @@
                   {{ dream.name }}
                 </h3>
                 <br />
-                <!-- <button class="btn btn-warning btn-round">Find artists</button> -->
               </ng-template>
             </ngb-tab>
           </ngb-tabset>

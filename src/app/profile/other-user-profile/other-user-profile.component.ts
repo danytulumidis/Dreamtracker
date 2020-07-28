@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "src/app/shared/services/user.service";
 import { UserSettings } from "src/app/shared/models/user-settings.model";
@@ -11,7 +11,7 @@ import { Friendship, status } from "src/app/shared/models/friendship.model";
   templateUrl: "./other-user-profile.component.html",
   styleUrls: ["./other-user-profile.component.scss"]
 })
-export class OtherUserProfileComponent implements OnInit {
+export class OtherUserProfileComponent implements OnInit, OnDestroy {
   userInfo: UserSettings = {
     name: "",
     jobTitle: "",
@@ -62,6 +62,14 @@ export class OtherUserProfileComponent implements OnInit {
       }
       this.isLoading = false;
     }, 1100);
+
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.add("profile-page");
+  }
+
+  ngOnDestroy() {
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.remove("profile-page");
   }
 
   async addFriend() {

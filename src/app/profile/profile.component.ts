@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DreamsService } from "../shared/services/dream.service";
 import { Dream } from "../shared/models/dream.model";
 import { UserSettings } from "../shared/models/user-settings.model";
@@ -10,7 +10,7 @@ import { Friendship } from "../shared/models/friendship.model";
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   userDreams: Dream[];
   userSettings: UserSettings = {
     name: "",
@@ -37,6 +37,14 @@ export class ProfileComponent implements OnInit {
       this.friends = this.userService.getFriends();
       this.isLoading = false;
     }, 1100);
+
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.add("profile-page");
+  }
+
+  ngOnDestroy() {
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.remove("profile-page");
   }
 
   async acceptFriend(request: Friendship) {

@@ -1,15 +1,20 @@
 <div class="wrapper">
-  <div
-    class="page-header page-header-xs"
-    data-parallax="true"
-    style="background-image: url('https://images.unsplash.com/photo-1556484687-30636164638b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80');"
-  >
+  <div class="page-header">
+    <div
+      class="page-header-image rellax-header"
+      data-rellax-speed="-7"
+      style="background-image: url('https://images.unsplash.com/photo-1556484687-30636164638b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')"
+    ></div>
     <div class="filter"></div>
-    <div class="container">
-      <div class="motto text-center">
-        <h1>Dream with me</h1>
-        <h3>We dream together!</h3>
-        <br />
+    <div class="content-center">
+      <div class="container">
+        <div class="motto">
+          <h1 class="title">Dream with me</h1>
+          <h3 class="description">
+            We dream together!
+          </h3>
+          <br />
+        </div>
       </div>
     </div>
   </div>
@@ -29,48 +34,65 @@
 
   <div *ngIf="!isLoading" class="section profile-content">
     <div class="container">
-      <div class="owner">
-        <!-- <div class="avatar">
-          <img
-            src="./assets/img/landing_page/itsme.jpg"
-            alt="Circle Image"
-            class="img-circle img-no-padding img-responsive"
-          />
-        </div> -->
-        <div [ngSwitch]="friendshipStatus.status">
-          <button
-            *ngSwitchCase="''"
-            class="btn btn-outline-primary btn-round alter-button"
-            (click)="addFriend()"
-          >
-            Add Friend
-          </button>
-          <h4 *ngSwitchCase="'accepted'" class="friendship-border-accepted">
-            Friends
-          </h4>
-          <h4 *ngSwitchCase="'requested'" class="friendship-border-request">
-            Friendship request open
-          </h4>
-        </div>
-        <h1>Profile</h1>
-        <div class="name">
-          <h3>Name</h3>
-          <h4 class="title">{{ userInfo.name }}<br /></h4>
-          <div *ngIf="userInfo.jobTitle">
-            <h3>Job</h3>
-            <h4 class="title">{{ userInfo.jobTitle }}<br /></h4>
+      <div class="row">
+        <div class="profile-picture">
+          <div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-new img-no-padding align-middle">
+              <img
+                src="https://images.unsplash.com/photo-1595452767427-0905ad9b036d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                alt="..."
+              />
+            </div>
+
+            <div class="name">
+              <h4 class="title text-center">
+                {{ userInfo.name }}<br /><small>{{ userInfo.jobTitle }}</small>
+              </h4>
+            </div>
           </div>
-          <h3>Description</h3>
-          <br />
-          <h4 class="title">{{ userInfo.description }}</h4>
         </div>
-        <h2 class="title colored-text">Dreams</h2>
-        <h3 *ngFor="let dream of userDreams" class="text-muted colored-dream">
-          {{ dream.name }}
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <p>
+            {{ userInfo.description }}
+          </p>
           <br />
-          <h5 class="userDream">{{ dream.description }}</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <div [ngSwitch]="friendshipStatus.status">
+            <button
+              *ngSwitchCase="''"
+              class="btn btn-outline-primary btn-round alter-button"
+              (click)="addFriend()"
+            >
+              Add Friend
+            </button>
+            <h4 *ngSwitchCase="'accepted'" class="friendship-border-accepted">
+              Friends
+            </h4>
+            <h4 *ngSwitchCase="'requested'" class="friendship-border-request">
+              Friendship request open
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <h2 class="title colored-text">Dreams</h2>
           <hr />
-        </h3>
+          <h3 *ngFor="let dream of userDreams" class="text-muted colored-dream">
+            {{ dream.name }}
+            <br />
+            <h5 class="userDream">{{ dream.description }}</h5>
+            <hr />
+          </h3>
+        </div>
       </div>
     </div>
   </div>
