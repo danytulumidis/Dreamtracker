@@ -1,9 +1,16 @@
-<div class="page-header about-header" data-parallax="true">
+<div class="page-header">
+  <div
+    class="page-header-image rellax-header"
+    data-rellax-speed="-7"
+    style="background-image: url('https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1488&q=80')"
+  ></div>
   <div class="filter"></div>
-  <div class="container">
-    <div class="motto text-center">
-      <h1>Privacy Policy</h1>
-      <br />
+  <div class="content-center">
+    <div class="container">
+      <div class="motto">
+        <h1 class="title">Privacy Policy</h1>
+        <br />
+      </div>
     </div>
   </div>
 </div>
@@ -24,9 +31,10 @@
             providing and improving the Service. We will not use or share your
             information with anyone except as described in this Privacy Policy.
             The terms used in this Privacy Policy have the same meanings as in
-            our Terms and Conditions, which is accessible at
-            dreamtrackerapp.com/compliance/legal, unless otherwise defined in
-            this Privacy Policy.
+            our
+            <a [routerLink]="['/compliance/legal']">Terms and Conditions</a>,
+            which is accessible at dreamtrackerapp.com/compliance/legal, unless
+            otherwise defined in this Privacy Policy.
           </h5>
           <h2 class="title">Information Collection and Use</h2>
           <h5 class="description">
