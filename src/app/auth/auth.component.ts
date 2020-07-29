@@ -11,7 +11,16 @@ export class AuthComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.add("full-screen");
+    body.classList.add("login");
+  }
+  ngOnDestroy() {
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.remove("full-screen");
+    body.classList.remove("login");
+  }
 
   federatedSignIn(provider: string) {
     this.authService.federatedSignIn(provider);
