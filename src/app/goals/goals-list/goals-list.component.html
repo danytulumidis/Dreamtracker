@@ -1,37 +1,52 @@
 <div class="main">
-    <div class="section text-center reduce-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h3>Name</h3>
-                    <hr>
-                    <p>{{ goals.name }}</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>Description</h3>
-                    <hr>
-                    <p>{{ goals.description }}</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>Finished</h3>
-                    <hr>
-                    <i *ngIf="goals.finished; else notFinished" class="nc-icon nc-check-2"></i>
-                    <ng-template #notFinished>
-                        <i class="nc-icon nc-simple-remove"></i>
-                    </ng-template>
-                </div>
-                <div class="col-md-3">
-                    <h3>Done</h3>
-                    <hr>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" placeholder="Tell us your Dream"
-                            [checked]="goals.finished" (change)="editGoalFinish(checkboxValue.checked, goals.id, goals.dreamsID)" #checkboxValue>
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
+  <div class="section text-center reduce-padding goal-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h3 class="white">Name</h3>
+          <hr />
+          <p class="white">{{ goals.name }}</p>
         </div>
+        <div class="col-md-3">
+          <h3 class="white">Description</h3>
+          <hr />
+          <p class="white">{{ goals.description }}</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="white">Finished</h3>
+          <hr />
+          <i
+            *ngIf="goals.finished; else notFinished"
+            class="nc-icon nc-check-2"
+          ></i>
+          <ng-template #notFinished>
+            <i class="nc-icon nc-simple-remove"></i>
+          </ng-template>
+        </div>
+        <div class="col-md-3">
+          <h3 class="white">Done</h3>
+          <hr />
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                placeholder="Tell us your Dream"
+                [checked]="goals.finished"
+                (change)="
+                  editGoalFinish(
+                    checkboxValue.checked,
+                    goals.id,
+                    goals.dreamsID
+                  )
+                "
+                #checkboxValue
+              />
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
