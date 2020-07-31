@@ -54,6 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     try {
       await this.userService.acceptFriend(request);
       this.friends.push(request);
+      // Refresh Friendlist Names to Show in the UI
+      this.myFriends = this.userService.getFriendName(this.friends);
       this.deleteFromFriendRequest(request);
     } catch (error) {
       console.log(error);

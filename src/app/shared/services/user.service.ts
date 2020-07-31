@@ -20,6 +20,7 @@ export class UserService {
 
   userFriendships: Friendship[] = [];
   // Show all Friends for Listing under the "Friends" Tab
+  // ! TODO: Refactor Friendship Feature regarding E-Mail and Names
   myFriends: String[] = [];
   currentUser: any;
 
