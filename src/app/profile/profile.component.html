@@ -74,7 +74,7 @@
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
           <ngb-tabset [justify]="'center'">
-            <ngb-tab title="Friend Requests">
+            <!-- <ngb-tab title="Friend Requests">
               <ng-template ngbTabContent>
                 <div *ngFor="let request of friendRequests">
                   <h4 class="text-muted">
@@ -94,8 +94,8 @@
                   </button>
                 </div>
               </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Friends">
+            </ngb-tab> -->
+            <!-- <ngb-tab title="Friends">
               <ng-template ngbTabContent>
                 <div
                   *ngFor="let friend of myFriends; index as i"
@@ -110,6 +110,15 @@
                   >
                     Remove Friend
                   </button>
+                </div>
+              </ng-template>
+            </ngb-tab> -->
+            <ngb-tab title="Friends (Upcoming Feature)">
+              <ng-template ngbTabContent>
+                <div class="justify-friends">
+                  <h4 class="text-muted to-button">
+                    Feature coming soon!
+                  </h4>
                 </div>
               </ng-template>
             </ngb-tab>

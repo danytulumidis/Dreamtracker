@@ -33,11 +33,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     setTimeout(async () => {
       this.userDreams = this.dreamsService.getUserDreams();
       this.userSettings = this.userService.getUserSettings();
-      this.userFriendships = await this.userService.getUserFriendships();
-      this.friendRequests = this.userService.getFriendRequests();
-      this.friends = this.userService.getFriends();
+      // this.userFriendships = await this.userService.getUserFriendships();
+      // this.friendRequests = this.userService.getFriendRequests();
+      // this.friends = this.userService.getFriends();
       // Show all Friends for Listing under the "Friends" Tab
-      this.myFriends = this.userService.getFriendName(this.friends);
+      // this.myFriends = this.userService.getFriendName(this.friends);
       this.isLoading = false;
     }, 1100);
 
