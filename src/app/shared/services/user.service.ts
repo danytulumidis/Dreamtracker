@@ -81,7 +81,7 @@ export class UserService {
     this.setAnotherUserSettings(settings);
   }
 
-  async getUserName(userID: string) {
+  async setMyFriends(userID: string) {
     const settings = await this.apiService.ListUserSettings(userID);
     this.myFriends.push(
       settings.find(setting => setting.settingName === "Name").settingValue
@@ -205,12 +205,13 @@ export class UserService {
     );
   }
 
-  setMyFriends(friends: Friendship[]) {
+  getFriendName(friends: Friendship[]) {
+    this.myFriends = [];
     friends.forEach(friend => {
       if (friend.userA === this.currentUser.attributes.email) {
-        this.getUserName(friend.userB);
+        this.setMyFriends(friend.userB);
       } else {
-        this.getUserName(friend.userA);
+        this.setMyFriends(friend.userA);
       }
     });
     return this.myFriends;
