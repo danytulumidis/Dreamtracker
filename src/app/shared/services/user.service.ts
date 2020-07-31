@@ -19,6 +19,8 @@ export class UserService {
   };
 
   userFriendships: Friendship[] = [];
+  // Show all Friends for Listing under the "Friends" Tab
+  myFriends: String[] = [];
   currentUser: any;
 
   constructor(private apiService: APIService) {}
@@ -77,6 +79,13 @@ export class UserService {
     const settings = await this.apiService.ListUserSettings(userID);
 
     this.setAnotherUserSettings(settings);
+  }
+
+  async getUserName(userID: string) {
+    const settings = await this.apiService.ListUserSettings(userID);
+    this.myFriends.push(
+      settings.find(setting => setting.settingName === "Name").settingValue
+    );
   }
 
   setUserSettings(settings: any) {
@@ -194,6 +203,17 @@ export class UserService {
     return this.userFriendships.filter(
       element => element.status === "accepted"
     );
+  }
+
+  setMyFriends(friends: Friendship[]) {
+    friends.forEach(friend => {
+      if (friend.userA === this.currentUser.attributes.email) {
+        this.getUserName(friend.userB);
+      } else {
+        this.getUserName(friend.userA);
+      }
+    });
+    return this.myFriends;
   }
 
   async acceptFriend(request: Friendship) {
