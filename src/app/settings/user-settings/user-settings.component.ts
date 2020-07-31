@@ -22,7 +22,8 @@ export class UserSettingsComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.userService.getCurrentUser();
     this.user = this.userService.user;
     this.userSettings = this.userService.getUserSettings();
   }
@@ -79,6 +80,6 @@ export class UserSettingsComponent implements OnInit {
     }
 
     this.settingsSaved = true;
-    this.userService.fetchUserSetting();
+    // this.userService.fetchUserSetting();
   }
 }

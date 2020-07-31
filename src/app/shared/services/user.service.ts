@@ -93,6 +93,7 @@ export class UserService {
       switch (element.settingName) {
         case "Name":
           this.userSettings.name = element.settingValue;
+          break;
         case "JobTitle":
           this.userSettings.jobTitle = element.settingValue;
           break;
