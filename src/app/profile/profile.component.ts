@@ -69,10 +69,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  async removeFriend(friend: Friendship) {
+  async removeFriend(index: number) {
     try {
-      await this.userService.deleteFriend(friend.userA, friend.userB);
-      this.deleteFromFriend(friend);
+      await this.userService.deleteFriend(
+        this.friends[index].userA,
+        this.friends[index].userB
+      );
+      this.deleteFromFriend(index);
     } catch (error) {
       console.log(error);
     }
@@ -86,11 +89,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.friendRequests.splice(index, 1);
   }
 
-  deleteFromFriend(friend: Friendship) {
-    const index = this.friends.findIndex(
-      element =>
-        element.userA === friend.userA && element.userB === friend.userB
-    );
+  deleteFromFriend(index: number) {
     this.friends.splice(index, 1);
+    this.myFriends.splice(index, 1);
   }
 }
