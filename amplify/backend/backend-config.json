@@ -1,34 +1,29 @@
 {
-    "hosting": {
-        "S3AndCloudFront": {
-            "service": "S3AndCloudFront",
-            "providerPlugin": "awscloudformation"
-        }
-    },
-    "auth": {
-        "dreamtrackerfc40e2aa": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [],
-            "customAuth": false
-        }
-    },
-    "api": {
-        "dreamtrackerAPI": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [],
-                    "defaultAuthentication": {
-                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-                        "userPoolConfig": {
-                            "userPoolId": "authdreamtrackerfc40e2aa"
-                        }
-                    }
-                }
-            },
-            "rdsInit": true
-        }
-    }
+	"hosting": {},
+	"auth": {
+		"dreamtrackerfc40e2aa": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"api": {
+		"dreamtrackerAPI": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authdreamtrackerfc40e2aa"
+						}
+					}
+				}
+			},
+			"rdsInit": true
+		}
+	}
 }
