@@ -1,7 +1,5 @@
 # Dreamtracker
 
-## In Progress
-
 Everybody have these things. One or even more goals in their life.
 Many people call it dreams and think its unreachable. Dreamtracker
 will help you to help yourself and reach these Dreams!
@@ -18,3 +16,6 @@ surrounding yourself with people chasing a dream.
 Chase your dreams!
 
 Built with the help of the Paper Kit 2 Pro Angular Template from Creative Tim (https://www.creative-tim.com/).
+
+INFO:
+First Version is complete but not available right now. Will be released in the future. Also new features will be implemented.
